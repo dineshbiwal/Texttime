@@ -1,8 +1,16 @@
 package texttime.android.app.texttime;
 
+import android.app.Activity;
+import android.os.Bundle;
+
 /**
  * Created by Dinesh_Text on 2/6/2017.
  */
 
-public class MainActivity {
+public class MainActivity extends Activity{
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_activity);
+    }
 }
