@@ -15,5 +15,6 @@ public class MainActivity extends Activity{
         setContentView(R.layout.main_activity);
         TextView tv=new TextView(this);
         tv.setText("git text");
+
     }
 }
