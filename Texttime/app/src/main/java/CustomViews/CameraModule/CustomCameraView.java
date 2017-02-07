@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
 import texttime.android.app.texttime.R;
 
 

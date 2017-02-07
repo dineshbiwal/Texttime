@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -13,19 +14,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
-import CustomViews.CustomProgressDialog;
 import CustomViews.CustomTextViewBold;
 import CustomViews.CustomTextViewRegular;
-import CustomViews.TopAnimationBar.SwipeRefreshLayout;
-import DataManagers.Appdelegate;
-import DataManagers.SaveDataPreferences;
-import GeneralUtilities.CommonDataUtility;
-import GeneralUtilities.CommonViewUtility;
-import GeneralUtilities.DataFunctions;
-import GeneralUtilities.PermissionManager;
-import WebOperations.ApiClient;
-import WebOperations.ApiInterface;
-import app.android.texttime.R;
+import texttime.android.app.texttime.CommonClasses.CommonDataUtility;
+import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
+import texttime.android.app.texttime.CommonClasses.DataFunctions;
+import texttime.android.app.texttime.CommonClasses.PermissionManager;
+
 
 public class BaseActivity extends AppCompatActivity {
     public CommonDataUtility cd;
@@ -144,6 +139,7 @@ public class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.toolbar_updated);
+        getSupportActionBar().setElevation(0);
         View view = getSupportActionBar().getCustomView();
 
         ImageView searchIcon = (ImageView) view.findViewById(R.id.searchIcon);
