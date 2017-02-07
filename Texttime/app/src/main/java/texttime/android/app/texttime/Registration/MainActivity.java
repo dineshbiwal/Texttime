@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.util.Log;
-
 import texttime.android.app.texttime.R;
 
 /**
