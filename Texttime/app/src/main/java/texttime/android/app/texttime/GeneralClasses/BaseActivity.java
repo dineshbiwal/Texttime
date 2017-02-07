@@ -1,5 +1,8 @@
 package texttime.android.app.texttime.GeneralClasses;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -14,12 +17,20 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
+import CustomViews.CustomTextView;
+
 import CustomViews.CustomTextViewBold;
 import CustomViews.CustomTextViewRegular;
 import texttime.android.app.texttime.CommonClasses.CommonDataUtility;
 import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
+
 import texttime.android.app.texttime.CommonClasses.DataFunctions;
 import texttime.android.app.texttime.CommonClasses.PermissionManager;
+import texttime.android.app.texttime.CommonClasses.CustomProgressDialog;
+import texttime.android.app.texttime.CommonClasses.DataFunctions;
+import texttime.android.app.texttime.CommonClasses.PermissionManager;
+import texttime.android.app.texttime.CommonClasses.SaveDataPreferences;
+import texttime.android.app.texttime.R;
 
 
 public class BaseActivity extends AppCompatActivity {
@@ -28,7 +39,6 @@ public class BaseActivity extends AppCompatActivity {
     public SaveDataPreferences sd;
     public DataFunctions dfunctions;
     public Context context;
-    public ApiInterface apiService;
     public CustomProgressDialog cpd;
     public View currentFocus;
     public PermissionManager pm;
@@ -50,7 +60,6 @@ public class BaseActivity extends AppCompatActivity {
         pm = new PermissionManager(this);
         dfunctions = new DataFunctions();
         cpd = new CustomProgressDialog(context);
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         setDisplay();
     }
 
@@ -89,17 +98,17 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void clearSavedData() {
+   /* public void clearSavedData() {
         Appdelegate.getInstance().setClickedImage(null);
         Appdelegate.getInstance().setCroppedImage(null);
         Appdelegate.getInstance().setReturningToken(null);
-    }
+    }*/
 
-    public void setTopLoadingBar(SwipeRefreshLayout.OnRefreshListener listener) {
+   /* public void setTopLoadingBar(SwipeRefreshLayout.OnRefreshListener listener) {
         swipeContainer.setOnRefreshListener(listener);
         swipeContainer.setEnabled(false);
         swipeContainer.setColorSchemeResources(R.color.yellow, R.color.blue, R.color.red, R.color.button_blue);
-    }
+    }*/
 
     public void setTopAnimation() {
         swipeContainer.post(new Runnable() {
@@ -122,9 +131,10 @@ public class BaseActivity extends AppCompatActivity {
     public void setUpActionbar(String title, int iconResource, View.OnClickListener listener) {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setElevation(0);
         getSupportActionBar().setCustomView(R.layout.toolbar);
         View view = getSupportActionBar().getCustomView();
-        CustomTextViewBold titleText = (CustomTextViewBold) view.findViewById(R.id.toolBarText);
+        CustomTextView titleText = (CustomTextView) view.findViewById(R.id.toolBarText);
         ImageView toolbarIcon = (ImageView) view.findViewById(R.id.tool_barIcon);
         titleText.setText(title);
         if (iconResource == 0) {
@@ -135,7 +145,7 @@ public class BaseActivity extends AppCompatActivity {
         toolbarIcon.setOnClickListener(listener);
     }
 
-    public void setUpActionbar() {
+  /*  public void setUpActionbar() {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.toolbar_updated);
@@ -164,7 +174,7 @@ public class BaseActivity extends AppCompatActivity {
         cv.adjustRelative(moreOptionsIcon, 128,28);
         cv.adjustRelativeSquare(timerIcon, 60);
         getSupportActionBar().setCustomView(view);
-    }
+    }*/
 
     public TransitionDrawable createDrawable(int res1, int res2) {
         TransitionDrawable drawable;
@@ -176,4 +186,51 @@ public class BaseActivity extends AppCompatActivity {
         drawable.setCrossFadeEnabled(true);
         return drawable;
     }
+
+
+
+    float alpha=0;
+    int mAnimDuration = 600/* milliseconds */;
+
+    ValueAnimator mVaActionBar;
+
+    public void hideActionBar() {
+        // initialize `mToolbarHeight`
+        if (alpha == 0) {
+            alpha = getSupportActionBar().getCustomView().getAlpha();
+        }
+
+        if (mVaActionBar != null && mVaActionBar.isRunning()) {
+            // we are already animating a transition - block here
+            return;
+        }
+
+        // animate `Toolbar's` height to zero.
+        mVaActionBar = ValueAnimator.ofFloat(alpha , 0);
+        mVaActionBar.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                // update LayoutParams
+                getSupportActionBar().getCustomView().setAlpha((Float) animation.getAnimatedValue());
+                getSupportActionBar().getCustomView().requestLayout();
+            }
+        });
+
+        mVaActionBar.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+
+                if (getSupportActionBar() != null) { // sanity check
+                   // getSupportActionBar().hide();
+                    setUpActionbar("2nd Action Bar",android.R.drawable.ic_dialog_dialer,null);
+                }
+            }
+        });
+
+        mVaActionBar.setDuration(mAnimDuration);
+        mVaActionBar.start();
+    }
+
+
 }

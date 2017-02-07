@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:id="@+id/bottomTabBar"
@@ -80,7 +81,7 @@
             android:layout_height="wrap_content">
 
 
-            <RelativeLayout
+        <!--    <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/cameraPreview"
@@ -96,7 +97,7 @@
                     android:layout_centerInParent="true"
                     ></CustomViews.CameraModule.CustomCameraView>
 
-            </RelativeLayout>
+            </RelativeLayout>-->
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -181,3 +182,5 @@
 
 
 </RelativeLayout>
+
+

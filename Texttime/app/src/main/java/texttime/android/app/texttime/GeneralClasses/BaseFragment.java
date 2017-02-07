@@ -8,15 +8,14 @@ import android.graphics.drawable.TransitionDrawable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import CustomViews.CustomProgressDialog;
-import DataManagers.SaveDataPreferences;
-import GeneralUtilities.CommonDataUtility;
-import GeneralUtilities.CommonViewUtility;
-import GeneralUtilities.DataFunctions;
-import GeneralUtilities.PermissionManager;
-import WebOperations.ApiClient;
-import WebOperations.ApiInterface;
-import app.android.texttime.texttime.ContainerActivity;
+import texttime.android.app.texttime.CommonClasses.CommonDataUtility;
+import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
+import texttime.android.app.texttime.CommonClasses.CustomProgressDialog;
+import texttime.android.app.texttime.CommonClasses.DataFunctions;
+import texttime.android.app.texttime.CommonClasses.PermissionManager;
+import texttime.android.app.texttime.CommonClasses.SaveDataPreferences;
+import texttime.android.app.texttime.WebOperations.ApiClient;
+import texttime.android.app.texttime.WebOperations.ApiInterface;
 
 /**
  * Created by TextTime Android Dev on 8/24/2016.
@@ -45,7 +44,7 @@ public class BaseFragment extends Fragment {
 
 
      public void openFragment(Fragment f, String tag){
-         ((ContainerActivity)getActivity()).openNewFragment(f,tag);
+        // ((ContainerActivity)getActivity()).openNewFragment(f,tag);
      }
 
     public void setBackPressed(View.OnClickListener listener){

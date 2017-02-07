@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#579D9D</color>
-    <color name="colorPrimaryDark">#579D9D</color>
-    <color name="colorAccent">#579D9D</color>
-    <color name="textColor">#000000</color>
-    <color name="textColor1">#000000</color>
+    <color name="colorPrimary">#8DFDFD</color>
+    <color name="colorPrimaryDark">#CBFEFE</color>
+    <color name="colorAccent">#CBFEFE</color>
+    <color name="textColor">#25000000</color>
+    <color name="textColor1">#50000000</color>
     <color name="bg_gredient_start">#8DFDFD</color>
     <color name="bg_gredient_center">#CBFEFE</color>
     <color name="bg_gredient_end">#EBFEFF</color>
