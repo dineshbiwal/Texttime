@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -13,19 +14,16 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
-import CustomViews.CustomProgressDialog;
+import CustomViews.CustomTextView;
 import CustomViews.CustomTextViewBold;
 import CustomViews.CustomTextViewRegular;
-import CustomViews.TopAnimationBar.SwipeRefreshLayout;
-import DataManagers.Appdelegate;
-import DataManagers.SaveDataPreferences;
-import GeneralUtilities.CommonDataUtility;
-import GeneralUtilities.CommonViewUtility;
-import GeneralUtilities.DataFunctions;
-import GeneralUtilities.PermissionManager;
-import WebOperations.ApiClient;
-import WebOperations.ApiInterface;
-import app.android.texttime.R;
+import texttime.android.app.texttime.CommonClasses.CommonDataUtility;
+import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
+import texttime.android.app.texttime.CommonClasses.CustomProgressDialog;
+import texttime.android.app.texttime.CommonClasses.DataFunctions;
+import texttime.android.app.texttime.CommonClasses.PermissionManager;
+import texttime.android.app.texttime.CommonClasses.SaveDataPreferences;
+import texttime.android.app.texttime.R;
 
 public class BaseActivity extends AppCompatActivity {
     public CommonDataUtility cd;
@@ -33,7 +31,6 @@ public class BaseActivity extends AppCompatActivity {
     public SaveDataPreferences sd;
     public DataFunctions dfunctions;
     public Context context;
-    public ApiInterface apiService;
     public CustomProgressDialog cpd;
     public View currentFocus;
     public PermissionManager pm;
@@ -55,7 +52,6 @@ public class BaseActivity extends AppCompatActivity {
         pm = new PermissionManager(this);
         dfunctions = new DataFunctions();
         cpd = new CustomProgressDialog(context);
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         setDisplay();
     }
 
@@ -94,17 +90,17 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void clearSavedData() {
+   /* public void clearSavedData() {
         Appdelegate.getInstance().setClickedImage(null);
         Appdelegate.getInstance().setCroppedImage(null);
         Appdelegate.getInstance().setReturningToken(null);
-    }
+    }*/
 
-    public void setTopLoadingBar(SwipeRefreshLayout.OnRefreshListener listener) {
+   /* public void setTopLoadingBar(SwipeRefreshLayout.OnRefreshListener listener) {
         swipeContainer.setOnRefreshListener(listener);
         swipeContainer.setEnabled(false);
         swipeContainer.setColorSchemeResources(R.color.yellow, R.color.blue, R.color.red, R.color.button_blue);
-    }
+    }*/
 
     public void setTopAnimation() {
         swipeContainer.post(new Runnable() {
@@ -127,9 +123,10 @@ public class BaseActivity extends AppCompatActivity {
     public void setUpActionbar(String title, int iconResource, View.OnClickListener listener) {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setElevation(0);
         getSupportActionBar().setCustomView(R.layout.toolbar);
         View view = getSupportActionBar().getCustomView();
-        CustomTextViewBold titleText = (CustomTextViewBold) view.findViewById(R.id.toolBarText);
+        CustomTextView titleText = (CustomTextView) view.findViewById(R.id.toolBarText);
         ImageView toolbarIcon = (ImageView) view.findViewById(R.id.tool_barIcon);
         titleText.setText(title);
         if (iconResource == 0) {
@@ -140,7 +137,7 @@ public class BaseActivity extends AppCompatActivity {
         toolbarIcon.setOnClickListener(listener);
     }
 
-    public void setUpActionbar() {
+  /*  public void setUpActionbar() {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.toolbar_updated);
@@ -168,7 +165,7 @@ public class BaseActivity extends AppCompatActivity {
         cv.adjustRelative(moreOptionsIcon, 128,28);
         cv.adjustRelativeSquare(timerIcon, 60);
         getSupportActionBar().setCustomView(view);
-    }
+    }*/
 
     public TransitionDrawable createDrawable(int res1, int res2) {
         TransitionDrawable drawable;
