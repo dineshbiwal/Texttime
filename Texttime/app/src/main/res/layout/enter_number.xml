@@ -1,6 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg_gradient">
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/choose_country"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="162dp"
+        android:layout_marginLeft="@dimen/leftmargin">
+        <ImageButton
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_location"
+            android:background="@android:color/transparent"/>
+        <CustomViews.CustomTextView
+            android:id="@+id/your_country"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:textColor="@color/textColor1"
+            android:text="@string/choose_country"
+            android:background="@android:color/transparent"/>
+    </LinearLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/aTIL"
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/leftmargin"
+        android:layout_marginRight="@dimen/leftmargin"
+        android:layout_marginTop="35dp">
+        <CustomViews.CustomEditText
+            android:id="@+id/insert_number"
+            android:hint="@string/enter_number"
+            android:textColorHint="@color/textColor1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor1"
+            android:background="@drawable/edittext_bottom_line"
+            android:textSize="24dp"
+            android:singleLine="true"
+            android:inputType="phone"/>
+    </android.support.design.widget.TextInputLayout>
+    <LinearLayout
+        android:layout_marginTop="65dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="@dimen/leftmargin"
+        android:background="@android:color/transparent">
+        <CustomViews.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/textColor1"
+            android:background="@android:color/transparent"
+            android:text="@string/send_sms" />
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/sendSms"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="7dp"
+            android:src="@mipmap/send"/>
+    </LinearLayout>
+</LinearLayout>

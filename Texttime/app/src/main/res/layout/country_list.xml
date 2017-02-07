@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg_gradient">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_cancel"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"/>
+            <ImageView
+                android:id="@+id/search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_search_country"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"/>
+            <EditText
+                android:id="@+id/country_picker_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Search"
+                android:textColor="@color/textColor1"
+                android:textColorHint="@color/textColor1"
+                android:focusable="true"
+                android:layout_gravity="center_vertical"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_marginRight="10dp"
+                android:padding="5dp"
+                android:focusableInTouchMode="true"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+            <LinearLayout
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:background="@drawable/search_bg_icon"
+                android:gravity="center" >
+
+                <CustomViews.CustomTextViewBold
+                    android:id="@+id/alphabate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#"
+                    android:background="@android:color/transparent"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/list_country"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scrollbars="none"
+                android:divider="@null">
+                <requestFocus />
+            </ListView>
+
+            <LinearLayout
+                android:id="@+id/side_index"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginRight="8dp"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <CustomViews.VerticalSeekBar
+                        android:id="@+id/seekBar1"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"
+                        android:thumb="@drawable/circle_white"
+                        android:progressDrawable="@drawable/seekdrawable"
+                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:id="@+id/alphabaticLayout"
+                        android:orientation="vertical"
+                        ></LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
