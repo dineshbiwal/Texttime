@@ -21,4 +21,20 @@
         <item name="windowActionBar">true</item>
     </style>
 
+
+
+    <style name="ThemeCustomBar1" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/app_blue</item>
+        <item name="colorPrimaryDark">@color/app_blue</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+
+
+    <style name="ThemeCustomBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/app_blue</item>
+        <item name="colorPrimaryDark">@color/app_blue</item>
+
+    </style>
+
 </resources>

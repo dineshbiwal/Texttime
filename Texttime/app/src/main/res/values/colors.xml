@@ -8,4 +8,8 @@
     <color name="bg_gredient_start">#8DFDFD</color>
     <color name="bg_gredient_center">#CBFEFE</color>
     <color name="bg_gredient_end">#F8FEFF</color>
+    <color name="text_tab">#FAC821</color>
+    <color name="app_blue">#00BBD3</color>
+
+>>>>>>> d7faceef4bf1cfef2c12106f27c3dba2d46bb75b
 </resources>

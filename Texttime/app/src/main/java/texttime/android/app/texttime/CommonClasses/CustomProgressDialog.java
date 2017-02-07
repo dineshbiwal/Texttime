@@ -3,6 +3,7 @@ package texttime.android.app.texttime.CommonClasses;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Window;
+
 import texttime.android.app.texttime.R;
 
 

@@ -1,5 +1,8 @@
 package texttime.android.app.texttime.GeneralClasses;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -15,15 +18,20 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
 import CustomViews.CustomTextView;
+
 import CustomViews.CustomTextViewBold;
 import CustomViews.CustomTextViewRegular;
 import texttime.android.app.texttime.CommonClasses.CommonDataUtility;
 import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
+
+import texttime.android.app.texttime.CommonClasses.DataFunctions;
+import texttime.android.app.texttime.CommonClasses.PermissionManager;
 import texttime.android.app.texttime.CommonClasses.CustomProgressDialog;
 import texttime.android.app.texttime.CommonClasses.DataFunctions;
 import texttime.android.app.texttime.CommonClasses.PermissionManager;
 import texttime.android.app.texttime.CommonClasses.SaveDataPreferences;
 import texttime.android.app.texttime.R;
+
 
 public class BaseActivity extends AppCompatActivity {
     public CommonDataUtility cd;
@@ -141,6 +149,7 @@ public class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.toolbar_updated);
+        getSupportActionBar().setElevation(0);
         View view = getSupportActionBar().getCustomView();
 
         ImageView searchIcon = (ImageView) view.findViewById(R.id.searchIcon);
@@ -177,4 +186,51 @@ public class BaseActivity extends AppCompatActivity {
         drawable.setCrossFadeEnabled(true);
         return drawable;
     }
+
+
+
+    float alpha=0;
+    int mAnimDuration = 600/* milliseconds */;
+
+    ValueAnimator mVaActionBar;
+
+    public void hideActionBar() {
+        // initialize `mToolbarHeight`
+        if (alpha == 0) {
+            alpha = getSupportActionBar().getCustomView().getAlpha();
+        }
+
+        if (mVaActionBar != null && mVaActionBar.isRunning()) {
+            // we are already animating a transition - block here
+            return;
+        }
+
+        // animate `Toolbar's` height to zero.
+        mVaActionBar = ValueAnimator.ofFloat(alpha , 0);
+        mVaActionBar.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                // update LayoutParams
+                getSupportActionBar().getCustomView().setAlpha((Float) animation.getAnimatedValue());
+                getSupportActionBar().getCustomView().requestLayout();
+            }
+        });
+
+        mVaActionBar.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+
+                if (getSupportActionBar() != null) { // sanity check
+                   // getSupportActionBar().hide();
+                    setUpActionbar("2nd Action Bar",android.R.drawable.ic_dialog_dialer,null);
+                }
+            }
+        });
+
+        mVaActionBar.setDuration(mAnimDuration);
+        mVaActionBar.start();
+    }
+
+
 }
