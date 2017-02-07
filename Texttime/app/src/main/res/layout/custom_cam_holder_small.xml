@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+    <TextureView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/camDisplay"
+
+        />
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/maskLayout"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/imageTrans"
+            android:background="@mipmap/trans_patch1"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/imageMask"
+            android:background="@mipmap/framenew1"
+            />
+
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/maskLayout"
+        android:background="@mipmap/bg_tab"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottom"
+        ></View>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/maskLayout"
+        android:background="@mipmap/bg_tab"
+        android:layout_alignParentTop="true"
+        android:id="@+id/top"
+        ></View>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/maskLayout"
+        android:layout_below="@id/top"
+        android:layout_above="@id/bottom"
+        android:background="@mipmap/bg_tab"
+        android:layout_alignParentLeft="true"
+        ></View>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/maskLayout"
+        android:layout_below="@id/top"
+        android:layout_above="@id/bottom"
+        android:background="@mipmap/bg_tab"
+        ></View>
+
+
+
+</RelativeLayout>
