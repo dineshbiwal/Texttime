@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+
+    android:layout_height="wrap_content">
+
+
+    <CustomViews.CustomImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileImage"
+        android:layout_centerVertical="true"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/chatMessageLayout"
+        android:layout_toRightOf="@id/profileImage"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="20dp"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CustomViews.CustomTextViewBold
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userNameLabel"
+                android:textSize="18dp"
+                android:textColor="#000000"
+                android:alpha="0.5"
+                android:layout_marginLeft="3dp"
+                android:layout_centerVertical="true"
+
+                />
+
+            <CustomViews.CustomTextViewLight
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/postedTimeLabel"
+                android:textSize="14dp"
+                android:textColor="#000000"
+                android:alpha="0.25"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:id="@+id/messageReceivedLayout"
+            android:layout_height="wrap_content">
+
+            <CustomViews.CustomTextViewRegular
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:id="@+id/unreadMessageLbl"
+                android:gravity="center"
+                android:background="#00BBD3"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:textSize="12dp"
+                />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/messageLayout"
+                android:layout_toLeftOf="@id/unreadMessageLbl"
+                >
+
+            <ImageView
+                android:layout_width="16dp"
+                android:id="@+id/messageStatusImage"
+                android:layout_margin="5dp"
+                android:layout_height="16dp" />
+
+
+            <CustomViews.CustomTextViewLight
+                android:layout_toRightOf="@id/messageStatusImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:id="@+id/messageText"
+                android:ellipsize="end"
+                android:textSize="16dp"
+                android:textColor="#000000"
+                android:alpha="0.50"
+                android:layout_marginRight="5dp"
+                />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:id="@+id/receivedImageThumbnail"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

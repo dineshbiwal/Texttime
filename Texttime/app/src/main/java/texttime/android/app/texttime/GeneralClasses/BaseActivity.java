@@ -12,10 +12,12 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import CustomViews.CustomTextView;
 
@@ -143,6 +145,61 @@ public class BaseActivity extends AppCompatActivity {
         if (iconResource != 0)
             toolbarIcon.setImageResource(iconResource);
         toolbarIcon.setOnClickListener(listener);
+    }
+
+
+    public void setUpActionbarChatList() {
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setElevation(0);
+        getSupportActionBar().setCustomView(R.layout.toolbar_chat_list);
+        View view = getSupportActionBar().getCustomView();
+        CustomTextViewBold chatlabel = (CustomTextViewBold) view.findViewById(R.id.chatlabel);
+        chatlabel.setAlpha(0.5f);
+        ImageView settingsIcon = (ImageView) view.findViewById(R.id.settingsIcon);
+        ImageView searchIcon = (ImageView) view.findViewById(R.id.searchIcon);
+        ImageView createNewChatIcon = (ImageView) view.findViewById(R.id.createNewChatIcon);
+        ImageView onlinestatus = (ImageView) view.findViewById(R.id.onlinestatus);
+        CommonViewUtility cv = CommonViewUtility.getInstance();
+
+        cv.adjustRelativeSquare(settingsIcon,45);
+        cv.adjustRelativeSquare(searchIcon,48);
+        cv.adjustRelativeSquare(createNewChatIcon,58);
+
+    }
+
+
+    public void setUpActionbarChatListSearch() {
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setElevation(0);
+        getSupportActionBar().setCustomView(R.layout.toolbar_search);
+        View view = getSupportActionBar().getCustomView();
+        CustomTextView chatlabel = (CustomTextView) view.findViewById(R.id.cancelText);
+        SearchView searchView=(SearchView)view.findViewById(R.id.searchView);
+
+    }
+
+
+    public void setUpActionbarChatSelection() {
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setElevation(0);
+        getSupportActionBar().setCustomView(R.layout.toolbar_chat_options);
+        View view = getSupportActionBar().getCustomView();
+        ImageView backButton = (ImageView) view.findViewById(R.id.backButton);
+        ImageView muteButton = (ImageView) view.findViewById(R.id.muteButton);
+        ImageView archiveButton = (ImageView) view.findViewById(R.id.archiveButton);
+        ImageView deleteButton = (ImageView) view.findViewById(R.id.deleteButton);
+        TextView numberofSelection = (TextView) view.findViewById(R.id.numberofSelection);
+        CommonViewUtility cv = CommonViewUtility.getInstance();
+        cv.adjustRelativeSquare(deleteButton,80);
+        cv.adjustRelativeSquare(archiveButton,70);
+        cv.adjustRelativeSquare(muteButton,70);
+        cv.adjustRelativeSquare(numberofSelection,55);
+//        cv.adjustRelativeSquare(numberofSelection,70);
+        numberofSelection.setAlpha(0.5f);
+
     }
 
   /*  public void setUpActionbar() {

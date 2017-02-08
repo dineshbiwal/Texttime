@@ -1,13 +1,17 @@
 package texttime.android.app.texttime;
 
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import ChatUI.fragments.ChatFragment;
 import CustomViews.CustomTextViewBold;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,12 +61,32 @@ public class ContainerActivity extends BaseActivity {
         setContentView(R.layout.activity_container);
         ButterKnife.bind(this);
         init(this);
-        setUpActionbar("1st bar",android.R.drawable.ic_menu_agenda,new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                hideActionBar();
-
-            }
-        });
+        //setUpActionbarChatSelection();
+        // setUpActionbarChatListSearch();
+         setUpActionbarChatList();
+         openNewFragment(new ChatFragment(),"Chat");
+         cv.adjustRelativeHeight(bottomTabBar,80);
     }
+
+    Fragment currentFragment;
+    public void openNewFragment(Fragment f, String tag)
+    {
+        FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+        Fragment fragment=getSupportFragmentManager().findFragmentByTag(tag);
+        if(fragment!=null){
+            ft.show(fragment);
+            ft.hide(currentFragment);
+            currentFragment=fragment;
+        }
+        else
+        {
+            if(currentFragment!=null)
+                ft.hide(currentFragment);
+
+            ft.add(R.id.placeHolder,f,tag);
+            currentFragment=f;
+        }
+        ft.commit();
+    }
+
 }
