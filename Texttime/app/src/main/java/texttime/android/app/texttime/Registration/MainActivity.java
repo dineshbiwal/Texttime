@@ -41,15 +41,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         ButterKnife.bind(this);
         init(this);
         setUpActionbar("TextTime App.", 0, null);
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+      //  this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         adjustUIcontent();
+        insertNumber.clearFocus();
+        chooseCountry.requestFocus();
         chooseCountry.setOnClickListener(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        insertNumber.clearFocus();
         //yourCountry.setText(sd.getCountryName() + " " + sd.getDialCode());
     }
 
