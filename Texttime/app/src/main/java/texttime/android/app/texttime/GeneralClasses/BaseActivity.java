@@ -145,6 +145,26 @@ public class BaseActivity extends AppCompatActivity {
         toolbarIcon.setOnClickListener(listener);
     }
 
+    public void setUpActionbar(String title, int iconResource, View.OnClickListener leftIconListener, View.OnClickListener rightIconListener) {
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setElevation(0);
+        getSupportActionBar().setCustomView(R.layout.toolbar);
+        View view = getSupportActionBar().getCustomView();
+        CustomTextView titleText = (CustomTextView) view.findViewById(R.id.toolBarText);
+        ImageView toolbarIcon = (ImageView) view.findViewById(R.id.tool_barIcon);
+        //CustomTextView rightIcon = (CustomTextView) view.findViewById(R.id.rightAction);
+        titleText.setText(title);
+        if (iconResource == 0) {
+            toolbarIcon.setVisibility(View.GONE);
+        }
+        if (iconResource != 0)
+            toolbarIcon.setImageResource(iconResource);
+        toolbarIcon.setOnClickListener(leftIconListener);
+       // rightIcon.setVisibility(View.VISIBLE);
+       // rightIcon.setOnClickListener(rightIconListener);
+    }
+
   /*  public void setUpActionbar() {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);

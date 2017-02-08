@@ -6,29 +6,36 @@
     android:background="@drawable/main_bg_gradient">
 
     <LinearLayout
-         android:id="@+id/choose_country"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:orientation="horizontal"
-         android:gravity="center_vertical"
-         android:background="@android:color/transparent"
-         android:layout_marginTop="162dp"
-         android:layout_marginLeft="@dimen/leftmargin">
-         <ImageButton
-             android:id="@+id/location"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:src="@mipmap/ic_location"
-             android:background="@android:color/transparent"/>
-         <CustomViews.CustomTextView
-             android:id="@+id/your_country"
-             android:textSize="18dp"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginLeft="7dp"
-             android:textColor="@color/textColor1"
-             android:text="@string/choose_country"
-             android:background="@android:color/transparent"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="16dp">
+        <CustomViews.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/verify_msg"
+            android:textSize="18dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <CustomViews.CustomTextView
+                android:id="@+id/code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/black"/>
+            <CustomViews.CustomTextView
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:layout_marginLeft="8dp"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,19 +44,11 @@
         android:background="@android:color/transparent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="35dp">
-        <CustomViews.CustomTextView
-            android:id="@+id/country_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="28dp"
-            android:visibility="gone"
-            android:background="@android:color/transparent"
-            android:layout_marginRight="16dp"
-            android:textColor="@android:color/black"/>
+        android:layout_marginTop="30dp">
+
         <EditText
-            android:id="@+id/insert_number"
-            android:hint="@string/enter_number"
+            android:id="@+id/insert_code"
+            android:hint="@string/digit_code"
             android:textColorHint="@color/textColor1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,11 +56,10 @@
             android:background="@drawable/edittext_bottom_line"
             android:textSize="28dp"
             android:focusableInTouchMode="true"
-            android:inputType="phone"/>
+            android:inputType="number"/>
     </LinearLayout>
-
     <LinearLayout
-        android:id="@+id/sendVerifyCode"
+        android:id="@+id/resendVerifyCode"
         android:layout_marginTop="65dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,14 +73,14 @@
             android:textSize="20dp"
             android:textColor="@color/textColor1"
             android:background="@android:color/transparent"
-            android:text="@string/send_sms" />
+            android:text="@string/resend_code" />
         <ImageView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:id="@+id/sendSms"
+            android:id="@+id/sendcode"
             android:background="@android:color/transparent"
             android:layout_marginLeft="7dp"
             android:src="@mipmap/send"/>
     </LinearLayout>
-</LinearLayout>
 
+</LinearLayout>
