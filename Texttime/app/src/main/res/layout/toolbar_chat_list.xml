@@ -9,8 +9,8 @@
     android:layout_height="wrap_content"
     android:id="@+id/settingsIcon"
     android:layout_centerVertical="true"
-    android:layout_marginLeft="15dp"
-    android:background="@mipmap/chat_settings"
+
+    android:background="@mipmap/settings_icon_new"
     />
 
 
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/searchIcon"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="25dp"
+
         android:background="@mipmap/seach_new"
         android:layout_toRightOf="@id/settingsIcon"
         />
@@ -36,7 +36,7 @@
         android:layout_centerVertical="true"
         android:textSize="22dp"
         android:text="Chat"
-        android:layout_marginLeft="15dp"
+
         android:layout_toRightOf="@id/searchIcon"
         />
 
@@ -46,8 +46,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/createNewChatIcon"
         android:layout_centerVertical="true"
-        android:layout_marginRight="15dp"
-        android:background="@mipmap/compose_new"
+
+        android:background="@mipmap/compose_icon"
        android:layout_alignParentRight="true"
         />
 
@@ -57,7 +57,7 @@
         android:id="@+id/onlinestatus"
         android:background="@drawable/circle_green"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
+
         android:layout_toRightOf="@id/chatlabel"
         />
 
