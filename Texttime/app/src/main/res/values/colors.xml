@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#8DFDFD</color>
+    <!--<color name="colorPrimary">#8DFDFD</color>
     <color name="colorPrimaryDark">#CBFEFE</color>
-    <color name="colorAccent">#CBFEFE</color>
+    <color name="colorAccent">#CBFEFE</color>-->
+    <color name="colorPrimary">@android:color/transparent</color>
+    <color name="colorPrimaryDark">#2C9E9E</color>
+    <color name="colorAccent">@android:color/transparent</color>
     <color name="textColor">#32000000</color>
     <color name="textColor1">#68000000</color>
+    <color name="bg_gredient_start">#2AFFFF</color>
+    <color name="bg_gredient_center">#B7FFFF</color>
+    <color name="bg_gredient_end">#F3FFFF</color>
     <!--<color name="bg_gredient_start">#8DFDFD</color>
-    <color name="bg_gredient_center">#CBFEFE</color>
-    <color name="bg_gredient_end">#F8FEFF</color>-->
-    <color name="bg_gredient_start">#8DFDFD</color>
     <color name="bg_gredient_center">#BBFEFE</color>
-    <color name="bg_gredient_end">#EBFEFF</color>
+    <color name="bg_gredient_end">#EBFEFF</color>-->
     <color name="text_tab">#FAC821</color>
     <color name="app_blue">#00BBD3</color>
 </resources>

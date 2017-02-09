@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Texttime</string>
+    <string name="app_name">TextTime</string>
     <string name="app">TextTime App.</string>
     <string name="choose_country"> Choose your country</string>
     <string name="enter_number">Enter your phone number</string>
@@ -10,4 +10,8 @@
     <string name="country_err">Please select your country code and enter valid phone number</string>
     <string name="number_correct">Is your number above correct?</string>
     <string name="signup_error">Getting error with signup process</string>
+    <string name="unable_resend_code">Unable to resend verification code</string>
+    <string name="reached_limit">Your reached limit for resending code.</string>
+    <string name="invalid_verify">Verification code not valid more then one time</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyA82N1-k-AGKJrboXsXcddIEV9UBGsginU</string>
 </resources>

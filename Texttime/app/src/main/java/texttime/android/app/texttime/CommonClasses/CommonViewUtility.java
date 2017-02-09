@@ -229,16 +229,20 @@ public class CommonViewUtility {
                 lp.leftMargin=getWidth(value);
                 break;
 
-            case 4:
-                lp.rightMargin=getWidth(value);
-                break;
-
             case 2:
                 lp.topMargin=getHeight(value);
                 break;
 
             case 3:
                 lp.bottomMargin=getHeight(value);
+                break;
+
+            case 4:
+                lp.rightMargin=getWidth(value);
+                break;
+
+            case 5:
+                lp.setMargins(value, value, value, value);
                 break;
         }
         v.setLayoutParams(lp);
@@ -265,6 +269,9 @@ public class CommonViewUtility {
 
             case 3:
                 lp.bottomMargin=getHeight(value);
+                break;
+            case 5:
+                lp.setMargins(value, value, value, value);
                 break;
         }
         v.setLayoutParams(lp);

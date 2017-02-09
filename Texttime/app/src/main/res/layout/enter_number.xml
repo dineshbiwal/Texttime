@@ -11,9 +11,7 @@
          android:layout_height="wrap_content"
          android:orientation="horizontal"
          android:gravity="center_vertical"
-         android:background="@android:color/transparent"
-         android:layout_marginTop="162dp"
-         android:layout_marginLeft="@dimen/leftmargin">
+         android:background="@android:color/transparent">
          <ImageButton
              android:id="@+id/location"
              android:layout_width="wrap_content"
@@ -22,30 +20,26 @@
              android:background="@android:color/transparent"/>
          <CustomViews.CustomTextView
              android:id="@+id/your_country"
-             android:textSize="18dp"
+             android:textSize="16dp"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:layout_marginLeft="7dp"
              android:textColor="@color/textColor1"
              android:text="@string/choose_country"
              android:background="@android:color/transparent"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/numberinput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@android:color/transparent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="35dp">
+        android:background="@android:color/transparent">
         <CustomViews.CustomTextView
             android:id="@+id/country_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="28dp"
+            android:textSize="24dp"
             android:visibility="gone"
             android:background="@android:color/transparent"
-            android:layout_marginRight="16dp"
             android:textColor="@android:color/black"/>
         <EditText
             android:id="@+id/insert_number"
@@ -55,19 +49,17 @@
             android:layout_height="wrap_content"
             android:textColor="@color/textColor1"
             android:background="@drawable/edittext_bottom_line"
-            android:textSize="28dp"
+            android:textSize="24dp"
             android:focusableInTouchMode="true"
             android:inputType="phone"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/sendVerifyCode"
-        android:layout_marginTop="65dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="right|center_vertical"
-        android:layout_marginRight="@dimen/leftmargin"
         android:background="@android:color/transparent">
         <CustomViews.CustomTextView
             android:layout_width="wrap_content"
@@ -81,7 +73,6 @@
             android:layout_width="wrap_content"
             android:id="@+id/sendSms"
             android:background="@android:color/transparent"
-            android:layout_marginLeft="7dp"
             android:src="@mipmap/send"/>
     </LinearLayout>
 </LinearLayout>
