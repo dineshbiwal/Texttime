@@ -26,16 +26,17 @@
             android:screenOrientation="portrait"
             android:name=".Registration.MainActivity"
             android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity
             android:screenOrientation="portrait"
             android:name=".ContainerActivity"
             android:theme="@style/ThemeCustomBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".Registration.CountryList"

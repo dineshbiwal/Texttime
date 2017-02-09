@@ -20,7 +20,6 @@
         android:layout_toRightOf="@id/profileImage"
         android:orientation="vertical"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
         android:layout_marginBottom="20dp"
         >
 
@@ -36,16 +35,15 @@
                 android:textSize="18dp"
                 android:textColor="#000000"
                 android:alpha="0.5"
-                android:layout_marginLeft="3dp"
                 android:layout_centerVertical="true"
 
                 />
 
-            <CustomViews.CustomTextViewLight
+            <CustomViews.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/postedTimeLabel"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 android:textColor="#000000"
                 android:alpha="0.25"
                 android:layout_centerVertical="true"
@@ -57,7 +55,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="5dp"
+
             android:id="@+id/messageReceivedLayout"
             android:layout_height="wrap_content">
 
@@ -88,16 +86,16 @@
                 android:layout_height="16dp" />
 
 
-            <CustomViews.CustomTextViewLight
+            <CustomViews.CustomTextView
                 android:layout_toRightOf="@id/messageStatusImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="2"
                 android:id="@+id/messageText"
                 android:ellipsize="end"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 android:textColor="#000000"
-                android:alpha="0.50"
+                android:alpha="0.25"
                 android:layout_marginRight="5dp"
                 />
             </RelativeLayout>

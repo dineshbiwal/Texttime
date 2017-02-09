@@ -20,6 +20,7 @@ import ChatUI.fragments.ChatDataModels.ChattingUserList;
 import CustomViews.CustomTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
 import texttime.android.app.texttime.GeneralClasses.BaseFragment;
 import texttime.android.app.texttime.R;
 
@@ -32,8 +33,7 @@ public class ChatFragment extends BaseFragment {
 
     @BindView(R.id.typeofchat)
     CustomTextView typeofchat;
-    @BindView(R.id.topLayout)
-    RelativeLayout topLayout;
+
     @BindView(R.id.chatList)
     RecyclerView chatList;
 
@@ -59,12 +59,17 @@ public class ChatFragment extends BaseFragment {
         chatList.setLayoutManager(new LinearLayoutManager(context));
         ChatHistoryAdapter adapter=new ChatHistoryAdapter(list,context);
         chatList.setAdapter(adapter);
-
+        adjustUIComponent();
 
         return view;
     }
 
 
+
+    private void adjustUIComponent(){
+        cv.adjustRelativeMargin(typeofchat, CommonViewUtility.TOP,60);
+        cv.adjustRelativeMargin(chatList, CommonViewUtility.TOP,162);
+    }
     private void fillData(){
         ChattingUserList user=new ChattingUserList();
         user.setLastMessage("Alpha bravo charlie delta echo foxtrot golf hotel india juliet kilo lima");

@@ -147,7 +147,7 @@ public class BaseActivity extends AppCompatActivity {
         toolbarIcon.setOnClickListener(listener);
     }
 
-<<<<<<< HEAD
+
     public void setUpActionbar(String title, int iconResource, View.OnClickListener leftIconListener, View.OnClickListener rightIconListener) {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -164,14 +164,16 @@ public class BaseActivity extends AppCompatActivity {
         if (iconResource != 0)
             toolbarIcon.setImageResource(iconResource);
         toolbarIcon.setOnClickListener(leftIconListener);
+    }
        // rightIcon.setVisibility(View.VISIBLE);
        // rightIcon.setOnClickListener(rightIconListener);
-=======
+
 
     public void setUpActionbarChatList() {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setElevation(0);
+
         getSupportActionBar().setCustomView(R.layout.toolbar_chat_list);
         View view = getSupportActionBar().getCustomView();
         CustomTextViewBold chatlabel = (CustomTextViewBold) view.findViewById(R.id.chatlabel);
@@ -182,9 +184,15 @@ public class BaseActivity extends AppCompatActivity {
         ImageView onlinestatus = (ImageView) view.findViewById(R.id.onlinestatus);
         CommonViewUtility cv = CommonViewUtility.getInstance();
 
-        cv.adjustRelativeSquare(settingsIcon,45);
-        cv.adjustRelativeSquare(searchIcon,48);
-        cv.adjustRelativeSquare(createNewChatIcon,58);
+        cv.adjustRelative(settingsIcon,30,30);
+        cv.adjustRelativeSquare(onlinestatus,12);
+        cv.adjustRelative(searchIcon,49,52);
+        cv.adjustRelativeSquare(createNewChatIcon,54);
+        cv.adjustRelativeMargin(settingsIcon,CommonViewUtility.LEFT,30);
+        cv.adjustRelativeMargin(searchIcon,CommonViewUtility.LEFT,78);
+        cv.adjustRelativeMargin(createNewChatIcon,CommonViewUtility.RIGHT,24);
+        cv.adjustRelativeMargin(chatlabel,CommonViewUtility.LEFT,46);
+        cv.adjustRelativeMargin(onlinestatus,CommonViewUtility.LEFT,28);
 
     }
 
@@ -220,7 +228,7 @@ public class BaseActivity extends AppCompatActivity {
 //        cv.adjustRelativeSquare(numberofSelection,70);
         numberofSelection.setAlpha(0.5f);
 
->>>>>>> 4ec71d27e62cb893dc202df05f8e958bf7228558
+
     }
 
   /*  public void setUpActionbar() {

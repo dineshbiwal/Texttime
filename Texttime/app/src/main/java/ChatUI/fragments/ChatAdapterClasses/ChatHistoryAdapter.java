@@ -46,9 +46,14 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter{
 
 
         CommonViewUtility cv=CommonViewUtility.getInstance();
-        cv.adjustRelativeSquare(viewHolder.profileImage,150);
-        cv.adjustRelativeSquare(viewHolder.unreadMessageLbl,50);
-        cv.adjustRelativeSquare(viewHolder.messageStatusImage,20);
+        cv.adjustRelativeSquare(viewHolder.profileImage,180);
+        cv.adjustRelativeSquare(viewHolder.unreadMessageLbl,57);
+        cv.adjustRelativeSquare(viewHolder.messageStatusImage,13);
+        cv.adjustRelativeMargin(viewHolder.profileImage,CommonViewUtility.LEFT,15);
+        cv.adjustRelativeMargin(viewHolder.chatMessageLayout,CommonViewUtility.TOP,35);
+        cv.adjustRelativeMargin(viewHolder.chatMessageLayout,CommonViewUtility.LEFT,30);
+        cv.adjustRelativeMargin(viewHolder.postedTimeLabel,CommonViewUtility.LEFT,28);
+        cv.adjustLinearMargin(viewHolder.messageReceivedLayout,CommonViewUtility.TOP,20);
 
         if(model.getUserStatus()){
             viewHolder.messageStatusImage.setImageResource(R.drawable.circle_blue_solid);

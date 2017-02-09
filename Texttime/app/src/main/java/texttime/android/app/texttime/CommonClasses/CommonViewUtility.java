@@ -60,7 +60,7 @@ public class CommonViewUtility {
     public int getWidth(int wid)
     {
         int w=0;
-        w=((wid*width)/768);
+        w=((wid*width)/1080);
         return w;
     }
 
@@ -68,7 +68,7 @@ public class CommonViewUtility {
     public int getHeight(int hei)
     {
         int h=0;
-        h=((hei*height)/1080);
+        h=((hei*height)/1920);
         return h;
     }
 
