@@ -147,7 +147,10 @@ public class BaseActivity extends AppCompatActivity {
         toolbarIcon.setOnClickListener(listener);
     }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 1b5c1708576965f0eb1b85dc3b32f6270fe20e92
     public void setUpActionbar(String title, int iconResource, View.OnClickListener leftIconListener, View.OnClickListener rightIconListener) {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -156,7 +159,7 @@ public class BaseActivity extends AppCompatActivity {
         View view = getSupportActionBar().getCustomView();
         CustomTextView titleText = (CustomTextView) view.findViewById(R.id.toolBarText);
         ImageView toolbarIcon = (ImageView) view.findViewById(R.id.tool_barIcon);
-        //CustomTextView rightIcon = (CustomTextView) view.findViewById(R.id.rightAction);
+        CustomTextView rightIcon = (CustomTextView) view.findViewById(R.id.rightAction);
         titleText.setText(title);
         if (iconResource == 0) {
             toolbarIcon.setVisibility(View.GONE);
@@ -164,10 +167,16 @@ public class BaseActivity extends AppCompatActivity {
         if (iconResource != 0)
             toolbarIcon.setImageResource(iconResource);
         toolbarIcon.setOnClickListener(leftIconListener);
+<<<<<<< HEAD
+        rightIcon.setVisibility(View.VISIBLE);
+        rightIcon.setOnClickListener(rightIconListener);
+    }
+=======
     }
        // rightIcon.setVisibility(View.VISIBLE);
        // rightIcon.setOnClickListener(rightIconListener);
 
+>>>>>>> 1b5c1708576965f0eb1b85dc3b32f6270fe20e92
 
     public void setUpActionbarChatList() {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -225,10 +234,12 @@ public class BaseActivity extends AppCompatActivity {
         cv.adjustRelativeSquare(archiveButton,70);
         cv.adjustRelativeSquare(muteButton,70);
         cv.adjustRelativeSquare(numberofSelection,55);
-//        cv.adjustRelativeSquare(numberofSelection,70);
         numberofSelection.setAlpha(0.5f);
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 1b5c1708576965f0eb1b85dc3b32f6270fe20e92
     }
 
   /*  public void setUpActionbar() {

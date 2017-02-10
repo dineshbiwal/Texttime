@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="12dp"
         android:background="@android:color/transparent"
         android:id="@+id/tool_barIcon" />
     <CustomViews.CustomTextView
@@ -28,7 +28,7 @@
         android:textColor="@color/textColor1"
         android:visibility="gone"
         android:text="Next"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="12dp"
         android:background="@android:color/transparent"
         android:id="@+id/rightAction"
         android:layout_alignParentRight="true"/>

@@ -28,6 +28,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
 import CustomViews.CustomTextViewBold;
 import CustomViews.VerticalSeekBar;
 import butterknife.BindView;
@@ -59,6 +60,10 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
     ImageView cancel;
     @BindView(R.id.search_icon)
     ImageView searchIcon;
+    @BindView(R.id.country_lst)
+    LinearLayout countryLst;
+    @BindView(R.id.action)
+    LinearLayout action;
 
     private CountryListAdapter adapter;
     private List<Country> cList, selectedCountriesList;
@@ -78,10 +83,10 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
             public void run() {
                 new AllCountryList().execute();
             }
-        },10);
+        }, 10);
     }
 
-    public void init(){
+    public void init() {
         listCountry.setOnItemClickListener(this);
         listCountry.setOnScrollListener(this);
 
@@ -92,10 +97,12 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
             public void onTextChanged(CharSequence s, int start, int before,
                                       int count) {
             }
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 search(s.toString());
@@ -107,9 +114,11 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) {
                     }
+
                     @Override
                     public void onStartTrackingTouch(SeekBar seekBar) {
                     }
+
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress,
                                                   boolean fromUser) {
@@ -124,14 +133,19 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
     }
 
     private void adjustUIcontant() {
+        cv.adjustLinearMargin(action, 2, 25);
         cv.adjustLinearSquare(searchIcon, 50);
+        cv.adjustLinearMargin(action,1, 25);
+        cv.adjustLinearMargin(searchIcon, 5, 20);
+        cv.adjustLinearMargin(cancel, 5, 20);
         cv.adjustLinearSquare(cancel, 50);
         cv.adjustRelativeHeight(seekBar, 700);
         cv.adjustRelativeWidth(seekBar, 70);
         cv.adjustRelativeHeight(alphabaticLayout, 700);
+        cv.adjustLinearMargin(countryLst, 2, 20);
     }
 
-    private void setonClicklistener(){
+    private void setonClicklistener() {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -272,7 +286,7 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
             tv.setTextColor(getResources().getColor(R.color.textColor1));
             tv.setText(index);
             tv.setTextSize(9f);
-            tv.setPadding(1,1,1,1);
+            tv.setPadding(1, 1, 1, 1);
             alphabaticLayout.addView(tv);
         }
     }

@@ -27,10 +27,11 @@ import java.util.Map;
 import CustomViews.CustomTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import texttime.android.app.texttime.CommonClasses.AppDelegate;
 import texttime.android.app.texttime.CommonClasses.IncomingSms;
 import texttime.android.app.texttime.CommonClasses.PermissionCode;
+import texttime.android.app.texttime.ContainerActivity;
 import texttime.android.app.texttime.DataModels.RegisterUser;
-import texttime.android.app.texttime.DataModels.Verification;
 import texttime.android.app.texttime.GeneralClasses.BaseActivity;
 import texttime.android.app.texttime.R;
 import texttime.android.app.texttime.WebOperations.ResponseCodes;
@@ -57,8 +58,9 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
     CustomTextView countryCode;
     @BindView(R.id.sendVerifyCode)
     LinearLayout sendVerifyCode;
-
-    String phoneNumber;
+    String phoneNumber = "";
+    @BindView(R.id.numberinput)
+    LinearLayout numberinput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,20 +69,21 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
         ButterKnife.bind(this);
         init(this);
         setUpActionbar(getResources().getString(R.string.app), 0, null);
-        adjustUIcontent();
-        chooseCountry.requestFocus();
-        chooseCountry.setOnClickListener(this);
-        insertNumber.addTextChangedListener(this);
-        sendVerifyCode.setOnClickListener(this);
-        checkPermissions();
+        checkIfLoggedIn();
+        getCountryCode();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        adjustUIcontent();
+        chooseCountry.setOnClickListener(this);
+        insertNumber.addTextChangedListener(this);
+        sendVerifyCode.setOnClickListener(this);
+        checkPermissions();
         insertNumber.clearFocus();
         countryCode.setVisibility(View.GONE);
-        getCountryCode();
+        yourCountry.setText(sd.getCountryName() + " " + sd.getDialCode());
         if (!TextUtils.isEmpty(sd.getDialCode())) {
             countryCode.setVisibility(View.VISIBLE);
             countryCode.setText(sd.getDialCode());
@@ -91,13 +94,23 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
     private void getCountryCode() {
         TelephonyManager tm = (TelephonyManager) this.getSystemService(this.TELEPHONY_SERVICE);
         String countryCodeValue = tm.getNetworkCountryIso();
+        AppDelegate.getInstance().getCountryDetails(countryCodeValue, this);
         insertNumber.setTypeface(dfunctions.getFontFamily(context), Typeface.NORMAL);
-        yourCountry.setText(sd.getCountryName() + " " + sd.getDialCode());
     }
 
     private void adjustUIcontent() {
         cv.adjustLinearSquare(location, 50);
         cv.adjustLinearSquare(sendSms, 60);
+        cv.adjustLinearMargin(chooseCountry, 2, 224);
+        cv.adjustLinearMargin(chooseCountry, 1, 44);
+        cv.adjustLinearMargin(yourCountry, 1, 16);
+        cv.adjustLinearMargin(numberinput,2, 44);
+        cv.adjustLinearMargin(numberinput, 1, 24);
+        cv.adjustLinearMargin(numberinput, 4, 26);
+        cv.adjustLinearMargin(countryCode, 4, 36);
+        cv.adjustLinearMargin(sendVerifyCode, 4, 44);
+        cv.adjustLinearMargin(sendSms, 1, 7);
+        cv.adjustLinearMargin(sendVerifyCode, 2, 80);
     }
 
     private void failShowMessage() {
@@ -108,15 +121,14 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
     public void onClick(View v) {
         if (v == chooseCountry) {
             startActivity(new Intent(this, CountryList.class));
-        }
-        else if(v == sendVerifyCode){
+        } else if (v == sendVerifyCode) {
             if (TextUtils.isEmpty(sd.getDialCode()) || TextUtils.isEmpty(cd.etData(insertNumber))) {
                 cv.showAlert(context, getResources().getString(R.string.country_err));
             } else {
                 if (cd.isNetworkAvailable()) {
                     //-----If the phone number is valid then make the web call--------------------------
                     //-----Phone number validation function is written in the datafunction class--------
-                    if (dfunctions.isPhoneNumberValid(phoneNumber) && dfunctions.isPhoneValid(phoneNumber, sd.getISOAlpha2())) {
+                    if (dfunctions.isPhoneValid(phoneNumber, sd.getISOAlpha2())) {
                         String message = sd.getDialCode() + " " + cd.etData(insertNumber) + "\n" + getResources().getString(R.string.
                                 number_correct);
                         hideKeyboard();
@@ -144,9 +156,9 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         final PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
-        if (dfunctions.isPhoneNumberValid(s.toString()) && dfunctions.isPhoneValid(s.toString(), sd.getISOAlpha2())) {
+        phoneNumber = s.toString();
+        if (dfunctions.isPhoneNumberValid(phoneNumber) && dfunctions.isPhoneValid(phoneNumber, sd.getISOAlpha2())) {
             try {
-                phoneNumber = s.toString();
                 final Phonenumber.PhoneNumber numberProto = phoneUtil.parse(s.toString(), sd.getISOAlpha2());
                 insertNumber.setText(phoneUtil.format(numberProto, PhoneNumberUtil.PhoneNumberFormat.NATIONAL));
                 insertNumber.setSelection(insertNumber.getText().length());
@@ -199,11 +211,9 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
         params.put("dial_code", sd.getDialCode());
         params.put("mobile_number", cd.etData(insertNumber));
         params.put("country_id", "1");
-       // cpd.show();
+        cpd.show();
         hideKeyboard();
-        sd.setPhoneNumber(cd.etData(insertNumber));
-        startActivity(new Intent(this, VerificationActivity.class));
-       // new WebTask(context, TaskCode.SENDVERIFYCODE, this, params).performTask();
+        new WebTask(context, TaskCode.SENDVERIFYCODE, this, params).performTask();
     }
 
     @Override
@@ -211,7 +221,7 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
         cpd.dismiss();
         if (taskCode == TaskCode.SENDVERIFYCODE) {
             RegisterUser user = (RegisterUser) object;
-            if (user.getResponseCode()== ResponseCodes.PHONENUMBERVERIFY) {
+            if (user.getResponseCode() == ResponseCodes.PHONENUMBERVERIFY) {
                 sd.setToken(user.data.getGuestToken());
                 sd.setPhoneNumber(cd.etData(insertNumber));
                 Bundle b = new Bundle();
@@ -234,5 +244,13 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
     public void failed(Object object, int taskCode) {
         cpd.dismiss();
         failShowMessage();
+    }
+
+    //-------If user has logged in redirect to the Home Activity-------------------------
+    //else keep on this screen and continue OTP login process----------------------------
+    private void checkIfLoggedIn() {
+        if (!TextUtils.equals(sd.getAccessToken(), "")) {
+            SAF(ContainerActivity.class);
+        }
     }
 }

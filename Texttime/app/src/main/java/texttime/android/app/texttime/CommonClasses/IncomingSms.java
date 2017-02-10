@@ -14,7 +14,6 @@ public class IncomingSms extends BroadcastReceiver
     @Override
     public void onReceive(Context context, Intent intent)
     {
-
         final Bundle bundle = intent.getExtras();
         try {
             if (bundle != null)
@@ -36,10 +35,8 @@ public class IncomingSms extends BroadcastReceiver
                         }
                     }
                     catch(Exception e){}
-
                 }
             }
-
         } catch (Exception e)
         {
 
