@@ -5,7 +5,7 @@
     android:background="@drawable/main_bg_gradient">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
         <View
             android:layout_width="match_parent"
@@ -13,7 +13,13 @@
             android:background="#000000"
             android:alpha="0.38"
             ></View>
-
+        <!--<include layout="@layout/toolbar"
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="24dp"
+            ></include>-->
         <RelativeLayout
             android:id="@+id/verify_tool"
             android:layout_width="match_parent"
@@ -32,7 +38,7 @@
                 android:textSize="22dp"
                 android:textColor="@color/textColor"
                 android:background="@android:color/transparent"
-                android:text="Sign In"
+                android:text="@string/app"
                 android:id="@+id/toolBarText"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
@@ -59,11 +65,11 @@
                 android:text="@string/verify_msg"
                 android:textSize="18dp" />
             <LinearLayout
+                android:id="@+id/valid_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@android:color/transparent"
-                android:layout_marginTop="5dp">
+                android:background="@android:color/transparent">
                 <CustomViews.CustomTextView
                     android:id="@+id/code"
                     android:layout_width="wrap_content"
@@ -94,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/textColor1"
                 android:background="@drawable/edittext_bottom_line"
-                android:textSize="24dp"
+                android:textSize="28dp"
                 android:focusableInTouchMode="true"
                 android:inputType="number"/>
         </LinearLayout>
@@ -108,7 +114,7 @@
             <CustomViews.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textColor="@color/textColor1"
                 android:background="@android:color/transparent"
                 android:text="@string/resend_code" />
@@ -123,30 +129,41 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        android:background="@android:color/transparent"
-        android:gravity="bottom">
+        android:orientation="vertical">
         <ProgressBar
-            android:background="@android:color/transparent"
             android:id="@+id/verify_progress"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="3dp"
             android:indeterminate="false"
             android:max="60"
             android:progress="60"
             android:progressDrawable="@drawable/progressbar"></ProgressBar>
-
-        <TextView
-            android:id="@+id/timerText"
+        <!--<LinearLayout
+            android:id="@+id/custom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#5F9E9E"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:text="00:45"
-            android:textColor="@android:color/white" />
+            android:background="@color/black_trans">-->
+            <TextView
+                android:id="@+id/timerText"
+                android:background="@color/black_trans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:textSize="20dp"
+                android:text="Call me 00:45"
+                android:textColor="@android:color/black" />
+        <!--</LinearLayout>-->
+        <LinearLayout
+            android:id="@+id/customKeyboardLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            android:orientation="vertical">
+        </LinearLayout>
     </LinearLayout>
+
 </RelativeLayout>

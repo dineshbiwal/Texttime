@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,8 @@ import com.google.i18n.phonenumbers.Phonenumber;
 
 import java.util.HashMap;
 
+import CustomViews.CurrentFocusInterface;
+import CustomViews.CustomKeyboardLayout;
 import CustomViews.CustomTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,19 +62,23 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     LinearLayout veriCode;
     @BindView(R.id.digit)
     LinearLayout digit;
+    @BindView(R.id.customKeyboardLayout)
+    LinearLayout customKeyboardLayout;
 
     int timerTime = 45;
     int resendActivationCount = 0;
     Handler handler;
     Runnable r;
-    @BindView(R.id.tool_cancel)
-    ImageView toolCancel;
     @BindView(R.id.toolBarText)
     CustomTextView toolBarText;
     @BindView(R.id.rightAction)
     CustomTextView rightAction;
+    @BindView(R.id.tool_cancel)
+    ImageView toolCancel;
     @BindView(R.id.verify_tool)
     RelativeLayout verifyTool;
+    @BindView(R.id.valid_code)
+    LinearLayout validCode;
     private String code = "";
 
     @BindView(R.id.verify_progress)
@@ -80,7 +87,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     TextView timerText;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.verify_code);
         ButterKnife.bind(this);
@@ -111,8 +118,16 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
 
     private void initData() {
         startTimer();
+        createCustomKeyboard();
+        View view = this.getCurrentFocus();
+        if(view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
         code = getIntent().getExtras().getString("verifycode");
         resendVerifyCode.setOnClickListener(this);
+        toolCancel.setOnClickListener(this);
+        rightAction.setOnClickListener(this);
         Toast.makeText(context, "Code is >>" + code, Toast.LENGTH_LONG).show();
         ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
                 .showSoftInput(insertCode, InputMethodManager.SHOW_FORCED);
@@ -121,19 +136,20 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void adjustUIcontent() {
-       /* cv.adjustRelativeMargin(verifyTool, CommonViewUtility.TOP, 80);
+        cv.adjustLinearMargin(verifyTool, CommonViewUtility.TOP, 80);
         cv.adjustRelativeMargin(toolCancel, CommonViewUtility.LEFT, 50);
-        cv.adjustRelativeMargin(rightAction,CommonViewUtility.RIGHT, 50);*/
-        cv.adjustLinearSquare(sendcode, 60);
-        cv.adjustLinearMargin(veriCode, 1, 24);
-        cv.adjustLinearMargin(veriCode, 2, 120);
-        cv.adjustLinearMargin(digit, 1, 24);
-        cv.adjustLinearMargin(digit, 2, 60);
-        cv.adjustLinearMargin(digit, 4, 24);
-        cv.adjustLinearMargin(resendVerifyCode, 2, 74);
-        cv.adjustLinearMargin(resendVerifyCode, 4, 44);
-        cv.adjustLinearMargin(sendcode, 1, 7);
-        cv.adjustLinearHeight(timerText, 70);
+        cv.adjustRelativeMargin(rightAction, CommonViewUtility.RIGHT, 50);
+        cv.adjustLinearMargin(veriCode, CommonViewUtility.LEFT, 32);
+        cv.adjustLinearMargin(veriCode, CommonViewUtility.TOP, 165);
+        cv.adjustLinearMargin(validCode, CommonViewUtility.TOP, 30);
+        cv.adjustLinearMargin(digit, CommonViewUtility.LEFT, 32);
+        cv.adjustLinearMargin(digit, CommonViewUtility.TOP, 80);
+        cv.adjustLinearMargin(digit, CommonViewUtility.RIGHT, 32);
+        cv.adjustLinearMargin(resendVerifyCode, CommonViewUtility.TOP, 100);
+        cv.adjustLinearMargin(resendVerifyCode, CommonViewUtility.RIGHT, 44);
+        cv.adjustLinearSquare(sendcode, 72);
+        cv.adjustLinearMargin(sendcode, CommonViewUtility.LEFT, 7);
+      //  cv.adjustLinearHeight(timerText, 80);
         insertCode.setTypeface(dfunctions.getFontFamily(context), Typeface.NORMAL);
     }
 
@@ -142,7 +158,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         resendVerifyCode.setOnClickListener(null);
         timerText.setOnClickListener(null);
         resendVerifyCode.setAlpha(0.5f);
-        timerText.setAlpha(0.5f);
+        //timerText.setAlpha(0.5f);
     }
     //-------------------------------------------------------------
 
@@ -161,7 +177,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
             handler = null;
         }
         timerText.setTag(45);
-        timerText.setText("00:45");
+        timerText.setText("Call me 00:45");
         handler = new Handler();
         startAnimation();
         //updateTimerText();
@@ -202,17 +218,17 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         int value = (int) timerText.getTag();
         if (value > 0) {
             if (value == timerTime)
-                timerText.setText("00:" + value + "");
+                timerText.setText("Call me 00:" + value + "");
             else {
                 if (value < 10)
-                    timerText.setText("00:0" + value + "");
+                    timerText.setText("Call me 00:0" + value + "");
                 else
-                    timerText.setText("00:" + value + "");
+                    timerText.setText("Call me 00:" + value + "");
             }
             value = value - 1;
             timerText.setTag(value);
         } else {
-            timerText.setText("00:00");
+            timerText.setText("Call me 00:00");
             stopTimer();
         }
     }
@@ -263,6 +279,10 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                     }
                 });
             }
+        } else if (view == toolCancel) {
+            finish();
+        } else if (view == rightAction) {
+            verifyCode();
         }
     }
 
@@ -408,5 +428,16 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                 }
             });
         }
+    }
+
+    CustomKeyboardLayout cutomKeyboard;
+
+    CurrentFocusInterface interfaceCurrent;
+
+    //---Creates the custom keyboard to support the needs for the screen
+    private void createCustomKeyboard() {
+        cutomKeyboard = new CustomKeyboardLayout(customKeyboardLayout, this, insertCode);
+        interfaceCurrent = cutomKeyboard.getInterface();
+        cutomKeyboard.createCustomKeyBoard();
     }
 }
