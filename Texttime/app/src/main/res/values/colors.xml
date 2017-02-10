@@ -3,9 +3,9 @@
     <!--<color name="colorPrimary">#8DFDFD</color>
     <color name="colorPrimaryDark">#CBFEFE</color>
     <color name="colorAccent">#CBFEFE</color>-->
-    <color name="colorPrimary">@android:color/transparent</color>
-    <color name="colorPrimaryDark">#2C9E9E</color>
-    <color name="colorAccent">@android:color/transparent</color>
+    <color name="colorPrimary">#2AFFFF</color>
+    <color name="colorPrimaryDark">#72000000</color>
+    <color name="colorAccent">#2AFFFF</color>
     <color name="textColor">#32000000</color>
     <color name="textColor1">#68000000</color>
     <color name="bg_gredient_start">#2AFFFF</color>

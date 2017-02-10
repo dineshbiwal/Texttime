@@ -28,6 +28,7 @@ import CustomViews.CustomTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import texttime.android.app.texttime.CommonClasses.AppDelegate;
+import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
 import texttime.android.app.texttime.CommonClasses.IncomingSms;
 import texttime.android.app.texttime.CommonClasses.PermissionCode;
 import texttime.android.app.texttime.ContainerActivity;
@@ -61,6 +62,8 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
     String phoneNumber = "";
     @BindView(R.id.numberinput)
     LinearLayout numberinput;
+    @BindView(R.id.toolText)
+    CustomTextView toolText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +71,7 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
         setContentView(R.layout.enter_number);
         ButterKnife.bind(this);
         init(this);
-        setUpActionbar(getResources().getString(R.string.app), 0, null);
+        // setUpActionbar(getResources().getString(R.string.app), 0, null);
         checkIfLoggedIn();
         getCountryCode();
     }
@@ -83,7 +86,8 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
         checkPermissions();
         insertNumber.clearFocus();
         countryCode.setVisibility(View.GONE);
-        yourCountry.setText(sd.getCountryName() + " " + sd.getDialCode());
+        yourCountry.setText(sd.getCountryName() + "   ");
+        countryCode.setText(sd.getDialCode());
         if (!TextUtils.isEmpty(sd.getDialCode())) {
             countryCode.setVisibility(View.VISIBLE);
             countryCode.setText(sd.getDialCode());
@@ -99,18 +103,20 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
     }
 
     private void adjustUIcontent() {
-        cv.adjustLinearSquare(location, 50);
-        cv.adjustLinearSquare(sendSms, 60);
-        cv.adjustLinearMargin(chooseCountry, 2, 224);
-        cv.adjustLinearMargin(chooseCountry, 1, 44);
-        cv.adjustLinearMargin(yourCountry, 1, 16);
-        cv.adjustLinearMargin(numberinput,2, 44);
-        cv.adjustLinearMargin(numberinput, 1, 24);
-        cv.adjustLinearMargin(numberinput, 4, 26);
-        cv.adjustLinearMargin(countryCode, 4, 36);
-        cv.adjustLinearMargin(sendVerifyCode, 4, 44);
-        cv.adjustLinearMargin(sendSms, 1, 7);
-        cv.adjustLinearMargin(sendVerifyCode, 2, 80);
+        cv.adjustLinearHeight(location, 62);
+        cv.adjustLinearWidth(location, 44);
+        cv.adjustLinearSquare(sendSms, 72);
+        cv.adjustLinearMargin(toolText, CommonViewUtility.TOP, 62);
+        cv.adjustLinearMargin(chooseCountry, CommonViewUtility.TOP, 380);
+        cv.adjustLinearMargin(chooseCountry, CommonViewUtility.LEFT, 62);
+        cv.adjustLinearMargin(yourCountry, CommonViewUtility.LEFT, 21);
+        cv.adjustLinearMargin(numberinput, CommonViewUtility.TOP, 68);
+        cv.adjustLinearMargin(numberinput, CommonViewUtility.LEFT, 38);
+        cv.adjustLinearMargin(numberinput, CommonViewUtility.RIGHT, 34);
+        cv.adjustLinearMargin(countryCode, CommonViewUtility.RIGHT, 62);
+        cv.adjustLinearMargin(sendVerifyCode, CommonViewUtility.RIGHT, 44);
+        cv.adjustLinearMargin(sendSms, CommonViewUtility.LEFT, 14);
+        cv.adjustLinearMargin(sendVerifyCode, CommonViewUtility.TOP, 130);
     }
 
     private void failShowMessage() {

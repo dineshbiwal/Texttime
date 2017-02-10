@@ -46,14 +46,14 @@
             android:id="@+id/country_lst"
             android:layout_marginTop="8dp">
             <LinearLayout
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:id="@+id/s_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
                 android:background="@drawable/search_bg_icon"
                 android:gravity="center" >
 
-                <CustomViews.CustomTextViewBold
+                <CustomViews.CustomTextViewRegular
                     android:id="@+id/alphabate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

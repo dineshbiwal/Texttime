@@ -30,10 +30,12 @@ import java.util.Locale;
 import java.util.Map;
 
 import CustomViews.CustomTextViewBold;
+import CustomViews.CustomTextViewRegular;
 import CustomViews.VerticalSeekBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import texttime.android.app.texttime.Adapter.CountryListAdapter;
+import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
 import texttime.android.app.texttime.CommonClasses.CountryJSON;
 import texttime.android.app.texttime.DataModels.Country;
 import texttime.android.app.texttime.GeneralClasses.BaseActivity;
@@ -47,7 +49,7 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
     @BindView(R.id.country_picker_search)
     EditText countryPickerSearch;
     @BindView(R.id.alphabate)
-    CustomTextViewBold alphabate;
+    CustomTextViewRegular alphabate;
     @BindView(R.id.list_country)
     ListView listCountry;
     @BindView(R.id.seekBar1)
@@ -64,6 +66,8 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
     LinearLayout countryLst;
     @BindView(R.id.action)
     LinearLayout action;
+    @BindView(R.id.s_text)
+    LinearLayout sText;
 
     private CountryListAdapter adapter;
     private List<Country> cList, selectedCountriesList;
@@ -133,16 +137,17 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
     }
 
     private void adjustUIcontant() {
-        cv.adjustLinearMargin(action, 2, 25);
-        cv.adjustLinearSquare(searchIcon, 50);
-        cv.adjustLinearMargin(action,1, 25);
-        cv.adjustLinearMargin(searchIcon, 5, 20);
-        cv.adjustLinearMargin(cancel, 5, 20);
-        cv.adjustLinearSquare(cancel, 50);
-        cv.adjustRelativeHeight(seekBar, 700);
-        cv.adjustRelativeWidth(seekBar, 70);
-        cv.adjustRelativeHeight(alphabaticLayout, 700);
-        cv.adjustLinearMargin(countryLst, 2, 20);
+        cv.adjustLinearMargin(action, CommonViewUtility.TOP, 80);
+        cv.adjustLinearMargin(action, CommonViewUtility.LEFT, 36);
+        cv.adjustLinearSquare(cancel, 68);
+        cv.adjustLinearMargin(searchIcon, CommonViewUtility.LEFT, 56);
+        cv.adjustLinearMargin(searchIcon, CommonViewUtility.RIGHT, 28);
+        cv.adjustRelativeHeight(seekBar, 1300);
+        cv.adjustRelativeWidth(seekBar, 100);
+        cv.adjustRelativeHeight(alphabaticLayout, 1300);
+        cv.adjustLinearMargin(sText, CommonViewUtility.LEFT, 26);
+        cv.adjustLinear(sText, 100, 100);
+        cv.adjustLinearMargin(countryLst, CommonViewUtility.TOP, 56);
     }
 
     private void setonClicklistener() {
@@ -198,7 +203,7 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
 
         @Override
         protected void onPostExecute(Void params) {
-            adapter = new CountryListAdapter(CountryList.this, selectedCountriesList);
+            adapter = new CountryListAdapter(CountryList.this, selectedCountriesList, mapIndex);
             listCountry.setAdapter(adapter);
             init();
             fillLayout();
@@ -285,7 +290,7 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
             tv.setLayoutParams(lp);
             tv.setTextColor(getResources().getColor(R.color.textColor1));
             tv.setText(index);
-            tv.setTextSize(9f);
+            tv.setTextSize(10f);
             tv.setPadding(1, 1, 1, 1);
             alphabaticLayout.addView(tv);
         }
