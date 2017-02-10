@@ -6,6 +6,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import CustomViews.CameraModule.CustomReceivedImageView;
+import CustomViews.CameraModule.CustomTextViewMedium;
 import CustomViews.CustomImageView;
 import CustomViews.CustomTextView;
 import CustomViews.CustomTextViewBold;
@@ -21,24 +23,25 @@ import texttime.android.app.texttime.R;
 public class ChatListViewHolder extends RecyclerView.ViewHolder{
 
     public CustomImageView profileImage;
-    public CustomTextViewBold userNameLabel;
+    public CustomTextViewMedium userNameLabel;
     public LinearLayout chatMessageLayout;
     public RelativeLayout messageReceivedLayout;
-    public CustomTextViewRegular unreadMessageLbl;
-    public CustomTextView messageText,postedTimeLabel;
-    public ImageView messageStatusImage,receivedImageThumbnail;
+    public CustomTextViewBold unreadMessageLbl;
+    public CustomTextViewLight messageText,postedTimeLabel;
+    public ImageView messageStatusImage;
+    public CustomReceivedImageView receivedImageThumbnail;
 
     public ChatListViewHolder(View itemView) {
         super(itemView);
         messageReceivedLayout= (RelativeLayout) itemView.findViewById(R.id.messageReceivedLayout);
         chatMessageLayout= (LinearLayout) itemView.findViewById(R.id.chatMessageLayout);
         profileImage= (CustomImageView) itemView.findViewById(R.id.profileImage);
-        userNameLabel= (CustomTextViewBold) itemView.findViewById(R.id.userNameLabel);
-        postedTimeLabel= (CustomTextView) itemView.findViewById(R.id.postedTimeLabel);
-        unreadMessageLbl= (CustomTextViewRegular) itemView.findViewById(R.id.unreadMessageLbl);
-        messageText= (CustomTextView) itemView.findViewById(R.id.messageText);
+        userNameLabel= (CustomTextViewMedium) itemView.findViewById(R.id.userNameLabel);
+        postedTimeLabel= (CustomTextViewLight) itemView.findViewById(R.id.postedTimeLabel);
+        unreadMessageLbl= (CustomTextViewBold) itemView.findViewById(R.id.unreadMessageLbl);
+        messageText= (CustomTextViewLight) itemView.findViewById(R.id.messageText);
         messageStatusImage= (ImageView) itemView.findViewById(R.id.messageStatusImage);
-        receivedImageThumbnail= (ImageView) itemView.findViewById(R.id.receivedImageThumbnail);
+        receivedImageThumbnail= (CustomReceivedImageView) itemView.findViewById(R.id.receivedImageThumbnail);
 
     }
 }

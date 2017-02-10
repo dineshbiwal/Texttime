@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -27,13 +27,16 @@
         <item name="colorPrimary">@color/app_blue</item>
         <item name="colorPrimaryDark">@color/app_blue</item>
         <item name="windowActionBar">false</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
     </style>
 
 
 
     <style name="ThemeCustomBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/app_blue</item>
-        <item name="colorPrimaryDark">@color/app_blue</item>
+        <item name="colorPrimaryDark">#007483</item>
+
+
 
     </style>
 

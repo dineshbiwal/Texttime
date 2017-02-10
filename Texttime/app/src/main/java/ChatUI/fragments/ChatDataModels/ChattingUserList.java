@@ -13,15 +13,15 @@ public class ChattingUserList {
     String jabberID;
     boolean userStatus; // ONLINE, OFFLINE
     byte[] userAvatar; //User Profile photo
-    String baseImage;
+    byte[] baseImage;
     int newMessageCount; //number Of New Message of user
     String lastMessageTime;
 
-    public String getBaseImage() {
+    public byte[] getBaseImage() {
         return baseImage;
     }
 
-    public void setBaseImage(String baseImage) {
+    public void setBaseImage(byte[] baseImage) {
         this.baseImage = baseImage;
     }
 
