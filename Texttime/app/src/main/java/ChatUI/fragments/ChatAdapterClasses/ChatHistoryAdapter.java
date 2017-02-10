@@ -2,9 +2,11 @@ package ChatUI.fragments.ChatAdapterClasses;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,13 +49,21 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter{
 
         CommonViewUtility cv=CommonViewUtility.getInstance();
         cv.adjustRelativeSquare(viewHolder.profileImage,180);
-        cv.adjustRelativeSquare(viewHolder.unreadMessageLbl,57);
-        cv.adjustRelativeSquare(viewHolder.messageStatusImage,13);
+        cv.adjustRelativeSquare(viewHolder.unreadMessageLbl,55);
+        cv.adjustRelativeSquare(viewHolder.messageStatusImage,23);
         cv.adjustRelativeMargin(viewHolder.profileImage,CommonViewUtility.LEFT,15);
+        cv.adjustRelativeMargin(viewHolder.messageText,CommonViewUtility.LEFT,15);
+        cv.adjustRelativeMargin(viewHolder.receivedImageThumbnail,CommonViewUtility.LEFT,15);
         cv.adjustRelativeMargin(viewHolder.chatMessageLayout,CommonViewUtility.TOP,35);
         cv.adjustRelativeMargin(viewHolder.chatMessageLayout,CommonViewUtility.LEFT,30);
         cv.adjustRelativeMargin(viewHolder.postedTimeLabel,CommonViewUtility.LEFT,28);
         cv.adjustLinearMargin(viewHolder.messageReceivedLayout,CommonViewUtility.TOP,20);
+        cv.adjustRelativeSquare(viewHolder.receivedImageThumbnail,116);
+
+      //  viewHolder.userNameLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX,30.43f);
+      //  viewHolder.messageText.setTextSize(TypedValue.COMPLEX_UNIT_PX,23.33f);
+      //  viewHolder.postedTimeLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX,20.29f);
+          viewHolder.userNameLabel.setTextColor(Color.parseColor("#505f67"));
 
         if(model.getUserStatus()){
             viewHolder.messageStatusImage.setImageResource(R.drawable.circle_blue_solid);
@@ -68,6 +78,17 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter{
         viewHolder.userNameLabel.setText(model.getDisplayName());
         viewHolder.unreadMessageLbl.setText("" + model.getNewMessageCount());
         viewHolder.postedTimeLabel.setText("Today 11:17 AM");
+        if(model.getLastMessage().contains("Image")){
+            viewHolder.messageText.setVisibility(View.GONE);
+            viewHolder.receivedImageThumbnail.setVisibility(View.VISIBLE);
+            viewHolder.receivedImageThumbnail.setUrl(model.getBaseImage());
+
+        }
+
+        else {
+            viewHolder.messageText.setVisibility(View.VISIBLE);
+            viewHolder.receivedImageThumbnail.setVisibility(View.GONE);
+        }
 
         /*if(model.getLastMessageTime() != null)
             viewHolder.postedTimeLabel.setText(CommonMethods.calculateTimeDiffernce(Long.parseLong(model.getLastMessageTime())));

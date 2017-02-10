@@ -10,9 +10,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,7 +17,6 @@ import android.widget.RelativeLayout;
 
 import ChatUI.fragments.ChatFragment;
 import CustomViews.CameraModule.CustomCameraView;
-import CustomViews.CameraModule.CustomTextViewMedium;
 import CustomViews.CustomTextViewBold;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,13 +24,12 @@ import texttime.android.app.texttime.CommonClasses.CamUtils;
 import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
 import texttime.android.app.texttime.CommonClasses.PermissionCode;
 import texttime.android.app.texttime.GeneralClasses.BaseActivity;
-import texttime.android.app.texttime.GeneralClasses.BaseActivityFull;
 
 /**
  * Created by TextTime Android Dev on 2/7/2017.
  */
 
-public class ContainerActivity extends BaseActivityFull {
+public class ContainerActivityBackup extends BaseActivity {
     @BindView(R.id.chatIcon)
     ImageView chatIcon;
     @BindView(R.id.chatText)
@@ -75,18 +70,6 @@ public class ContainerActivity extends BaseActivityFull {
     CustomCameraView customCameraView;
     @BindView(R.id.cameraPreview)
     RelativeLayout cameraPreview;
-    @BindView(R.id.settingsIcon)
-    ImageView settingsIcon;
-    @BindView(R.id.searchIcon)
-    ImageView searchIcon;
-    @BindView(R.id.chatlabel)
-    CustomTextViewMedium chatlabel;
-    @BindView(R.id.createNewChatIcon)
-    ImageView createNewChatIcon;
-    @BindView(R.id.onlinestatus)
-    ImageView onlinestatus;
-   /* @BindView(R.id.toolbar)
-    Toolbar toolbar;*/
 
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -112,37 +95,23 @@ public class ContainerActivity extends BaseActivityFull {
 
     }
 
-
-    public void setUpActionbarChatList() {
-
-        cv.adjustRelative(settingsIcon,30,30);
-        cv.adjustRelativeSquare(onlinestatus,12);
-        cv.adjustRelative(searchIcon,49,52);
-        cv.adjustRelativeSquare(createNewChatIcon,54);
-        cv.adjustRelativeMargin(settingsIcon,CommonViewUtility.LEFT,30);
-        cv.adjustRelativeMargin(searchIcon,CommonViewUtility.LEFT,78);
-        cv.adjustRelativeMargin(createNewChatIcon,CommonViewUtility.RIGHT,24);
-        cv.adjustRelativeMargin(chatlabel,CommonViewUtility.LEFT,46);
-        cv.adjustRelativeMargin(onlinestatus,CommonViewUtility.LEFT,28);
-
-    }
     Camera camera;
     CamUtils cUtils;
-
     //-------Initiate the camera-------------------------------------------
-    private void initCam() {
+    private void initCam(){
 
-        cUtils = new CamUtils(false, cv.getWidth(93), cv.getWidth(93), this);
+        cUtils=new CamUtils(false,cv.getWidth(93),cv.getWidth(93),this);
 
         try {
-            if (cUtils.checkForCamera()) {
+            if(cUtils.checkForCamera()) {
                 camera = cUtils.initCamera();
             }
-        } catch (Exception e) {
-            System.out.print("Error is >>>" + e);
+        }
+        catch (Exception e){
+            System.out.print("Error is >>>"+e);
         }
 
-        if (camera != null) {
+        if(camera!=null) {
             customCameraView.setPreviewUpdated(camera, (93));
             Camera.Size s = camera.getParameters().getPreviewSize();
             maintainAspect(s.width, s.height);
@@ -150,22 +119,25 @@ public class ContainerActivity extends BaseActivityFull {
     }
 
 
-    private void maintainAspect(int width, int height) {
-        float ratio = width / height;
-        int reqh = (93);
-        int newW = (int) (ratio * reqh);
+    private void maintainAspect(int width,int height){
+        float ratio=width/height;
+        int reqh=(93);
+        int newW=(int)(ratio*reqh);
 
-        if (reqh == newW) {
-            cv.adjustRelativeSquare(customCameraView, newW);
-        } else
-            cv.adjustRelative(customCameraView, newW, reqh);
+        if(reqh==newW){
+            cv.adjustRelativeSquare(customCameraView,newW);
+        }
+        else
+            cv.adjustRelative(customCameraView,newW,reqh);
     }
+
+
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_container_updated);
+        setContentView(R.layout.activity_container);
         ButterKnife.bind(this);
         init(this);
         //setUpActionbarChatSelection();
@@ -179,15 +151,17 @@ public class ContainerActivity extends BaseActivityFull {
 
 
     //--------Ask for the camera permission in the marshmallow devices-----------
-    private void askPermission() {
+    private void askPermission(){
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
             // Marshmallow+
-            if (!pm.checkPermission(Manifest.permission.CAMERA)) {
+            if(!pm.checkPermission(Manifest.permission.CAMERA)) {
                 pm.getPermission(Manifest.permission.CAMERA, PermissionCode.PERMISSIONCAMERA);
-            } else {
+            }
+            else
+            {
                 initCam();
             }
-        } else {
+        }else{
             //below Marshmallow
             initCam();
         }
@@ -197,16 +171,18 @@ public class ContainerActivity extends BaseActivityFull {
 
 
     //-------Check if camera is enabled on the custom cameraview----
-    private boolean isCameraEnabled() {
-        String s = (String) customCameraView.getTag();
-        if (s != null) {
+    private boolean isCameraEnabled(){
+        String s= (String) customCameraView.getTag();
+        if(s!=null) {
             if (s.equalsIgnoreCase("gallery")) {
                 return false;
             } else {
                 return true;
             }
-        } else
-            return false;
+        }
+
+        else
+            return  false;
     }
 
     @Override
@@ -225,7 +201,7 @@ public class ContainerActivity extends BaseActivityFull {
     @Override
     protected void onPause() {
         super.onPause();
-        if (pm.checkPermission(Manifest.permission.CAMERA)) {
+        if(pm.checkPermission(Manifest.permission.CAMERA)) {
             if (isCameraEnabled()) {
                 if (camera != null) {
                     try {

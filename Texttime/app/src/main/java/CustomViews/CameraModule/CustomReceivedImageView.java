@@ -1,4 +1,4 @@
-package CustomViews;
+package CustomViews.CameraModule;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -43,14 +43,14 @@ import texttime.android.app.texttime.R;
 /**
  * Created by TextTime Android Dev on 7/28/2016.
  */
-public class CustomImageView extends ImageView{
+public class CustomReceivedImageView extends ImageView{
 
     int width,height;
     Context context;
     DiskCache cache;
     String url;
 
-    public CustomImageView(Context context) {
+    public CustomReceivedImageView(Context context) {
         super(context);
         this.context=context;
         cache=new InternalCacheDiskCacheFactory(context).build();
@@ -149,18 +149,18 @@ public class CustomImageView extends ImageView{
                 });
     }
 
-    public CustomImageView(Context context, AttributeSet attrs) {
+    public CustomReceivedImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context=context;
     }
 
-    public CustomImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomReceivedImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context=context;
         cache=new InternalCacheDiskCacheFactory(context).build();
     }
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public CustomImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CustomReceivedImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.context=context;
         cache=new InternalCacheDiskCacheFactory(context).build();
@@ -200,7 +200,7 @@ public class CustomImageView extends ImageView{
 
         BitmapDrawable db=new BitmapDrawable(getResources(),result);
         this.setBackground(db);
-       // this.setImageBitmap(result);
+        //this.setImageBitmap(result);
         //Appdelegate.getInstance().getImageList().put(url,result);
         this.setScaleType(ScaleType.CENTER_INSIDE);
         //this.setBackgroundResource(R.drawable.image_new_mask1);
@@ -349,7 +349,7 @@ public class CustomImageView extends ImageView{
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private Bitmap createMaskBitmap(int w, int h){
-        Drawable d=getResources().getDrawable(R.drawable.image_new_mask_transblue,null);
+        Drawable d=getResources().getDrawable(R.mipmap.received_image_mask,null);
         Bitmap.Config config = Bitmap.Config.ARGB_8888;
         Bitmap bitmap = Bitmap.createBitmap(w, h, config);
         Canvas c=new Canvas(bitmap);

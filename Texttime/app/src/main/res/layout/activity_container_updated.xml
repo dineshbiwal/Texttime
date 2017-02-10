@@ -4,9 +4,23 @@
     android:background="@color/app_blue"
     android:layout_height="match_parent">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="#000000"
+        android:alpha="0.38"
+        ></View>
 
+    <include layout="@layout/toolbar_chat_list_updated"
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="24dp"
+        ></include>
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:id="@+id/bottomTabBar"
         android:background="@mipmap/bg_tab"
@@ -165,6 +179,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_above="@id/bottomTabBar"
+        android:layout_below="@id/topBar"
         android:id="@+id/placeHolder"
         android:background="@drawable/container_background"
         android:layout_height="match_parent">

@@ -20,7 +20,7 @@ public class CustomTextViewLight extends TextView {
 	}
 
 	private void setFont() {
-		Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Thin.ttf");
+		Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Light.ttf");
 		setTypeface(font, Typeface.NORMAL);
 	}
 }

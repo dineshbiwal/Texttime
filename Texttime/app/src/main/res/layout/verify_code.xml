@@ -7,7 +7,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:background="#000000"
+            android:alpha="0.38"
+            ></View>
+
         <RelativeLayout
+            android:id="@+id/verify_tool"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView

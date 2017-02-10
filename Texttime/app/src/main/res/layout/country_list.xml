@@ -4,6 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg_gradient">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="#000000"
+        android:alpha="0.38"
+        ></View>
     <LinearLayout
         android:id="@+id/action"
         android:layout_width="match_parent"

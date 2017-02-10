@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,8 +28,8 @@ import java.util.HashMap;
 import CustomViews.CustomTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import texttime.android.app.texttime.CommonClasses.AppDelegate;
+import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
 import texttime.android.app.texttime.DataModels.ResendVerifyCode;
 import texttime.android.app.texttime.DataModels.Verification;
 import texttime.android.app.texttime.GeneralClasses.BaseActivity;
@@ -43,7 +44,7 @@ import texttime.android.app.texttime.callbacks.OTPRecievedCallback;
  * Created by Dinesh_Text on 2/8/2017.
  */
 
-public class VerificationActivity extends BaseActivity implements View.OnClickListener, WebTaskCallback, OTPRecievedCallback{
+public class VerificationActivity extends BaseActivity implements View.OnClickListener, WebTaskCallback, OTPRecievedCallback {
     @BindView(R.id.code)
     CustomTextView code1;
     @BindView(R.id.phone)
@@ -63,6 +64,14 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     int resendActivationCount = 0;
     Handler handler;
     Runnable r;
+    @BindView(R.id.tool_cancel)
+    ImageView toolCancel;
+    @BindView(R.id.toolBarText)
+    CustomTextView toolBarText;
+    @BindView(R.id.rightAction)
+    CustomTextView rightAction;
+    @BindView(R.id.verify_tool)
+    RelativeLayout verifyTool;
     private String code = "";
 
     @BindView(R.id.verify_progress)
@@ -76,7 +85,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         setContentView(R.layout.verify_code);
         ButterKnife.bind(this);
         init(this);
-        setUpActionbar(getResources().getString(R.string.app), R.mipmap.ic_cancel,
+       /* setUpActionbar(getResources().getString(R.string.app), R.mipmap.ic_cancel,
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View c) {
@@ -87,7 +96,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                     public void onClick(View v) {
                         verifyCode();
                     }
-                });
+                });*/
         adjustUIcontent();
         code1.setText(sd.getDialCode());
         PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
@@ -100,17 +109,21 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         initData();
     }
 
-    private void initData(){
+    private void initData() {
         startTimer();
         code = getIntent().getExtras().getString("verifycode");
         resendVerifyCode.setOnClickListener(this);
-        Toast.makeText(context,"Code is >>"+code,Toast.LENGTH_LONG).show();
-        ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE))
+        Toast.makeText(context, "Code is >>" + code, Toast.LENGTH_LONG).show();
+        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
                 .showSoftInput(insertCode, InputMethodManager.SHOW_FORCED);
-        if(pm.checkPermission(pm.FIRSTPAGEPERMISSIONS))
+        if (pm.checkPermission(pm.FIRSTPAGEPERMISSIONS))
             AppDelegate.getInstance().setOtpCallback(this);
     }
+
     private void adjustUIcontent() {
+       /* cv.adjustRelativeMargin(verifyTool, CommonViewUtility.TOP, 80);
+        cv.adjustRelativeMargin(toolCancel, CommonViewUtility.LEFT, 50);
+        cv.adjustRelativeMargin(rightAction,CommonViewUtility.RIGHT, 50);*/
         cv.adjustLinearSquare(sendcode, 60);
         cv.adjustLinearMargin(veriCode, 1, 24);
         cv.adjustLinearMargin(veriCode, 2, 120);
@@ -120,7 +133,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         cv.adjustLinearMargin(resendVerifyCode, 2, 74);
         cv.adjustLinearMargin(resendVerifyCode, 4, 44);
         cv.adjustLinearMargin(sendcode, 1, 7);
-        cv.adjustLinearHeight(timerText,70);
+        cv.adjustLinearHeight(timerText, 70);
         insertCode.setTypeface(dfunctions.getFontFamily(context), Typeface.NORMAL);
     }
 
@@ -142,18 +155,18 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     }
 
     //-----Run the timer and the reducing status bar for 45 secs------------
-    private void startTimer(){
-        if(handler!=null){
+    private void startTimer() {
+        if (handler != null) {
             handler.removeCallbacks(r);
-            handler=null;
+            handler = null;
         }
         timerText.setTag(45);
         timerText.setText("00:45");
-        handler=new Handler();
+        handler = new Handler();
         startAnimation();
         //updateTimerText();
         disableButtons();
-        r=new Runnable() {
+        r = new Runnable() {
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
@@ -163,44 +176,42 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                     }
                 });
 
-                handler.postDelayed(this,1000);
+                handler.postDelayed(this, 1000);
             }
         };
-        handler.postDelayed(r,1000);
+        handler.postDelayed(r, 1000);
     }
 
     //------Stop the timer after the 45 secs or if the correct code is entered.
-    private void stopTimer(){
+    private void stopTimer() {
         handler.removeCallbacks(r);
         enableButtons();
     }
 
     //-------Animate the bar to reduce from the 45 secs to 0
-    private void startAnimation(){
-        verifyProgress.setMax(timerTime*100);
-        ObjectAnimator progressAnimator = ObjectAnimator.ofInt(verifyProgress, "progress", timerTime*100, 0);
-        progressAnimator.setDuration(timerTime*1000);
+    private void startAnimation() {
+        verifyProgress.setMax(timerTime * 100);
+        ObjectAnimator progressAnimator = ObjectAnimator.ofInt(verifyProgress, "progress", timerTime * 100, 0);
+        progressAnimator.setDuration(timerTime * 1000);
         progressAnimator.setInterpolator(new LinearInterpolator());
         progressAnimator.start();
     }
 
     //--------Update the text of the timer every second---------
-    private void updateTimerText(){
-        int value= (int) timerText.getTag();
-        if(value>0) {
+    private void updateTimerText() {
+        int value = (int) timerText.getTag();
+        if (value > 0) {
             if (value == timerTime)
-                timerText.setText("00:"+value+"");
+                timerText.setText("00:" + value + "");
             else {
                 if (value < 10)
-                    timerText.setText("00:0" + value+"");
+                    timerText.setText("00:0" + value + "");
                 else
-                    timerText.setText("00:" + value+"");
+                    timerText.setText("00:" + value + "");
             }
-            value=value-1;
+            value = value - 1;
             timerText.setTag(value);
-        }
-        else
-        {
+        } else {
             timerText.setText("00:00");
             stopTimer();
         }
@@ -211,7 +222,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         String verifyCode = cd.etData(insertCode);
         if (TextUtils.equals(code, verifyCode)) {
             //setTopAnimation();
-           // disableAllview();
+            // disableAllview();
             //verifyCodeServer();
             cv.showAlert(context, "Code verification successful");
         } else {
@@ -229,25 +240,22 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
 
     //-----make web call to the resend the verification code------------------------------
     private void resendVerifyCodeServer() {
-        if(cd.isNetworkAvailable()) {
+        if (cd.isNetworkAvailable()) {
             HashMap<String, String> map = new HashMap<>();
             map.put("token", sd.getToken());
             new WebTask(context, TaskCode.REVERIFYCODE, this, map).performTask();
-        }
-
-        else
-            cv.showAlert(context,"Please connect to internet.");
+        } else
+            cv.showAlert(context, "Please connect to internet.");
     }
 
     @Override
     public void onClick(View view) {
         if (view == resendVerifyCode) {
-            if(resendActivationCount<=2) {
-               // setTopAnimation();
+            if (resendActivationCount <= 2) {
+                // setTopAnimation();
                 //disableAllview();
                 resendVerifyCodeServer();
-            }
-            else {
+            } else {
                 cv.showAlertSingleAction(context, "Resend activation code limit reached.", "Back", null, new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialogInterface) {
@@ -278,7 +286,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void success(Object object, int taskCode) {
-       // stopTopAnimation();
+        // stopTopAnimation();
         //enableAllViews();
         if (taskCode == TaskCode.VERIFYCODE) {
             verifyCodeResultCheck(object);
@@ -326,10 +334,10 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     //---read the verification code-------
     @Override
     public void sendSMS(String code) {
-        int start=code.indexOf(":");
-        int end=code.indexOf(".");
-        String c=code.substring(start+2,end);
-        System.out.print("code is >>"+c);
+        int start = code.indexOf(":");
+        int end = code.indexOf(".");
+        String c = code.substring(start + 2, end);
+        System.out.print("code is >>" + c);
         insertCode.setText("");
         insertCode.setText(c.toString());
     }
@@ -339,12 +347,11 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     private void verifyCodeResultCheck(Object object) {
         Verification verifyObject = (Verification) object;
 
-        if (verifyObject.getResponseCode()== ResponseCodes.VERIFYCODESUCCESS) {
+        if (verifyObject.getResponseCode() == ResponseCodes.VERIFYCODESUCCESS) {
             startActivityTransition(ProfileUsernameActivity.class);
             AppDelegate.getInstance().setReturningUser(false);
             finish();
-        }
-        else if (verifyObject.getResponseCode()==ResponseCodes.VERIFYCODESUCCESSRETURNINGUSER) {
+        } else if (verifyObject.getResponseCode() == ResponseCodes.VERIFYCODESUCCESSRETURNINGUSER) {
             sd.setUsername(verifyObject.data.getUsername());
             sd.setDisplayName(verifyObject.data.getDisplayName());
 
@@ -357,7 +364,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
 
             startActivityTransition(ProfilePasswordActivity.class);
             finish();
-        } else if (verifyObject.getResponseCode()==ResponseCodes.VERIFYCODEREPESTED) {
+        } else if (verifyObject.getResponseCode() == ResponseCodes.VERIFYCODEREPESTED) {
 
             cv.showAlertSingleAction(context, getResources().getString(R.string.invalid_verify), "OK", null, new DialogInterface.OnDismissListener() {
                 @Override
@@ -375,7 +382,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     //-----Checks from the response from the callback response from the resend verification code
     private void resendVerifyCodeResultCheck(Object object) {
         ResendVerifyCode verifyObject = (ResendVerifyCode) object;
-        if (verifyObject.getResponseCode()== ResponseCodes.RESENDVERIFICATIONCODE) {
+        if (verifyObject.getResponseCode() == ResponseCodes.RESENDVERIFICATIONCODE) {
             code = verifyObject.data.getVerificationCode();
             Log.d("Verify Code", code);
             Toast.makeText(context, code, Toast.LENGTH_LONG).show();
@@ -383,7 +390,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
             startTimer();
             resendActivationCount += 1;
 
-        } else if (verifyObject.getResponseCode()== ResponseCodes.UNABLERESENDVERIFICATIONCODE) {
+        } else if (verifyObject.getResponseCode() == ResponseCodes.UNABLERESENDVERIFICATIONCODE) {
 
             cv.showAlertSingleAction(context, getResources().getString(R.string.unable_resend_code), "OK", null, new DialogInterface.OnDismissListener() {
                 @Override
