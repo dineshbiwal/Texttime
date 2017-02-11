@@ -18,6 +18,7 @@ public class AppDelegate {
     String croppedImage;
     String returningToken;
     boolean isReturningUser;
+    boolean isVideoCaptured;
 
     public static AppDelegate getInstance() {
         if (ad != null)
@@ -29,6 +30,13 @@ public class AppDelegate {
         }
     }
 
+    public boolean isVideoCaptured() {
+        return isVideoCaptured;
+    }
+
+    public void setVideoCaptured(boolean videoCaptured) {
+        isVideoCaptured = videoCaptured;
+    }
     public OTPRecievedCallback getOtpCallback() {
         return otpCallback;
     }
@@ -63,7 +71,9 @@ public class AppDelegate {
         }
         catch (Exception e){}
     }
-
+    public String getClickedImage() {
+        return clickedImage;
+    }
     public void setClickedImage(String clickedImage) {
         this.clickedImage = clickedImage;
     }
@@ -73,8 +83,9 @@ public class AppDelegate {
     public void setReturningToken(String returningToken) {
         this.returningToken = returningToken;
     }
-
     public void setReturningUser(boolean returningUser) {
         isReturningUser = returningUser;
     }
+
+
 }

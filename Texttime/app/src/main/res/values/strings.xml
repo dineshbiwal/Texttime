@@ -6,7 +6,9 @@
     <string name="send_sms">Send SMS with verification code</string>
     <string name="verify_msg">Validation code was sent to this number</string>
     <string name="digit_code">Enter 4 digit code</string>
+    <string name="create_user">Create your @username</string>
     <string name="resend_code">Resend validation code</string>
+    <string name="already_profile">Already have an account?</string>
     <string name="country_err">Please select your country code and enter valid phone number</string>
     <string name="number_correct">Is your number above correct?</string>
     <string name="signup_error">Getting error with signup process</string>

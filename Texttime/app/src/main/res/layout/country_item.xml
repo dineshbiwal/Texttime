@@ -3,7 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" >
+    <LinearLayout
+        android:id="@+id/s_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/search_bg_icon"
+        android:gravity="center" >
 
+        <CustomViews.CustomTextViewRegular
+            android:id="@+id/alphabate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#"
+            android:background="@android:color/transparent"
+            android:textSize="18dp" />
+
+    </LinearLayout>
     <CustomViews.CustomTextView
         android:id="@+id/country_name"
         android:layout_width="0dp"
@@ -12,7 +28,6 @@
         android:textSize="18dp"
         android:textColor="@color/textColor1"
         android:layout_weight="0.7" />
-
     <TextView
         android:id="@+id/isoalpha2"
         android:layout_width="wrap_content"
@@ -28,5 +43,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        android:textColor="@android:color/black"
         android:textSize="18dp" />
 </LinearLayout>

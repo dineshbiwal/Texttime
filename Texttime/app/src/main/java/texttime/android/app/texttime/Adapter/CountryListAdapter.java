@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -73,26 +76,44 @@ public class CountryListAdapter extends BaseAdapter {
 			cell.iso_alpha_2 = (TextView) cellView.findViewById(R.id.isoalpha2);
 			cell.iso_alpha_3 = (TextView) cellView.findViewById(R.id.isoalpha3);
 			cell.dial_code = (TextView) cellView.findViewById(R.id.dial_code);
-			//cell.sText = (LinearLayout) cellView.findViewById(R.id.s_text);
-			//cell.alphabate = (CustomTextViewRegular) cellView.findViewById(R.id.alphabate);
-			cv.adjustLinearMargin(cell.country_name, CommonViewUtility.LEFT, 10);
+			cell.sText = (LinearLayout) cellView.findViewById(R.id.s_text);
+			cell.alphabate = (CustomTextViewRegular) cellView.findViewById(R.id.alphabate);
+			cv.adjustLinearMargin(cell.country_name, CommonViewUtility.LEFT, 32);
 			cv.adjustLinearMargin(cell.dial_code, CommonViewUtility.RIGHT, 50 );
-			//cv.adjustLinearMargin(cell.sText, CommonViewUtility.LEFT, 26);
-			//cv.adjustLinear(cell.sText, 100, 100);
+			cv.adjustLinearMargin(cell.sText, CommonViewUtility.LEFT, 37);
+			cv.adjustLinear(cell.sText, 100, 100);
 			cellView.setTag(cell);
 		} else {
 			cell = (Cell) cellView.getTag();
 		}
-		/*String index = country.getName().substring(0, 1);
+		String index = country.getName().substring(0, 1);
+		cell.sText.setVisibility(View.INVISIBLE);
+		if(position == 0){
+			cell.sText.setVisibility(View.VISIBLE);
+			cell.alphabate.setText("#");
+		}
 		if(mapIndex.get(index)==position){
 			cell.sText.setVisibility(View.VISIBLE);
 			cell.alphabate.setText(index);
-		}*/
+			//cv.adjustLinearMargin(cell.country_name, CommonViewUtility.LEFT, 32);
+		}
 		cell.country_name.setText(country.getName());
 		cell.iso_alpha_2.setText(country.getCode());
 		cell.dial_code.setText(country.getDialCode());
 		cell.iso_alpha_3.setText("");
 		return cellView;
+	}
+
+	private void getIndexList(String[] country) {
+		mapIndex = new LinkedHashMap<String, Integer>();
+		//Arrays.sort(countryname);
+		mapIndex.put("#", 0);
+		for (int i = 0; i < country.length; i++) {
+			String countries = country[i];
+			String index = countries.substring(0, 1);
+			if (mapIndex.get(index) == null)
+				mapIndex.put(index, (i + 7));
+		}
 	}
 
 	/**
@@ -104,8 +125,8 @@ public class CountryListAdapter extends BaseAdapter {
 		public TextView iso_alpha_2;
 		public TextView iso_alpha_3;
 		public TextView dial_code;
-		//public LinearLayout sText;
-		//public CustomTextViewRegular alphabate;
+		public LinearLayout sText;
+		public CustomTextViewRegular alphabate;
 	}
 
 }

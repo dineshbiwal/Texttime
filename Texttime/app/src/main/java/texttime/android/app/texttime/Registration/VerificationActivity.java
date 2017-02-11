@@ -1,6 +1,7 @@
 package texttime.android.app.texttime.Registration;
 
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
@@ -12,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -27,6 +27,7 @@ import com.google.i18n.phonenumbers.Phonenumber;
 import java.util.HashMap;
 
 import CustomViews.CurrentFocusInterface;
+import CustomViews.CustomEditText;
 import CustomViews.CustomKeyboardLayout;
 import CustomViews.CustomTextView;
 import butterknife.BindView;
@@ -53,7 +54,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     @BindView(R.id.phone)
     CustomTextView phone;
     @BindView(R.id.insert_code)
-    EditText insertCode;
+    CustomEditText insertCode;
     @BindView(R.id.resendVerifyCode)
     LinearLayout resendVerifyCode;
     @BindView(R.id.sendcode)
@@ -73,12 +74,18 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     CustomTextView toolBarText;
     @BindView(R.id.rightAction)
     CustomTextView rightAction;
-    @BindView(R.id.tool_cancel)
-    ImageView toolCancel;
+    /*@BindView(R.id.tool_cancel)
+    ImageView toolCancel;*/
     @BindView(R.id.verify_tool)
     RelativeLayout verifyTool;
     @BindView(R.id.valid_code)
     LinearLayout validCode;
+    @BindView(R.id.firstLine)
+    View firstLine;
+    @BindView(R.id.secondLine)
+    View secondLine;
+    @BindView(R.id.thirdLine)
+    View thirdLine;
     private String code = "";
 
     @BindView(R.id.verify_progress)
@@ -113,6 +120,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         } catch (NumberParseException e) {
             Log.e("Number Parse Error", e.toString());
         }
+        verifyProgress.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar));
         initData();
     }
 
@@ -120,13 +128,13 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         startTimer();
         createCustomKeyboard();
         View view = this.getCurrentFocus();
-        if(view != null) {
+        if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
         code = getIntent().getExtras().getString("verifycode");
         resendVerifyCode.setOnClickListener(this);
-        toolCancel.setOnClickListener(this);
+        // toolCancel.setOnClickListener(this);
         rightAction.setOnClickListener(this);
         Toast.makeText(context, "Code is >>" + code, Toast.LENGTH_LONG).show();
         ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
@@ -136,20 +144,20 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void adjustUIcontent() {
-        cv.adjustLinearMargin(verifyTool, CommonViewUtility.TOP, 80);
-        cv.adjustRelativeMargin(toolCancel, CommonViewUtility.LEFT, 50);
-        cv.adjustRelativeMargin(rightAction, CommonViewUtility.RIGHT, 50);
-        cv.adjustLinearMargin(veriCode, CommonViewUtility.LEFT, 32);
-        cv.adjustLinearMargin(veriCode, CommonViewUtility.TOP, 165);
-        cv.adjustLinearMargin(validCode, CommonViewUtility.TOP, 30);
-        cv.adjustLinearMargin(digit, CommonViewUtility.LEFT, 32);
-        cv.adjustLinearMargin(digit, CommonViewUtility.TOP, 80);
-        cv.adjustLinearMargin(digit, CommonViewUtility.RIGHT, 32);
-        cv.adjustLinearMargin(resendVerifyCode, CommonViewUtility.TOP, 100);
-        cv.adjustLinearMargin(resendVerifyCode, CommonViewUtility.RIGHT, 44);
-        cv.adjustLinearSquare(sendcode, 72);
+        cv.adjustLinearMargin(verifyTool, CommonViewUtility.TOP, 58);
+        //cv.adjustRelativeMargin(toolCancel, CommonViewUtility.LEFT, 50);
+        cv.adjustRelativeMargin(rightAction, CommonViewUtility.RIGHT, 60);
+        cv.adjustLinearMargin(veriCode, CommonViewUtility.LEFT, 46);
+        cv.adjustLinearMargin(veriCode, CommonViewUtility.TOP, 205);
+        cv.adjustLinearMargin(validCode, CommonViewUtility.TOP, 44);
+        cv.adjustLinearMargin(digit, CommonViewUtility.LEFT, 46);
+        cv.adjustLinearMargin(digit, CommonViewUtility.TOP, 116);
+        cv.adjustLinearMargin(digit, CommonViewUtility.RIGHT, 46);
+        cv.adjustLinearMargin(resendVerifyCode, CommonViewUtility.TOP, 148);
+        cv.adjustLinearMargin(resendVerifyCode, CommonViewUtility.RIGHT, 60);
+        cv.adjustLinearSquare(sendcode, 67);
         cv.adjustLinearMargin(sendcode, CommonViewUtility.LEFT, 7);
-      //  cv.adjustLinearHeight(timerText, 80);
+        //  cv.adjustLinearHeight(timerText, 80);
         insertCode.setTypeface(dfunctions.getFontFamily(context), Typeface.NORMAL);
     }
 
@@ -179,7 +187,12 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         timerText.setTag(45);
         timerText.setText("Call me 00:45");
         handler = new Handler();
-        startAnimation();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startAnimation();
+            }
+        }, 1000);
         //updateTimerText();
         disableButtons();
         r = new Runnable() {
@@ -191,7 +204,6 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                         updateTimerText();
                     }
                 });
-
                 handler.postDelayed(this, 1000);
             }
         };
@@ -207,7 +219,28 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     //-------Animate the bar to reduce from the 45 secs to 0
     private void startAnimation() {
         verifyProgress.setMax(timerTime * 100);
-        ObjectAnimator progressAnimator = ObjectAnimator.ofInt(verifyProgress, "progress", timerTime * 100, 0);
+        ObjectAnimator progressAnimator = ObjectAnimator.ofInt(verifyProgress, "progress", 0, timerTime * 100);
+        progressAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int progress = (int) animation.getAnimatedValue("progress");
+                if(progress > (0 * 100) && progress <= (15 * 100))
+                {
+                     verifyProgress.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar));
+                }
+                if (progress >= (15 * 100) && progress <= (30 * 100)) {
+                    verifyProgress.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_blue));
+                    firstLine.setVisibility(View.VISIBLE);
+                }
+
+                else if(progress >= (30 * 100)){
+                    verifyProgress.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_red));
+                    secondLine.setVisibility(View.VISIBLE);
+                }
+
+
+            }
+        });
         progressAnimator.setDuration(timerTime * 1000);
         progressAnimator.setInterpolator(new LinearInterpolator());
         progressAnimator.start();
@@ -220,9 +253,9 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
             if (value == timerTime)
                 timerText.setText("Call me 00:" + value + "");
             else {
-                if (value < 10)
+                if (value < 10) {
                     timerText.setText("Call me 00:0" + value + "");
-                else
+                } else
                     timerText.setText("Call me 00:" + value + "");
             }
             value = value - 1;
@@ -267,6 +300,10 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         if (view == resendVerifyCode) {
+            verifyProgress.setProgress(0);
+            firstLine.setVisibility(View.INVISIBLE);
+            secondLine.setVisibility(View.INVISIBLE);
+
             if (resendActivationCount <= 2) {
                 // setTopAnimation();
                 //disableAllview();
@@ -279,8 +316,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                     }
                 });
             }
-        } else if (view == toolCancel) {
-            finish();
+
         } else if (view == rightAction) {
             verifyCode();
         }

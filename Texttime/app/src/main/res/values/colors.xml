@@ -11,10 +11,11 @@
     <color name="bg_gredient_start">#2AFFFF</color>
     <color name="bg_gredient_center">#B7FFFF</color>
     <color name="bg_gredient_end">#F3FFFF</color>
-    <color name="black_trans">#60000000</color>
+    <color name="black_trans">#35000000</color>
     <!--<color name="bg_gredient_start">#8DFDFD</color>
     <color name="bg_gredient_center">#BBFEFE</color>
     <color name="bg_gredient_end">#EBFEFF</color>-->
     <color name="text_tab">#FAC821</color>
     <color name="app_blue">#00BBD3</color>
+    <color name="red">#ff0000</color>
 </resources>

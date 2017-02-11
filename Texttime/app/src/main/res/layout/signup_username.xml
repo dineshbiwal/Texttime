@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="#000000"
+        android:alpha="0.38"
+        ></View>
+    <RelativeLayout
+        android:id="@+id/profile_tool"
+        android:layout_width="match_parent"
+        android:background="@android:color/transparent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+        <!-- <ImageView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerVertical="true"
+             android:layout_alignParentLeft="true"
+             android:src="@mipmap/ic_cancel"
+             android:background="@android:color/transparent"
+             android:id="@+id/tool_cancel" />-->
+        <CustomViews.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22dp"
+            android:textColor="@color/textColor"
+            android:background="@android:color/transparent"
+            android:text="@string/app"
+            android:id="@+id/toolBarText"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+        <CustomViews.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/textColor1"
+            android:text="Next"
+            android:background="@android:color/transparent"
+            android:id="@+id/rightAction"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/imageContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <CustomViews.CameraModule.CustomCameraView
+            android:id="@+id/customCameraView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"/>
+
+        <CustomViews.CustomImageView
+            android:id="@+id/selectedImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+    <CustomViews.CustomEditText
+        android:id="@+id/insert_username"
+        android:hint="@string/create_user"
+        android:textColorHint="@color/textColor1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor1"
+        android:maxLength="4"
+        android:background="@drawable/edittext_bottom_line"
+        android:textSize="28dp"
+        android:focusableInTouchMode="true"
+        android:inputType="number"/>
+    <CustomViews.CustomTextViewRegular
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:background="@drawable/edittext_bottom_line"
+        android:onClick="alreadyProfile"
+        android:id="@+id/alreadyProfile"
+        android:text="@string/already_profile"
+        android:textSize="18dp"
+        android:textColor="@color/textColor1" />
+</LinearLayout>

@@ -58,6 +58,10 @@
             android:theme="@style/ThemeCustomBar1"
             android:windowSoftInputMode="stateAlwaysHidden"/>
 
+        <activity android:name=".Registration.ProfileUsernameActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeCustomBar1"/>
+
     </application>
 
 </manifest>

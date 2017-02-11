@@ -105,18 +105,18 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
     private void adjustUIcontent() {
         cv.adjustLinearHeight(location, 62);
         cv.adjustLinearWidth(location, 44);
-        cv.adjustLinearSquare(sendSms, 72);
-        cv.adjustLinearMargin(toolText, CommonViewUtility.TOP, 62);
-        cv.adjustLinearMargin(chooseCountry, CommonViewUtility.TOP, 380);
+        cv.adjustLinearSquare(sendSms, 67);
+        cv.adjustLinearMargin(toolText, CommonViewUtility.TOP, 58);
+        cv.adjustLinearMargin(chooseCountry, CommonViewUtility.TOP, 370);
         cv.adjustLinearMargin(chooseCountry, CommonViewUtility.LEFT, 62);
-        cv.adjustLinearMargin(yourCountry, CommonViewUtility.LEFT, 21);
-        cv.adjustLinearMargin(numberinput, CommonViewUtility.TOP, 68);
-        cv.adjustLinearMargin(numberinput, CommonViewUtility.LEFT, 38);
-        cv.adjustLinearMargin(numberinput, CommonViewUtility.RIGHT, 34);
+        cv.adjustLinearMargin(yourCountry, CommonViewUtility.LEFT, 30);
+        cv.adjustLinearMargin(numberinput, CommonViewUtility.TOP, 74);
+        cv.adjustLinearMargin(numberinput, CommonViewUtility.LEFT, 46);
+        cv.adjustLinearMargin(numberinput, CommonViewUtility.RIGHT, 46);
         cv.adjustLinearMargin(countryCode, CommonViewUtility.RIGHT, 62);
-        cv.adjustLinearMargin(sendVerifyCode, CommonViewUtility.RIGHT, 44);
+        cv.adjustLinearMargin(sendVerifyCode, CommonViewUtility.RIGHT, 60);
         cv.adjustLinearMargin(sendSms, CommonViewUtility.LEFT, 14);
-        cv.adjustLinearMargin(sendVerifyCode, CommonViewUtility.TOP, 130);
+        cv.adjustLinearMargin(sendVerifyCode, CommonViewUtility.TOP, 148);
     }
 
     private void failShowMessage() {
