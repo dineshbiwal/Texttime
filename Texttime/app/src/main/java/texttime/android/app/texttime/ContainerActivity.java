@@ -8,11 +8,9 @@ import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,7 +25,6 @@ import butterknife.ButterKnife;
 import texttime.android.app.texttime.CommonClasses.CamUtils;
 import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
 import texttime.android.app.texttime.CommonClasses.PermissionCode;
-import texttime.android.app.texttime.GeneralClasses.BaseActivity;
 import texttime.android.app.texttime.GeneralClasses.BaseActivityFull;
 
 /**
@@ -85,6 +82,10 @@ public class ContainerActivity extends BaseActivityFull {
     ImageView createNewChatIcon;
     @BindView(R.id.onlinestatus)
     ImageView onlinestatus;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+    @BindView(R.id.settingsIcon1)
+    ImageView settingsIcon1;
    /* @BindView(R.id.toolbar)
     Toolbar toolbar;*/
 
@@ -115,17 +116,19 @@ public class ContainerActivity extends BaseActivityFull {
 
     public void setUpActionbarChatList() {
 
-        cv.adjustRelative(settingsIcon,30,30);
-        cv.adjustRelativeSquare(onlinestatus,12);
-        cv.adjustRelative(searchIcon,49,52);
-        cv.adjustRelativeSquare(createNewChatIcon,54);
-        cv.adjustRelativeMargin(settingsIcon,CommonViewUtility.LEFT,30);
-        cv.adjustRelativeMargin(searchIcon,CommonViewUtility.LEFT,78);
-        cv.adjustRelativeMargin(createNewChatIcon,CommonViewUtility.RIGHT,24);
-        cv.adjustRelativeMargin(chatlabel,CommonViewUtility.LEFT,46);
-        cv.adjustRelativeMargin(onlinestatus,CommonViewUtility.LEFT,28);
+        cv.adjustRelative(settingsIcon, 30, 30);
+        cv.adjustRelative(settingsIcon1, 30, 30);
+        cv.adjustRelativeSquare(onlinestatus, 12);
+        cv.adjustRelative(searchIcon, 49, 52);
+        cv.adjustRelativeSquare(createNewChatIcon, 54);
+        cv.adjustRelativeMargin(settingsIcon1, CommonViewUtility.LEFT, 30);
+        cv.adjustRelativeMargin(searchIcon, CommonViewUtility.LEFT, 78);
+        cv.adjustRelativeMargin(settingsIcon, CommonViewUtility.RIGHT, 43);
+        cv.adjustRelativeMargin(chatlabel, CommonViewUtility.LEFT, 46);
+        cv.adjustRelativeMargin(onlinestatus, CommonViewUtility.LEFT, 28);
 
     }
+
     Camera camera;
     CamUtils cUtils;
 
@@ -173,6 +176,12 @@ public class ContainerActivity extends BaseActivityFull {
         setUpActionbarChatList();
         openNewFragment(new ChatFragment(), "Chat");
         cv.adjustRelativeHeight(bottomTabBar, 133);
+
+        cv.adjustRelativeMargin(fab, CommonViewUtility.BOTTOM, 169);
+        cv.adjustRelativeMargin(fab, CommonViewUtility.RIGHT, 39);
+        //cv.adjustRelativeSquare(fab,116);
+
+
         createIcons();
         askPermission();
     }

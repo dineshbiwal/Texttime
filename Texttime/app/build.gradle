@@ -33,7 +33,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/libphonenumber-5.3.jar')
     compile('com.android.support:appcompat-v7:25.1.0')
-    compile('com.android.support:design:24.0.0')
+    compile('com.android.support:design:25.1.0')
     compile('com.android.support:support-v4:24.0.0')
     compile('com.android.support:recyclerview-v7:24.0.0')
     compile('com.squareup.retrofit2:retrofit:2.0.2')
