@@ -18,9 +18,10 @@
 <ImageView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/settingsIcon"
+    android:id="@+id/settingsIcon1"
     android:layout_centerVertical="true"
     android:background="@mipmap/settings_icon_new"
+    android:visibility="invisible"
     />
 
 
@@ -30,7 +31,7 @@
         android:id="@+id/searchIcon"
         android:layout_centerVertical="true"
         android:background="@mipmap/seach_new"
-        android:layout_toRightOf="@id/settingsIcon"
+        android:layout_toRightOf="@id/settingsIcon1"
         />
 
 
@@ -52,10 +53,21 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/settingsIcon"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:background="@mipmap/settings_icon_new"
+
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/createNewChatIcon"
         android:layout_centerVertical="true"
         android:background="@mipmap/compose_icon"
        android:layout_alignParentRight="true"
+        android:visibility="gone"
         />
 
     <ImageView

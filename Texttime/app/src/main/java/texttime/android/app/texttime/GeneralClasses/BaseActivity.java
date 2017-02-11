@@ -3,12 +3,15 @@ package texttime.android.app.texttime.GeneralClasses;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -130,6 +133,7 @@ public class BaseActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void setUpActionbar(String title, int iconResource, View.OnClickListener listener) {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -148,6 +152,7 @@ public class BaseActivity extends AppCompatActivity {
         toolbarIcon.setOnClickListener(listener);
     }
 
+
     public void setUpActionbar(String title, int iconResource, View.OnClickListener leftIconListener, View.OnClickListener rightIconListener) {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -164,9 +169,16 @@ public class BaseActivity extends AppCompatActivity {
         if (iconResource != 0)
             toolbarIcon.setImageResource(iconResource);
         toolbarIcon.setOnClickListener(leftIconListener);
+
+
         rightIcon.setVisibility(View.VISIBLE);
         rightIcon.setOnClickListener(rightIconListener);
     }
+
+
+
+
+
 
     public void setUpActionbarChatList() {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -225,6 +237,10 @@ public class BaseActivity extends AppCompatActivity {
         cv.adjustRelativeSquare(muteButton,70);
         cv.adjustRelativeSquare(numberofSelection,55);
         numberofSelection.setAlpha(0.5f);
+
+
+
+
     }
 
   /*  public void setUpActionbar() {
@@ -299,6 +315,7 @@ public class BaseActivity extends AppCompatActivity {
         });
 
         mVaActionBar.addListener(new AnimatorListenerAdapter() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);

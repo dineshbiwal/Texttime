@@ -8,6 +8,7 @@ import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -23,7 +24,7 @@ import texttime.android.app.texttime.WebOperations.ApiClient;
 import texttime.android.app.texttime.WebOperations.ApiInterface;
 
 
-public class BaseActivityFull extends FragmentActivity {
+public class BaseActivityFull extends AppCompatActivity {
     public CommonDataUtility cd;
     public CommonViewUtility cv;
     public SaveDataPreferences sd;
