@@ -230,7 +230,6 @@ public class ContainerActivity extends BaseActivityFull {
         }
     }
 
-
     @Override
     protected void onPause() {
         super.onPause();

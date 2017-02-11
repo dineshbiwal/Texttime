@@ -1,35 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="12dp"
-        android:background="@android:color/transparent"
-        android:id="@+id/tool_barIcon" />
-    <CustomViews.CustomTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22dp"
-        android:textColor="@color/textColor"
-        android:background="@android:color/transparent"
-        android:text="Sign In"
-        android:id="@+id/toolBarText"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-    <CustomViews.CustomTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:textColor="@color/textColor1"
-        android:visibility="gone"
-        android:text="Next"
-        android:layout_marginRight="12dp"
-        android:background="@android:color/transparent"
-        android:id="@+id/rightAction"
-        android:layout_alignParentRight="true"/>
-</RelativeLayout>
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/app_blue"
+    app:layout_scrollFlags="scroll|enterAlways"
+    app:layout_collapseMode="pin">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="12dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/tool_barIcon" />
+        <CustomViews.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22dp"
+            android:textColor="@color/textColor"
+            android:background="@android:color/transparent"
+            android:text="Sign In"
+            android:id="@+id/toolBarText"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+        <CustomViews.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/textColor1"
+            android:visibility="gone"
+            android:text="Next"
+            android:layout_marginRight="12dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/rightAction"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+</android.support.v7.widget.Toolbar>

@@ -330,7 +330,6 @@ public class CommonViewUtility {
                 .show();
     }
 
-
     public Bitmap fastblur(Bitmap sentBitmap, float scale, int radius) {
 
         int width = Math.round(sentBitmap.getWidth() * scale);

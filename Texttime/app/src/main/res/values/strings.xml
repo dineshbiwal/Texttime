@@ -4,7 +4,7 @@
     <string name="choose_country"> Choose your country</string>
     <string name="enter_number">Enter your phone number</string>
     <string name="send_sms">Send SMS with verification code</string>
-    <string name="verify_msg">validation code was sent to this number</string>
+    <string name="verify_msg">Validation code was sent to this number</string>
     <string name="digit_code">Enter 4 digit code</string>
     <string name="resend_code">Resend validation code</string>
     <string name="country_err">Please select your country code and enter valid phone number</string>
