@@ -125,7 +125,7 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
         cv.adjustRelativeSquare(selectedImage,396);
         cv.adjustLinearMargin(insertUsername, CommonViewUtility.TOP, 266);
         cv.adjustLinearMargin(insertUsername, CommonViewUtility.LEFT, 45);
-        cv.adjustRelativeMargin(alreadyProfile, CommonViewUtility.TOP,236);
+        cv.adjustLinearMargin(alreadyProfile, CommonViewUtility.TOP,236);
     }
     //----Initialize the class data and setup the required callbacks---
     private void initEnvironment(){

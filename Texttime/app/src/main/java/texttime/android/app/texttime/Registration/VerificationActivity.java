@@ -272,7 +272,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         if (TextUtils.equals(code, verifyCode)) {
             //setTopAnimation();
             // disableAllview();
-            //verifyCodeServer();
+            verifyCodeServer();
             cv.showAlert(context, "Code verification successful");
         } else {
             cv.showAlert(context, "Incorrect verification code");
