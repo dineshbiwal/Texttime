@@ -68,7 +68,7 @@ public class PhotoHandler implements Camera.PictureCallback {
             if(!isActivity)
             context.startActivity(new Intent(context,ImageCropActivity.class));
 
-            else
+          //  else
               //  context.startActivity(new Intent(context,CustomizePostActivity.class));
 
             ((Activity)context).finish();

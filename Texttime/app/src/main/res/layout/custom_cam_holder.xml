@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/main_bg_gradient"
     android:layout_height="match_parent">
 
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_centerInParent="true"
+        android:background="@drawable/main_bg_gradient"
         android:layout_height="wrap_content">
     <TextureView
         android:layout_width="wrap_content"
@@ -22,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:background="@android:color/transparent"
         android:id="@+id/maskLayout"
         >
 
@@ -38,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:id="@+id/imageMask"
-            android:background="@mipmap/profile_capture"
+            android:background="@mipmap/profile_capture4"
             />
 
 
@@ -49,8 +53,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/maskLayout"
-        android:background="@drawable/key_white"
         android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
         android:id="@+id/bottom"
         ></View>
 
@@ -59,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/maskLayout"
-        android:background="@drawable/key_white"
+        android:background="@android:color/transparent"
         android:layout_alignParentTop="true"
         android:id="@+id/top"
         ></View>
@@ -70,7 +74,7 @@
         android:layout_toLeftOf="@id/maskLayout"
         android:layout_below="@id/top"
         android:layout_above="@id/bottom"
-        android:background="@android:color/white"
+        android:background="@android:color/transparent"
         android:layout_alignParentLeft="true"
         ></View>
 
@@ -80,8 +84,8 @@
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/maskLayout"
         android:layout_below="@id/top"
+        android:background="@android:color/transparent"
         android:layout_above="@id/bottom"
-        android:background="@android:color/white"
         ></View>
 
 

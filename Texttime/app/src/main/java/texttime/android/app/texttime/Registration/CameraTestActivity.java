@@ -1,4 +1,4 @@
-package CustomViews;
+package texttime.android.app.texttime.Registration;
 
 import android.annotation.TargetApi;
 import android.graphics.Color;
@@ -45,7 +45,6 @@ public class CameraTestActivity extends BaseActivityFull implements TextureView.
 
     @BindView(R.id.cameraPreviewDisplay)
     TextureView cameraPreviewDisplay;
-
     @BindView(R.id.donut_progress)
     DonutProgress donutProgress;
 
@@ -68,10 +67,7 @@ public class CameraTestActivity extends BaseActivityFull implements TextureView.
     ImageView switchFlashMode;
     private OrientationManager orientationManager;
     int currentRotation;
-
-
     private MediaRecorder mMediaRecorder;
-
 
     @Override
     protected void onPause() {
@@ -93,17 +89,12 @@ public class CameraTestActivity extends BaseActivityFull implements TextureView.
 
     private void initCams(boolean isVideo) {
 
-        if(camera!=null){
+        if(camera!=null)
             camUtils.releaseCamera();
-        }
-
         if(camUtils!=null)
-        {
           camUtils.setVideo(isVideo);
-        }
-
         else
-        camUtils = new CamUtils(isVideo, cv.getWidth(768), cv.getHeight(1080), this);
+        camUtils = new CamUtils(isVideo, cv.getWidth(1080), cv.getHeight(1920), this);
 
         try {
             camera = camUtils.initCamera();
@@ -114,9 +105,7 @@ public class CameraTestActivity extends BaseActivityFull implements TextureView.
             camera.setPreviewTexture(surfaceTexture);
             camera.startPreview();
             camera.autoFocus(null);
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
     }
 
 
@@ -143,8 +132,6 @@ public class CameraTestActivity extends BaseActivityFull implements TextureView.
                                     new MediaPrepareTask().execute();
                                 }
                             },100);
-
-                            // startRecordingTimerBar();
                         }
                     });
 
@@ -152,15 +139,11 @@ public class CameraTestActivity extends BaseActivityFull implements TextureView.
                         detectRecordingTimer.cancel();
                         detectRecordingTimer = null;
                     }
-
                     //---Write code to start recording
                     //---Write code to start the recording animation.
-
-
                 }
             }
         };
-
         return detectRecordingTask;
     }
 
@@ -219,9 +202,7 @@ public class CameraTestActivity extends BaseActivityFull implements TextureView.
         detectRecordingTimer = new Timer();
         detectRecordingTask = reinitTimerTask();
         detectRecordingTimer.scheduleAtFixedRate(detectRecordingTask, 0, 100);
-
     }
-
 
     private void captureButtonAction() {
         donutProgress.setTextColor(Color.TRANSPARENT);
@@ -319,8 +300,7 @@ public class CameraTestActivity extends BaseActivityFull implements TextureView.
         catch (Exception e){
 
         }
-
-            captureButtonAction();
+        captureButtonAction();
         initEnvironment();
         adjustUIComponents();
         setonclicklistener();
@@ -342,9 +322,7 @@ public class CameraTestActivity extends BaseActivityFull implements TextureView.
                     if(!camUtils.isFlashSupported()){
                         setFlashMode("off");
                     }
-                } catch (Exception e) {
-
-                }
+                } catch (Exception e) {}
             }
         });
 
@@ -369,8 +347,6 @@ public class CameraTestActivity extends BaseActivityFull implements TextureView.
 
                     setFlashMode(flashMode);
                 }
-
-
             }
         });
     }
@@ -450,9 +426,6 @@ public class CameraTestActivity extends BaseActivityFull implements TextureView.
         }
     }
 
-
-
-
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private boolean prepareVideoRecorder(){
         // BEGIN_INCLUDE (configure_preview)
@@ -514,8 +487,6 @@ public class CameraTestActivity extends BaseActivityFull implements TextureView.
             return "";
 
         }
-
-
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyymmddhhmmss");
         String date = dateFormat.format(new Date());
         String photoFile = "Video_TextTime" + ".mp4";
@@ -523,12 +494,8 @@ public class CameraTestActivity extends BaseActivityFull implements TextureView.
         String filename = pictureFileDir.getPath() + File.separator + photoFile;
         File pictureFile = new File(filename);
         AppDelegate.getInstance().setClickedImage(filename);
-
         return filename;
-
     }
-
-
     private File getDir() {
         File sdDir = Environment
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
@@ -546,13 +513,10 @@ public class CameraTestActivity extends BaseActivityFull implements TextureView.
             // Lock camera for later use i.e taking it back from MediaRecorder.
             // MediaRecorder doesn't need it anymore and we will release it if the activity pauses.
             camera.lock();
-
             AppDelegate.getInstance().setVideoCaptured(true);
            // startActivityTransition(CustomizePostActivity.class);
         }
     }
-
-
     /**
      * Asynchronous task for preparing the {@link android.media.MediaRecorder} since it's a long blocking
      * operation.

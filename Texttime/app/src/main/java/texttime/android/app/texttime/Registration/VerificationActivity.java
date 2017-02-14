@@ -8,8 +8,13 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
@@ -48,7 +53,7 @@ import texttime.android.app.texttime.callbacks.OTPRecievedCallback;
  * Created by Dinesh_Text on 2/8/2017.
  */
 
-public class VerificationActivity extends BaseActivity implements View.OnClickListener, WebTaskCallback, OTPRecievedCallback {
+public class VerificationActivity extends BaseActivity implements TextWatcher, View.OnClickListener, WebTaskCallback, OTPRecievedCallback {
     @BindView(R.id.code)
     CustomTextView code1;
     @BindView(R.id.phone)
@@ -72,8 +77,8 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     Runnable r;
     @BindView(R.id.toolBarText)
     CustomTextView toolBarText;
-    @BindView(R.id.rightAction)
-    CustomTextView rightAction;
+   /* @BindView(R.id.rightAction)
+    CustomTextView rightAction;*/
     /*@BindView(R.id.tool_cancel)
     ImageView toolCancel;*/
     @BindView(R.id.verify_tool)
@@ -99,18 +104,6 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         setContentView(R.layout.verify_code);
         ButterKnife.bind(this);
         init(this);
-       /* setUpActionbar(getResources().getString(R.string.app), R.mipmap.ic_cancel,
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View c) {
-                        finish();
-                    }
-                }, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        verifyCode();
-                    }
-                });*/
         adjustUIcontent();
         code1.setText(sd.getDialCode());
         PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
@@ -135,18 +128,36 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         code = getIntent().getExtras().getString("verifycode");
         resendVerifyCode.setOnClickListener(this);
         // toolCancel.setOnClickListener(this);
-        rightAction.setOnClickListener(this);
+        //rightAction.setOnClickListener(this);
+        insertCode.addTextChangedListener(this);
         Toast.makeText(context, "Code is >>" + code, Toast.LENGTH_LONG).show();
         ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
                 .showSoftInput(insertCode, InputMethodManager.SHOW_FORCED);
         if (pm.checkPermission(pm.FIRSTPAGEPERMISSIONS))
             AppDelegate.getInstance().setOtpCallback(this);
+        insertCode.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            public void onDestroyActionMode(ActionMode mode) {
+            }
+
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                return false;
+            }
+        });
     }
 
     private void adjustUIcontent() {
         cv.adjustLinearMargin(verifyTool, CommonViewUtility.TOP, 58);
         //cv.adjustRelativeMargin(toolCancel, CommonViewUtility.LEFT, 50);
-        cv.adjustRelativeMargin(rightAction, CommonViewUtility.RIGHT, 60);
+        //cv.adjustRelativeMargin(rightAction, CommonViewUtility.RIGHT, 60);
         cv.adjustLinearMargin(veriCode, CommonViewUtility.LEFT, 46);
         cv.adjustLinearMargin(veriCode, CommonViewUtility.TOP, 205);
         cv.adjustLinearMargin(validCode, CommonViewUtility.TOP, 44);
@@ -272,8 +283,9 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         if (TextUtils.equals(code, verifyCode)) {
             //setTopAnimation();
             // disableAllview();
+            cpd.show();
             verifyCodeServer();
-            cv.showAlert(context, "Code verification successful");
+
         } else {
             cv.showAlert(context, "Incorrect verification code");
         }
@@ -317,8 +329,6 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                 });
             }
 
-        } else if (view == rightAction) {
-            verifyCode();
         }
     }
 
@@ -344,6 +354,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
     public void success(Object object, int taskCode) {
         // stopTopAnimation();
         //enableAllViews();
+        cpd.dismiss();
         if (taskCode == TaskCode.VERIFYCODE) {
             verifyCodeResultCheck(object);
         } else if (taskCode == TaskCode.REVERIFYCODE) {
@@ -353,6 +364,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void fail(int taskCode) {
+        cpd.dismiss();
         if (taskCode == TaskCode.VERIFYCODE) {
             showFailedMessage();
         } else if (taskCode == TaskCode.REVERIFYCODE) {
@@ -362,6 +374,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void failed(Object object, int taskCode) {
+        cpd.dismiss();
         if (taskCode == TaskCode.VERIFYCODE) {
             showFailedMessage();
         } else if (taskCode == TaskCode.REVERIFYCODE) {
@@ -378,12 +391,6 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                 finish();
             }
         });
-    }
-
-    public void clearSavedData() {
-        AppDelegate.getInstance().setClickedImage(null);
-        AppDelegate.getInstance().setCroppedImage(null);
-        AppDelegate.getInstance().setReturningToken(null);
     }
 
     //---Callback from the OTPCallback----
@@ -475,5 +482,26 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         cutomKeyboard = new CustomKeyboardLayout(customKeyboardLayout, this, insertCode);
         interfaceCurrent = cutomKeyboard.getInterface();
         cutomKeyboard.createCustomKeyBoard();
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        if (s.length() == 4) {
+            if(cd.isNetworkAvailable()) {
+                verifyCode();
+            }
+            else
+                cv.showAlert(context,"Please connect to internet.");
+        }
     }
 }

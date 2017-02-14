@@ -77,7 +77,7 @@ public class ImageCropActivity extends Activity {
         mContentResolver = getContentResolver();
         mImageView = (PhotoView) findViewById(R.id.originalImage);
         mCropOverlayView = (CropOverlayView) findViewById(R.id.imageMask);
-        mCropOverlayView.moveToCenter(CommonViewUtility.getInstance().getWidth(768), CommonViewUtility.getInstance().getHeight(1080), CommonViewUtility.getInstance().getWidth(650), this);
+        mCropOverlayView.moveToCenter(CommonViewUtility.getInstance().getWidth(1080), CommonViewUtility.getInstance().getHeight(1920), CommonViewUtility.getInstance().getWidth(950), this);
         doneDropImage.setOnClickListener(btnDoneListerner);
         mImageView.setImageBoundsListener(new IGetImageBounds() {
             @Override
@@ -110,7 +110,7 @@ public class ImageCropActivity extends Activity {
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
 
-                if (resource.getWidth() >= CommonViewUtility.getInstance().getWidth(650) && resource.getHeight() >= CommonViewUtility.getInstance().getWidth(650)) {
+                if (resource.getWidth() >= CommonViewUtility.getInstance().getWidth(950) && resource.getHeight() >= CommonViewUtility.getInstance().getWidth(950)) {
                     Drawable drawable = new BitmapDrawable(getResources(), resource);
 
                     float minScale = mImageView.setMinimumScaleToFit(drawable);

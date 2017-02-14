@@ -4,6 +4,7 @@ import android.content.Context;
 
 import org.json.JSONArray;
 
+import texttime.android.app.texttime.WebOperations.ApiClient;
 import texttime.android.app.texttime.callbacks.OTPRecievedCallback;
 
 /**
@@ -74,8 +75,9 @@ public class AppDelegate {
     public String getClickedImage() {
         return clickedImage;
     }
-    public void setClickedImage(String clickedImage) {
-        this.clickedImage = clickedImage;
+    public void setClickedImage(String clickedImage) { this.clickedImage = clickedImage; }
+    public String getCroppedImage() {
+        return croppedImage;
     }
     public void setCroppedImage(String croppedImage) {
         this.croppedImage = croppedImage;
@@ -83,9 +85,16 @@ public class AppDelegate {
     public void setReturningToken(String returningToken) {
         this.returningToken = returningToken;
     }
+    public String getReturningToken() { return returningToken; }
     public void setReturningUser(boolean returningUser) {
         isReturningUser = returningUser;
     }
-
-
+    public boolean isReturningUser() { return isReturningUser; }
+    public String imageUrl(String id,SaveDataPreferences sd){
+        String url = ApiClient.BASE_URL + "profile/images/original/" + sd.getUsername() + "/" + id;
+        return url;
+    }
+    public static String getServerImageUrl(String media, String imageType, String username, String imageName){
+        return ApiClient.BASE_URL + media+"/images/"+imageType+"/"+username+"/"+imageName;
+    }
 }

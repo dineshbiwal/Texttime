@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg_gradient">
     <View
         android:layout_width="match_parent"
         android:layout_height="24dp"
-        android:background="#000000"
+        android:background="@mipmap/statusbar"
         android:alpha="0.38"
         ></View>
     <RelativeLayout
@@ -49,7 +50,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <CustomViews.CameraModule.CustomCameraView
             android:id="@+id/customCameraView"
             android:layout_width="wrap_content"
@@ -63,19 +63,19 @@
             android:visibility="gone"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
-    <CustomViews.CustomEditText
+    <EditText
         android:id="@+id/insert_username"
         android:hint="@string/create_user"
         android:textColorHint="@color/textColor1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/textColor1"
-        android:maxLength="4"
+        android:singleLine="true"
+        android:longClickable="false"
         android:background="@drawable/edittext_bottom_line"
         android:textSize="28dp"
-        android:focusableInTouchMode="true"
-        android:inputType="number"/>
-    <CustomViews.CustomTextViewRegular
+        android:focusableInTouchMode="true" />
+    <CustomViews.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

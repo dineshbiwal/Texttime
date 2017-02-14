@@ -2,8 +2,10 @@ package texttime.android.app.texttime.Registration;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.hardware.Camera;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,16 +13,21 @@ import android.text.Editable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import CustomViews.CameraModule.CustomCameraView;
-import CustomViews.CameraTestActivity;
 import CustomViews.CustomEditText;
 import CustomViews.CustomImageView;
 import CustomViews.CustomTextView;
@@ -53,9 +60,9 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
     @BindView(R.id.imageContainer)
     RelativeLayout imageContainer;
     @BindView(R.id.insert_username)
-    CustomEditText insertUsername;
+    EditText insertUsername;
     @BindView(R.id.alreadyProfile)
-    CustomTextViewRegular alreadyProfile;
+    CustomTextView alreadyProfile;
     @BindView(R.id.toolBarText)
     CustomTextView toolBarText;
     @BindView(R.id.profile_tool)
@@ -73,9 +80,9 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
         AppDelegate.getInstance().setClickedImage("");
         AppDelegate.getInstance().setCroppedImage("");
         adjustUIComponent();
-        askPermission();
         initEnvironment();
         setonclicklistener();
+        askPermission();
     }
 
     @Override
@@ -89,11 +96,6 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
         });
     }
 
-    public void clearSavedData() {
-        AppDelegate.getInstance().setClickedImage(null);
-        AppDelegate.getInstance().setCroppedImage(null);
-        AppDelegate.getInstance().setReturningToken(null);
-    }
     //--Receive the response from the check username api
     //--if username is valid reserve it by calling reserveUserName()
 
@@ -113,7 +115,6 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
         params.put("token", sd.getToken());
         String username=cd.etData(insertUsername).substring(1);
         params.put("username", username);
-
         WebTask wTask=new WebTask(context, TaskCode.RESERVEUSERNAME,this,params);
         wTask.performTask();
     }
@@ -157,9 +158,76 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
             }
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
+        insertUsername.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            public void onDestroyActionMode(ActionMode mode) {}
+
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                return false;
+            }
+        });
+        insertUsername.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            public boolean onLongClick(View v)
+            {
+                return true;
+            }
+        });
+    }
+
+    //---When app is paused release the camera if it's in use
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(isCameraEnabled()){
+            if(camera!=null) {
+                try {
+                    cUtils.releaseCamera();
+                    camera = null;
+                }
+                catch (Exception e){
+
+                }
+            }
+        }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //---If image has been clicked and cropped
+        //--Hide camera view and display the clicked and cropped image.
+        if (!TextUtils.isEmpty(AppDelegate.getInstance().getCroppedImage())) {
+            customCameraView.setVisibility(View.GONE);
+            selectedImage.setVisibility(View.VISIBLE);
+            selectedImage.setUrl(Uri.fromFile(new File(AppDelegate.getInstance().getCroppedImage())));
+        }
+
+        //---Else if camera permission is granted reinitialise the camera
+        else
+        {
+            if(isCameraEnabled() && pm.checkPermission(Manifest.permission.CAMERA)){
+                if(camera==null)
+                    initCam();
+            }
+
+            else {
+                if(!pm.checkPermission(Manifest.permission.CAMERA)){
+                    customCameraView.setPreviewWOCamera(cv.getWidth(396));
+                }
+            }
+        }
     }
 
     //--Ask for the camera permission----
@@ -205,6 +273,7 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
             @Override
             public void onClick(View view) {
                 if(!TextUtils.isEmpty(cd.etData(insertUsername))){
+                    cpd.show();
                     checkUserName();
                 }
                 else {
@@ -220,8 +289,7 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
         params.put("token", sd.getToken());
         String username=cd.etData(insertUsername).substring(1);
         params.put("username", username);
-
-        setTopAnimation();
+       // setTopAnimation();
         WebTask wTask=new WebTask(context, TaskCode.CHECKUSERNAME,this,params);
         wTask.performTask();
     }
@@ -238,7 +306,6 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
                 return true;
             }
         }
-
         else
             return  false;
     }
@@ -290,7 +357,23 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
             cv.adjustRelativeSquare(customCameraView,newW);
         }
         else
-            cv.adjustRelative(customCameraView,newW,reqh);
+        {
+            cv.adjustRelativeSquare(customCameraView,reqh);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            //---If camera permission is granted display the camera else create a view without camera.
+            case PermissionCode.PERMISSIONCAMERA:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    initCam();
+                } else {
+                    customCameraView.setPreviewWOCamera(cv.getWidth(396));
+                }
+                break;
+        }
     }
 
     //--WebTask Success function.
@@ -299,25 +382,26 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
 
     @Override
     public void success(Object object, int taskCode) {
+        cpd.dismiss();
         if(taskCode== TaskCode.CHECKUSERNAME) {
             ValidateUserName userName = (ValidateUserName) object;
             CheckUserNameResponse(userName);
         }
 
         else if(taskCode==TaskCode.RESERVEUSERNAME){
-            stopTopAnimation();
-
+          //  stopTopAnimation();
             ValidateUserName userName = (ValidateUserName) object;
             if(userName.getResponse_code()== ResponseCodes.RESERVEUSERNAME) {
                 String username=cd.etData(insertUsername).substring(1);
                 sd.setUsername(username);
-             //   startActivityTransition(ProfilePasswordActivity.class);
+                startActivityTransition(ProfilePasswordActivity.class);
                 finish();
             }
 
             else{
+                cpd.dismiss();
                 cv.showAlert(context,userName.getMessage());
-                stopTopAnimation();
+                //stopTopAnimation();
             }
         }
     }
@@ -326,15 +410,20 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
     //-------WebTask callback failed function------------------
     @Override
     public void fail(int taskCode) {
-        stopTopAnimation();
+       // stopTopAnimation();
+        cpd.dismiss();
         cv.showAlert(context,"Unable to check username availability.");
     }
 
     @Override
     public void failed(Object object, int taskCode) {
-        stopTopAnimation();
-        ValidateUserName userName= (ValidateUserName) object;
-        cv.showAlert(context,userName.getMessage());
+        // stopTopAnimation();
+        cpd.dismiss();
+        try {
+            ValidateUserName userName = (ValidateUserName) object;
+            cv.showAlert(context, userName.getMessage());
+        } catch (Exception e) {
+            cv.showAlert(context, "Username not valid! try with other");
+        }
     }
-
 }

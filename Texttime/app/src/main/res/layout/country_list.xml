@@ -7,8 +7,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="24dp"
-        android:background="#000000"
-        android:alpha="0.38"
+        android:background="@mipmap/statusbar2"
         ></View>
     <LinearLayout
         android:id="@+id/action"

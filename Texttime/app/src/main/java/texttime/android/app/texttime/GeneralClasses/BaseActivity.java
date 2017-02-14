@@ -26,6 +26,7 @@ import CustomViews.CustomTextView;
 
 import CustomViews.CustomTextViewBold;
 import CustomViews.CustomTextViewRegular;
+import texttime.android.app.texttime.CommonClasses.AppDelegate;
 import texttime.android.app.texttime.CommonClasses.CommonDataUtility;
 import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
 
@@ -175,10 +176,11 @@ public class BaseActivity extends AppCompatActivity {
         rightIcon.setOnClickListener(rightIconListener);
     }
 
-
-
-
-
+    public void clearSavedData() {
+        AppDelegate.getInstance().setClickedImage(null);
+        AppDelegate.getInstance().setCroppedImage(null);
+        AppDelegate.getInstance().setReturningToken(null);
+    }
 
     public void setUpActionbarChatList() {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
