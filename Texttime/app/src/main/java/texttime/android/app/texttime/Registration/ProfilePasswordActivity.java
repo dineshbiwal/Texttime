@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import org.json.JSONObject;
@@ -42,11 +41,8 @@ import texttime.android.app.texttime.WebOperations.WebTaskCallback;
  * Created by Dinesh_Text on 2/9/2017.
  */
 
-public class ProfilePasswordActivity extends BaseActivity implements WebTaskCallback{
-    @BindView(R.id.profile_done)
-    ImageView profileDone;
-    @BindView(R.id.profile_tool)
-    RelativeLayout profileTool;
+public class ProfilePasswordActivity extends BaseActivity implements WebTaskCallback {
+
     @BindView(R.id.profileImage)
     CustomImageView profileImage;
     @BindView(R.id.username)
@@ -61,6 +57,8 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
     RelativeLayout yourpass;
 
     boolean isView = false;
+    @BindView(R.id.right_done)
+    ImageView rightDone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,16 +69,19 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
         adjustUIContent();
         initData();
         setonclickListener();
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
     private void adjustUIContent() {
-        cv.adjustLinearMargin(profileTool, CommonViewUtility.TOP, 58);
-        cv.adjustRelativeMargin(profileDone, CommonViewUtility.RIGHT, 62);
-        cv.adjustRelativeSquare(profileDone, 72);
+       // cv.adjustLinearMargin(profileTool, CommonViewUtility.TOP, 58);
+        cv.adjustRelativeMargin(rightDone, CommonViewUtility.RIGHT, 62);
+        cv.adjustRelativeSquare(rightDone, 72);
         cv.adjustRelativeSquare(profileImage, 396);
         cv.adjustRelativeMargin(profileImage, CommonViewUtility.TOP, 48);
         cv.adjustLinearMargin(yourpass, CommonViewUtility.TOP, 266);
-        cv.adjustLinearMargin(yourpass, CommonViewUtility.LEFT,45);
+        cv.adjustLinearMargin(yourpass, CommonViewUtility.LEFT, 45);
         cv.adjustLinearMargin(yourpass, CommonViewUtility.RIGHT, 47);
         cv.adjustRelativeMargin(viewPassword, CommonViewUtility.LEFT, 47);
         cv.adjustRelative(viewPassword, 77, 45);
@@ -88,51 +89,48 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
         cv.adjustLinearMargin(notUser, CommonViewUtility.TOP, 250);
     }
 
-    private void setonclickListener(){
-            profileDone.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    /**/
-                    if(AppDelegate.getInstance().isReturningUser()) {
-                        if (!TextUtils.isEmpty(cd.etData(insertPassword))) {
-                            loginApplication();
-                        }
+    private void setonclickListener() {
+        rightDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (AppDelegate.getInstance().isReturningUser()) {
+                    if (!TextUtils.isEmpty(cd.etData(insertPassword))) {
+                        loginApplication();
                     }
-                    else if (applyPasswordValidation()) {
-                        createProfile();
-                    }
+                } else if (applyPasswordValidation()) {
+                    createProfile();
                 }
-            });
+            }
+        });
 
-            viewPassword.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(isView) {
-                        insertPassword.setInputType(InputType.TYPE_CLASS_TEXT |
-                                InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                        insertPassword.setTypeface(dfunctions.getFontFamily(context), Typeface.NORMAL);
-                        viewPassword.setImageResource(R.mipmap.ic_eye);
-                        insertPassword.setSelection(cd.etData(insertPassword).length());
-                        isView = false;
-                    }
-                    else{
-                        insertPassword.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-                        insertPassword.setBackgroundResource(R.drawable.edittext_bottom_line);
-                        insertPassword.setTypeface(dfunctions.getFontFamily(context), Typeface.NORMAL);
-                        viewPassword.setImageResource(R.mipmap.ic_eye_choosen);
-                        insertPassword.setSelection(cd.etData(insertPassword).length());
-                        isView = true;
-                    }
+        viewPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isView) {
+                    insertPassword.setInputType(InputType.TYPE_CLASS_TEXT |
+                            InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    insertPassword.setTypeface(dfunctions.getFontFamily(context), Typeface.NORMAL);
+                    viewPassword.setImageResource(R.mipmap.ic_eye);
+                    insertPassword.setSelection(cd.etData(insertPassword).length());
+                    isView = false;
+                } else {
+                    insertPassword.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+                    insertPassword.setBackgroundResource(R.drawable.edittext_bottom_line);
+                    insertPassword.setTypeface(dfunctions.getFontFamily(context), Typeface.NORMAL);
+                    viewPassword.setImageResource(R.mipmap.ic_eye_choosen);
+                    insertPassword.setSelection(cd.etData(insertPassword).length());
+                    isView = true;
                 }
-            });
+            }
+        });
 
-            notUser.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AppDelegate.getInstance().setReturningUser(false);
-                    SAF(ProfileUsernameActivity.class);
-                }
-            });
+        notUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppDelegate.getInstance().setReturningUser(false);
+                SAF(ProfileUsernameActivity.class);
+            }
+        });
     }
 
     @Override
@@ -153,13 +151,13 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
 
     private void initData() {
         insertPassword.setTypeface(dfunctions.getFontFamily(this), Typeface.NORMAL);
+        rightDone.setImageResource(R.mipmap.ic_right);
+        rightDone.setVisibility(View.VISIBLE);
         if (AppDelegate.getInstance().isReturningUser()) {
-            if(!TextUtils.isEmpty(AppDelegate.getInstance().getCroppedImage())) {
-                String url = AppDelegate.getInstance().imageUrl(AppDelegate.getInstance().getCroppedImage(),sd);
-                System.out.print("image url is >>>>" + url);
+            if (!TextUtils.isEmpty(AppDelegate.getInstance().getCroppedImage())) {
+                String url = AppDelegate.getInstance().imageUrl(AppDelegate.getInstance().getCroppedImage(), sd);
                 profileImage.setUrl(url);
-            }
-            else {
+            } else {
                 profileImage.setImageResource(R.mipmap.placeholder);
             }
             insertPassword.setHint(R.string.password);
@@ -167,13 +165,11 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
             username.setVisibility(View.VISIBLE);
             username.setText("@" + sd.getUsername());
             notUser.setText("Not " + sd.getUsername() + "?");
-         //   setUpActionbar("Sign In", 0, null);
         } else {
             insertPassword.setHint(R.string.your_pass);
-            if(TextUtils.isEmpty(AppDelegate.getInstance().getCroppedImage())){
+            if (TextUtils.isEmpty(AppDelegate.getInstance().getCroppedImage())) {
                 profileImage.setImageResource(R.mipmap.placeholder);
-            }
-            else
+            } else
                 profileImage.setUrl(Uri.fromFile(new File(AppDelegate.getInstance().getCroppedImage())));
             notUser.setText("");
         }
@@ -182,36 +178,31 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
             public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
                 return false;
             }
-
             public void onDestroyActionMode(ActionMode mode) {}
-
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 return false;
             }
-
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 return false;
             }
         });
-        insertPassword.setOnLongClickListener(new View.OnLongClickListener()
-        {
-            public boolean onLongClick(View v)
-            {
+        insertPassword.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View v) {
                 return true;
             }
         });
-
     }
+
     //----Perform login for the returning user------------
     private void loginApplication() {
-        if (!TextUtils.isEmpty(cd.etData(insertPassword)) ) {
+        if (!TextUtils.isEmpty(cd.etData(insertPassword))) {
             if (applyPasswordValidation()) {
-                Map<String,String> map=new HashMap<>();
-                map.put("token",sd.getToken());
-                map.put("returning_token",AppDelegate.getInstance().getReturningToken());
-                map.put("password",cd.etData(insertPassword));
-                map.put("username",sd.getUsername());
-                WebTask task=new WebTask(context, TaskCode.LOGIN,this,map);
+                Map<String, String> map = new HashMap<>();
+                map.put("token", sd.getToken());
+                map.put("returning_token", AppDelegate.getInstance().getReturningToken());
+                map.put("password", cd.etData(insertPassword));
+                map.put("username", sd.getUsername());
+                WebTask task = new WebTask(context, TaskCode.LOGIN, this, map);
                 task.performTask();
             }
         } else {
@@ -223,40 +214,33 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
     //---Must contain a capital letter
     //---Must contain a numeric digit
     //---Must contain a special character
-    private boolean applyPasswordValidation(){
+    private boolean applyPasswordValidation() {
 
-        String passwordString=cd.etData(insertPassword);
-
-        if(passwordString.length()>=8 && passwordString.length()<=24){
+        String passwordString = cd.etData(insertPassword);
+        if (passwordString.length() >= 8 && passwordString.length() <= 24) {
             boolean hasUppercase = !passwordString.equals(passwordString.toLowerCase());
             boolean hasSpecial = !passwordString.matches("[A-Za-z0-9 ]*");
             boolean hasNumber;
-            if(passwordString.matches(".*\\d.*"))
-                hasNumber=true;
+            if (passwordString.matches(".*\\d.*"))
+                hasNumber = true;
             else
-                hasNumber=false;
+                hasNumber = false;
 
-            if(hasNumber && hasSpecial && hasUppercase){
+            if (hasNumber && hasSpecial && hasUppercase) {
                 return true;
-            }
-
-            else{
-                if(!hasNumber){
+            } else {
+                if (!hasNumber) {
                     cv.showAlert(context, "Password must contain at least 1 numeric character.");
                     return false;
-                }
-                else if(!hasSpecial){
+                } else if (!hasSpecial) {
                     cv.showAlert(context, "Password must contain at least 1 special character.");
                     return false;
-                }
-
-                else if(!hasUppercase){
+                } else if (!hasUppercase) {
                     cv.showAlert(context, "Password must contain at least 1 uppercase character.");
                     return false;
                 }
             }
-        }
-        else {
+        } else {
             cv.showAlert(context, "Password must be at least 6 characters and at most 24 characters long.");
             return false;
         }
@@ -285,8 +269,8 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
 
     @Override
     public void success(Object object, int taskCode) {
-        UserSignup user= (UserSignup) object;
-        if(user.getResponseCode().equalsIgnoreCase("2015")){
+        UserSignup user = (UserSignup) object;
+        if (user.getResponseCode().equalsIgnoreCase("2015")) {
             sd.setToken("Bearer " + user.data.getToken());
             sd.setDisplayName(user.data.getDisplayName());
             sd.setAccessToken("Bearer " + user.data.getToken());
@@ -294,25 +278,21 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
             sd.setUserPassword(cd.etData(insertPassword));
             startActivityTransition(ContainerActivity.class);
             finish();
-        }
-        else
-        {
+        } else {
             cpd.dismiss();
-            cv.showAlert(context,user.getMessage());
-            //stopTopAnimation();
-           // transContainer.setVisibility(View.GONE);
+            cv.showAlert(context, user.getMessage());
         }
     }
 
     @Override
     public void fail(int taskCode) {
-        cv.showAlert(context,"Error, please try again.");
+        cv.showAlert(context, "Error, please try again.");
     }
 
     @Override
     public void failed(Object object, int taskCode) {
-        UserSignup user= (UserSignup) object;
-        cv.showAlert(context,user.getMessage());
+        UserSignup user = (UserSignup) object;
+        cv.showAlert(context, user.getMessage());
     }
 
     //----Create profile AsyncTasK----------------------
@@ -345,8 +325,6 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
                 response = "";
             }
         }
-
-
         //-----parse the create profile task response-----
         private void parseResponse() {
             if (TextUtils.isEmpty(response)) {
@@ -368,7 +346,6 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
                         cv.showAlert(context, data.getString("message"));
                     }
                 } catch (Exception e) {
-
                 }
             }
         }
@@ -377,7 +354,6 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //setTopAnimation();
             cpd.show();
             isRunning = true;
         }
@@ -385,7 +361,6 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-         // stopTopAnimation();
             cpd.dismiss();
             isRunning = false;
             parseResponse();

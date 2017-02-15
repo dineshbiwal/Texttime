@@ -63,10 +63,6 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
     EditText insertUsername;
     @BindView(R.id.alreadyProfile)
     CustomTextView alreadyProfile;
-    @BindView(R.id.toolBarText)
-    CustomTextView toolBarText;
-    @BindView(R.id.profile_tool)
-    RelativeLayout profileTool;
 
     Camera camera;
     CamUtils cUtils;
@@ -82,6 +78,9 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
         adjustUIComponent();
         initEnvironment();
         setonclicklistener();
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         askPermission();
     }
 
@@ -120,7 +119,7 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
     }
     //---Adjust the size of UI elements-----------
     private void adjustUIComponent(){
-        cv.adjustLinearMargin(profileTool, CommonViewUtility.TOP, 58);
+        //cv.adjustLinearMargin(profileTool, CommonViewUtility.TOP, 58);
         cv.adjustRelativeMargin(rightAction, CommonViewUtility.RIGHT, 60);
         cv.adjustLinearMargin(imageContainer, CommonViewUtility.TOP, 48);
         cv.adjustRelativeSquare(selectedImage,396);
@@ -131,6 +130,7 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
     //----Initialize the class data and setup the required callbacks---
     private void initEnvironment(){
         insertUsername.setTypeface(dfunctions.getFontFamily(this), Typeface.NORMAL);
+        rightAction.setVisibility(View.VISIBLE);
         insertUsername.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -248,7 +248,7 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
             @Override
             public void onClick(View view) {
                 //---User already has a profile redirect to login page.
-               // startActivityTransition(LoginActivity.class);
+                startActivityTransition(LoginActivity.class);
             }
         });
 

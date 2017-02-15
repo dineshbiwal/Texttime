@@ -5,6 +5,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -12,10 +13,12 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -70,19 +73,6 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
     LinearLayout digit;
     @BindView(R.id.customKeyboardLayout)
     LinearLayout customKeyboardLayout;
-
-    int timerTime = 45;
-    int resendActivationCount = 0;
-    Handler handler;
-    Runnable r;
-    @BindView(R.id.toolBarText)
-    CustomTextView toolBarText;
-   /* @BindView(R.id.rightAction)
-    CustomTextView rightAction;*/
-    /*@BindView(R.id.tool_cancel)
-    ImageView toolCancel;*/
-    @BindView(R.id.verify_tool)
-    RelativeLayout verifyTool;
     @BindView(R.id.valid_code)
     LinearLayout validCode;
     @BindView(R.id.firstLine)
@@ -91,12 +81,18 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
     View secondLine;
     @BindView(R.id.thirdLine)
     View thirdLine;
-    private String code = "";
-
     @BindView(R.id.verify_progress)
     ProgressBar verifyProgress;
     @BindView(R.id.timerText)
     TextView timerText;
+
+    private String code = "";
+    CustomKeyboardLayout cutomKeyboard;
+    CurrentFocusInterface interfaceCurrent;
+    int timerTime = 45;
+    int resendActivationCount = 0;
+    Handler handler;
+    Runnable r;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,6 +111,27 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
         }
         verifyProgress.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar));
         initData();
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        setStatusBarTranslucent(true);
+    }
+
+    protected void setStatusBarTranslucent(boolean makeTranslucent) {
+        View v = findViewById(R.id.toolbar);
+        if (v != null) {
+            int paddingTop = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ? android.R.attr.actionBarSize : 0;
+            TypedValue tv = new TypedValue();
+            getTheme().resolveAttribute(android.support.v7.appcompat.R.attr.actionBarSize, tv, true);
+            paddingTop += TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+            v.setPadding(0, makeTranslucent ? paddingTop : 0, 0, 0);
+        }
+
+        if (makeTranslucent) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        } else {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
     }
 
     private void initData() {
@@ -127,8 +144,6 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
         }
         code = getIntent().getExtras().getString("verifycode");
         resendVerifyCode.setOnClickListener(this);
-        // toolCancel.setOnClickListener(this);
-        //rightAction.setOnClickListener(this);
         insertCode.addTextChangedListener(this);
         Toast.makeText(context, "Code is >>" + code, Toast.LENGTH_LONG).show();
         ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
@@ -155,9 +170,7 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
     }
 
     private void adjustUIcontent() {
-        cv.adjustLinearMargin(verifyTool, CommonViewUtility.TOP, 58);
-        //cv.adjustRelativeMargin(toolCancel, CommonViewUtility.LEFT, 50);
-        //cv.adjustRelativeMargin(rightAction, CommonViewUtility.RIGHT, 60);
+        //cv.adjustLinearMargin(verifyTool, CommonViewUtility.TOP, 58);
         cv.adjustLinearMargin(veriCode, CommonViewUtility.LEFT, 46);
         cv.adjustLinearMargin(veriCode, CommonViewUtility.TOP, 205);
         cv.adjustLinearMargin(validCode, CommonViewUtility.TOP, 44);
@@ -168,7 +181,6 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
         cv.adjustLinearMargin(resendVerifyCode, CommonViewUtility.RIGHT, 60);
         cv.adjustLinearSquare(sendcode, 67);
         cv.adjustLinearMargin(sendcode, CommonViewUtility.LEFT, 7);
-        //  cv.adjustLinearHeight(timerText, 80);
         insertCode.setTypeface(dfunctions.getFontFamily(context), Typeface.NORMAL);
     }
 
@@ -177,7 +189,6 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
         resendVerifyCode.setOnClickListener(null);
         timerText.setOnClickListener(null);
         resendVerifyCode.setAlpha(0.5f);
-        //timerText.setAlpha(0.5f);
     }
     //-------------------------------------------------------------
 
@@ -204,7 +215,6 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
                 startAnimation();
             }
         }, 1000);
-        //updateTimerText();
         disableButtons();
         r = new Runnable() {
             @Override
@@ -281,11 +291,8 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
     private void verifyCode() {
         String verifyCode = cd.etData(insertCode);
         if (TextUtils.equals(code, verifyCode)) {
-            //setTopAnimation();
-            // disableAllview();
             cpd.show();
             verifyCodeServer();
-
         } else {
             cv.showAlert(context, "Incorrect verification code");
         }
@@ -315,10 +322,7 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
             verifyProgress.setProgress(0);
             firstLine.setVisibility(View.INVISIBLE);
             secondLine.setVisibility(View.INVISIBLE);
-
             if (resendActivationCount <= 2) {
-                // setTopAnimation();
-                //disableAllview();
                 resendVerifyCodeServer();
             } else {
                 cv.showAlertSingleAction(context, "Resend activation code limit reached.", "Back", null, new DialogInterface.OnDismissListener() {
@@ -328,7 +332,6 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
                     }
                 });
             }
-
         }
     }
 
@@ -352,8 +355,6 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
 
     @Override
     public void success(Object object, int taskCode) {
-        // stopTopAnimation();
-        //enableAllViews();
         cpd.dismiss();
         if (taskCode == TaskCode.VERIFYCODE) {
             verifyCodeResultCheck(object);
@@ -417,18 +418,13 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
         } else if (verifyObject.getResponseCode() == ResponseCodes.VERIFYCODESUCCESSRETURNINGUSER) {
             sd.setUsername(verifyObject.data.getUsername());
             sd.setDisplayName(verifyObject.data.getDisplayName());
-
             //----To check-----
             AppDelegate.getInstance().setReturningToken(verifyObject.data.getReturningToken());
-//            sd.setAccessToken(verifyObject.data.getReturningToken());
-
             AppDelegate.getInstance().setReturningUser(true);
             AppDelegate.getInstance().setCroppedImage(verifyObject.data.getProfile_image());
-
             startActivityTransition(ProfilePasswordActivity.class);
             finish();
         } else if (verifyObject.getResponseCode() == ResponseCodes.VERIFYCODEREPESTED) {
-
             cv.showAlertSingleAction(context, getResources().getString(R.string.invalid_verify), "OK", null, new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialogInterface) {
@@ -452,7 +448,6 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
             disableButtons();
             startTimer();
             resendActivationCount += 1;
-
         } else if (verifyObject.getResponseCode() == ResponseCodes.UNABLERESENDVERIFICATIONCODE) {
 
             cv.showAlertSingleAction(context, getResources().getString(R.string.unable_resend_code), "OK", null, new DialogInterface.OnDismissListener() {
@@ -461,9 +456,7 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
                     enableButtons();
                 }
             });
-
         } else {
-
             cv.showAlertSingleAction(context, getResources().getString(R.string.reached_limit), "OK", null, new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialogInterface) {
@@ -472,10 +465,6 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
             });
         }
     }
-
-    CustomKeyboardLayout cutomKeyboard;
-
-    CurrentFocusInterface interfaceCurrent;
 
     //---Creates the custom keyboard to support the needs for the screen
     private void createCustomKeyboard() {
@@ -486,12 +475,10 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
     }
 
     @Override

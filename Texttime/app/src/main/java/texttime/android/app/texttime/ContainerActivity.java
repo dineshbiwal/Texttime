@@ -176,12 +176,9 @@ public class ContainerActivity extends BaseActivityFull {
         setUpActionbarChatList();
         openNewFragment(new ChatFragment(), "Chat");
         cv.adjustRelativeHeight(bottomTabBar, 133);
-
         cv.adjustRelativeMargin(fab, CommonViewUtility.BOTTOM, 169);
         cv.adjustRelativeMargin(fab, CommonViewUtility.RIGHT, 39);
         //cv.adjustRelativeSquare(fab,116);
-
-
         createIcons();
         askPermission();
     }

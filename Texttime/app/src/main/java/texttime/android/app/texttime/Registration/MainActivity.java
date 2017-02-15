@@ -11,10 +11,12 @@ import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -37,6 +39,7 @@ import texttime.android.app.texttime.CommonClasses.PermissionCode;
 import texttime.android.app.texttime.ContainerActivity;
 import texttime.android.app.texttime.DataModels.RegisterUser;
 import texttime.android.app.texttime.GeneralClasses.BaseActivity;
+import texttime.android.app.texttime.GeneralClasses.BaseActivityFull;
 import texttime.android.app.texttime.R;
 import texttime.android.app.texttime.WebOperations.ResponseCodes;
 import texttime.android.app.texttime.WebOperations.TaskCode;
@@ -65,8 +68,6 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
     String phoneNumber = "";
     @BindView(R.id.numberinput)
     LinearLayout numberinput;
-    @BindView(R.id.toolText)
-    CustomTextView toolText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +75,11 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
         setContentView(R.layout.enter_number);
         ButterKnife.bind(this);
         init(this);
-        // setUpActionbar(getResources().getString(R.string.app), 0, null);
         checkIfLoggedIn();
         getCountryCode();
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
     @Override
@@ -133,7 +136,7 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
         cv.adjustLinearHeight(location, 62);
         cv.adjustLinearWidth(location, 44);
         cv.adjustLinearSquare(sendSms, 67);
-        cv.adjustLinearMargin(toolText, CommonViewUtility.TOP, 58);
+       // cv.adjustLinearMargin(toolText, CommonViewUtility.TOP, 58);
         cv.adjustLinearMargin(chooseCountry, CommonViewUtility.TOP, 370);
         cv.adjustLinearMargin(chooseCountry, CommonViewUtility.LEFT, 62);
         cv.adjustLinearMargin(yourCountry, CommonViewUtility.LEFT, 30);
@@ -283,7 +286,7 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
     //else keep on this screen and continue OTP login process----------------------------
     private void checkIfLoggedIn() {
         if (!TextUtils.equals(sd.getAccessToken(), "")) {
-            SAF(ContainerActivity.class);
+          //  SAF(ContainerActivity.class);
         }
     }
 }
