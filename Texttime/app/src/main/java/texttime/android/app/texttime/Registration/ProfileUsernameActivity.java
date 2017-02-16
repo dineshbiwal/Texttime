@@ -17,7 +17,6 @@ import android.text.style.StyleSpan;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -28,10 +27,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import CustomViews.CameraModule.CustomCameraView;
-import CustomViews.CustomEditText;
 import CustomViews.CustomImageView;
 import CustomViews.CustomTextView;
-import CustomViews.CustomTextViewRegular;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import texttime.android.app.texttime.CommonClasses.AppDelegate;
@@ -50,7 +47,7 @@ import texttime.android.app.texttime.WebOperations.WebTaskCallback;
  * Created by Dinesh_Text on 2/9/2017.
  */
 
-public class ProfileUsernameActivity extends BaseActivity implements WebTaskCallback{
+public class ProfileUsernameActivity extends BaseActivity implements WebTaskCallback {
     @BindView(R.id.rightAction)
     CustomTextView rightAction;
     @BindView(R.id.customCameraView)
@@ -66,6 +63,8 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
 
     Camera camera;
     CamUtils cUtils;
+    @BindView(R.id.userMain)
+    LinearLayout userMain;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,6 +80,10 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (userMain != null)
+                userMain.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         askPermission();
     }
 
@@ -98,57 +101,59 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
     //--Receive the response from the check username api
     //--if username is valid reserve it by calling reserveUserName()
 
-    private void CheckUserNameResponse(ValidateUserName userName){
-        if(userName.getResponse_code()== ResponseCodes.VALIDATEUSERNAME){
+    private void CheckUserNameResponse(ValidateUserName userName) {
+        if (userName.getResponse_code() == ResponseCodes.VALIDATEUSERNAME) {
             reserveUserName();
-        }
-        else {
-            cv.showAlert(context,userName.getMessage());
+        } else {
+            cv.showAlert(context, userName.getMessage());
         }
     }
 
     //--reserver the username, useful as the user signup api isn't called
     //--till next screen.
-    private void reserveUserName(){
+    private void reserveUserName() {
         Map<String, String> params = new HashMap<>();
         params.put("token", sd.getToken());
-        String username=cd.etData(insertUsername).substring(1);
+        String username = cd.etData(insertUsername).substring(1);
         params.put("username", username);
-        WebTask wTask=new WebTask(context, TaskCode.RESERVEUSERNAME,this,params);
+        WebTask wTask = new WebTask(context, TaskCode.RESERVEUSERNAME, this, params);
         wTask.performTask();
     }
+
     //---Adjust the size of UI elements-----------
-    private void adjustUIComponent(){
+    private void adjustUIComponent() {
         //cv.adjustLinearMargin(profileTool, CommonViewUtility.TOP, 58);
         cv.adjustRelativeMargin(rightAction, CommonViewUtility.RIGHT, 60);
         cv.adjustLinearMargin(imageContainer, CommonViewUtility.TOP, 48);
-        cv.adjustRelativeSquare(selectedImage,396);
+        cv.adjustRelativeSquare(selectedImage, 396);
         cv.adjustLinearMargin(insertUsername, CommonViewUtility.TOP, 266);
         cv.adjustLinearMargin(insertUsername, CommonViewUtility.LEFT, 45);
-        cv.adjustLinearMargin(alreadyProfile, CommonViewUtility.TOP,236);
+        cv.adjustLinearMargin(alreadyProfile, CommonViewUtility.TOP, 236);
     }
+
     //----Initialize the class data and setup the required callbacks---
-    private void initEnvironment(){
+    private void initEnvironment() {
         insertUsername.setTypeface(dfunctions.getFontFamily(this), Typeface.NORMAL);
         rightAction.setVisibility(View.VISIBLE);
         insertUsername.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
+
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String str = String.valueOf(charSequence);
-                if(!TextUtils.isEmpty(str) && !str.startsWith("@")){
-                    if(str.contains("@")){
-                        int index=str.indexOf("@");
-                        str=str.substring(index+1,str.length());
+                if (!TextUtils.isEmpty(str) && !str.startsWith("@")) {
+                    if (str.contains("@")) {
+                        int index = str.indexOf("@");
+                        str = str.substring(index + 1, str.length());
                     }
-                    str="@"+str;
+                    str = "@" + str;
                 }
                 if (str.contains(" ")) {
                     str = str.replace(" ", "_");
                 }
-                if(str.length()>=2 && !TextUtils.equals(insertUsername.getText(),str)) {
+                if (str.length() >= 2 && !TextUtils.equals(insertUsername.getText(), str)) {
                     SpannableString styledString = new SpannableString(str);
                     // styledString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.button_blue)), 0, 1, 0);
                     styledString.setSpan(new StyleSpan(Typeface.BOLD), 0, 1, 0);
@@ -156,6 +161,7 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
                     insertUsername.setSelection(styledString.length());
                 }
             }
+
             @Override
             public void afterTextChanged(Editable editable) {
             }
@@ -166,7 +172,8 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
                 return false;
             }
 
-            public void onDestroyActionMode(ActionMode mode) {}
+            public void onDestroyActionMode(ActionMode mode) {
+            }
 
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 return false;
@@ -176,10 +183,8 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
                 return false;
             }
         });
-        insertUsername.setOnLongClickListener(new View.OnLongClickListener()
-        {
-            public boolean onLongClick(View v)
-            {
+        insertUsername.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View v) {
                 return true;
             }
         });
@@ -189,13 +194,12 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
     @Override
     protected void onPause() {
         super.onPause();
-        if(isCameraEnabled()){
-            if(camera!=null) {
+        if (isCameraEnabled()) {
+            if (camera != null) {
                 try {
                     cUtils.releaseCamera();
                     camera = null;
-                }
-                catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }
@@ -215,15 +219,12 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
         }
 
         //---Else if camera permission is granted reinitialise the camera
-        else
-        {
-            if(isCameraEnabled() && pm.checkPermission(Manifest.permission.CAMERA)){
-                if(camera==null)
+        else {
+            if (isCameraEnabled() && pm.checkPermission(Manifest.permission.CAMERA)) {
+                if (camera == null)
                     initCam();
-            }
-
-            else {
-                if(!pm.checkPermission(Manifest.permission.CAMERA)){
+            } else {
+                if (!pm.checkPermission(Manifest.permission.CAMERA)) {
                     customCameraView.setPreviewWOCamera(cv.getWidth(396));
                 }
             }
@@ -231,19 +232,18 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
     }
 
     //--Ask for the camera permission----
-    private void askPermission(){
+    private void askPermission() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-            if(!pm.checkPermission(pm.SECONDPAGEPERMISSIONS)) {
+            if (!pm.checkPermission(pm.SECONDPAGEPERMISSIONS)) {
                 pm.getPermissionCollection(pm.SECONDPAGEPERMISSIONS, PermissionCode.PERMISSIONCAMERA);
-            }
-            else
+            } else
                 initCam();
-        }else
+        } else
             initCam();
     }
 
     //--Register click listeners------------------------------
-    private void setonclicklistener(){
+    private void setonclicklistener() {
         alreadyProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -255,7 +255,7 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
         customCameraView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isCameraEnabled()){
+                if (isCameraEnabled()) {
                     askWritePermission();
                 }
             }
@@ -264,101 +264,95 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
         selectedImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isCameraEnabled()){
+                if (isCameraEnabled()) {
                     askWritePermission();
                 }
             }
         });
-        rightAction.setOnClickListener(new View.OnClickListener(){
+        rightAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!TextUtils.isEmpty(cd.etData(insertUsername))){
+                if (!TextUtils.isEmpty(cd.etData(insertUsername))) {
                     cpd.show();
                     checkUserName();
-                }
-                else {
-                    cv.showAlert(context,"Please enter profile name.");
+                } else {
+                    cv.showAlert(context, "Please enter profile name.");
                 }
             }
         });
     }
 
     //--Webcall to check if username hasn't been taken already or if it isn't valid.
-    private void checkUserName(){
+    private void checkUserName() {
         Map<String, String> params = new HashMap<>();
         params.put("token", sd.getToken());
-        String username=cd.etData(insertUsername).substring(1);
+        String username = cd.etData(insertUsername).substring(1);
         params.put("username", username);
-       // setTopAnimation();
-        WebTask wTask=new WebTask(context, TaskCode.CHECKUSERNAME,this,params);
+        // setTopAnimation();
+        WebTask wTask = new WebTask(context, TaskCode.CHECKUSERNAME, this, params);
         wTask.performTask();
     }
 
     //--If camera permission is granted then the
     //--custom camera tag should be the "camera"
     //--else it is gallery so user can pick the image from gallery.
-    private boolean isCameraEnabled(){
-        String s= (String) customCameraView.getTag();
-        if(s!=null) {
+    private boolean isCameraEnabled() {
+        String s = (String) customCameraView.getTag();
+        if (s != null) {
             if (s.equalsIgnoreCase("gallery")) {
                 return false;
             } else {
                 return true;
             }
-        }
-        else
-            return  false;
+        } else
+            return false;
     }
+
     //----Check for the write external storage permission----
-    private void askWritePermission(){
+    private void askWritePermission() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-            if(!pm.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                pm.getPermissionCollection(pm.SECONDPAGEPERMISSIONS,PermissionCode.PERMISSIONCAMERA);
+            if (!pm.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                pm.getPermissionCollection(pm.SECONDPAGEPERMISSIONS, PermissionCode.PERMISSIONCAMERA);
+            } else {
+                Bundle b = new Bundle();
+                b.putBoolean("isActivity", false);
+                startActivityTransition(CameraTestActivity.class, b);
             }
-            else {
-                Bundle b=new Bundle();
-                b.putBoolean("isActivity",false);
-                startActivityTransition(CameraTestActivity.class,b);
-            }
-        }else{
-            Bundle b=new Bundle();
-            b.putBoolean("isActivity",false);
-            startActivityTransition(CameraTestActivity.class,b);
+        } else {
+            Bundle b = new Bundle();
+            b.putBoolean("isActivity", false);
+            startActivityTransition(CameraTestActivity.class, b);
         }
     }
 
     //---Initialise the camera view---------------
-    private void initCam(){
-        cUtils=new CamUtils(false,cv.getWidth(396),cv.getWidth(396),this);
+    private void initCam() {
+        cUtils = new CamUtils(false, cv.getWidth(396), cv.getWidth(396), this);
         try {
-            if(cUtils.checkForCamera())
+            if (cUtils.checkForCamera())
                 camera = cUtils.initCamera();
+        } catch (Exception e) {
+            System.out.print("Error is >>>" + e);
         }
-        catch (Exception e){
-            System.out.print("Error is >>>"+e);
-        }
-        if(camera!=null) {
+        if (camera != null) {
             customCameraView.setPreviewUpdated(camera, (396));
             Camera.Size s = camera.getParameters().getPreviewSize();
             maintainAspect(s.width, s.height);
-        }
-        else
+        } else
             customCameraView.setPreviewWOCamera(cv.getWidth(396));
     }
 
     //----Keep the camera view in the aspect ratio--------
     //----From Marshmallow onward devices have square camera resolution
     //----Any device before that will have slighly destorted preview.
-    private void maintainAspect(int width,int height){
-        float ratio=(float) width/height;
-        int reqh=(396);
-        int newW=(int)(ratio*reqh);
-        if(reqh==newW){
-            cv.adjustRelativeSquare(customCameraView,newW);
-        }
-        else
-        {
-            cv.adjustRelativeSquare(customCameraView,reqh);
+    private void maintainAspect(int width, int height) {
+        float ratio = (float) width / height;
+        int reqh = (396);
+        int newW = (int) (ratio * reqh);
+        if (reqh == newW) {
+            cv.adjustRelativeSquare(customCameraView, newW);
+        } else {
+            cv.adjustRelativeSquare(customCameraView, reqh);
         }
     }
 
@@ -383,24 +377,20 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
     @Override
     public void success(Object object, int taskCode) {
         cpd.dismiss();
-        if(taskCode== TaskCode.CHECKUSERNAME) {
+        if (taskCode == TaskCode.CHECKUSERNAME) {
             ValidateUserName userName = (ValidateUserName) object;
             CheckUserNameResponse(userName);
-        }
-
-        else if(taskCode==TaskCode.RESERVEUSERNAME){
-          //  stopTopAnimation();
+        } else if (taskCode == TaskCode.RESERVEUSERNAME) {
+            //  stopTopAnimation();
             ValidateUserName userName = (ValidateUserName) object;
-            if(userName.getResponse_code()== ResponseCodes.RESERVEUSERNAME) {
-                String username=cd.etData(insertUsername).substring(1);
+            if (userName.getResponse_code() == ResponseCodes.RESERVEUSERNAME) {
+                String username = cd.etData(insertUsername).substring(1);
                 sd.setUsername(username);
                 startActivityTransition(ProfilePasswordActivity.class);
                 finish();
-            }
-
-            else{
+            } else {
                 cpd.dismiss();
-                cv.showAlert(context,userName.getMessage());
+                cv.showAlert(context, userName.getMessage());
                 //stopTopAnimation();
             }
         }
@@ -410,9 +400,9 @@ public class ProfileUsernameActivity extends BaseActivity implements WebTaskCall
     //-------WebTask callback failed function------------------
     @Override
     public void fail(int taskCode) {
-       // stopTopAnimation();
+        // stopTopAnimation();
         cpd.dismiss();
-        cv.showAlert(context,"Unable to check username availability.");
+        cv.showAlert(context, "Unable to check username availability.");
     }
 
     @Override

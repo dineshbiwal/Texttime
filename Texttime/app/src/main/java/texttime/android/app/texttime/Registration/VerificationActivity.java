@@ -85,6 +85,8 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
     ProgressBar verifyProgress;
     @BindView(R.id.timerText)
     TextView timerText;
+    @BindView(R.id.verify_main)
+    RelativeLayout verifyMain;
 
     private String code = "";
     CustomKeyboardLayout cutomKeyboard;
@@ -114,6 +116,10 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (verifyMain != null)
+                verifyMain.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         setStatusBarTranslucent(true);
     }
 
@@ -245,16 +251,13 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 int progress = (int) animation.getAnimatedValue("progress");
-                if(progress > (0 * 100) && progress <= (15 * 100))
-                {
-                     verifyProgress.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar));
+                if (progress > (0 * 100) && progress <= (15 * 100)) {
+                    verifyProgress.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar));
                 }
                 if (progress >= (15 * 100) && progress <= (30 * 100)) {
                     verifyProgress.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_blue));
                     firstLine.setVisibility(View.VISIBLE);
-                }
-
-                else if(progress >= (30 * 100)){
+                } else if (progress >= (30 * 100)) {
                     verifyProgress.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_red));
                     secondLine.setVisibility(View.VISIBLE);
                 }
@@ -484,11 +487,10 @@ public class VerificationActivity extends BaseActivity implements TextWatcher, V
     @Override
     public void afterTextChanged(Editable s) {
         if (s.length() == 4) {
-            if(cd.isNetworkAvailable()) {
+            if (cd.isNetworkAvailable()) {
                 verifyCode();
-            }
-            else
-                cv.showAlert(context,"Please connect to internet.");
+            } else
+                cv.showAlert(context, "Please connect to internet.");
         }
     }
 }

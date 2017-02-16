@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import org.json.JSONObject;
@@ -59,6 +61,8 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
     boolean isView = false;
     @BindView(R.id.right_done)
     ImageView rightDone;
+    @BindView(R.id.passMain)
+    LinearLayout passMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +76,14 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (passMain != null)
+                passMain.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
     }
 
     private void adjustUIContent() {
-       // cv.adjustLinearMargin(profileTool, CommonViewUtility.TOP, 58);
+        // cv.adjustLinearMargin(profileTool, CommonViewUtility.TOP, 58);
         cv.adjustRelativeMargin(rightDone, CommonViewUtility.RIGHT, 62);
         cv.adjustRelativeSquare(rightDone, 72);
         cv.adjustRelativeSquare(profileImage, 396);
@@ -178,10 +186,14 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
             public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
                 return false;
             }
-            public void onDestroyActionMode(ActionMode mode) {}
+
+            public void onDestroyActionMode(ActionMode mode) {
+            }
+
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 return false;
             }
+
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 return false;
             }
@@ -325,6 +337,7 @@ public class ProfilePasswordActivity extends BaseActivity implements WebTaskCall
                 response = "";
             }
         }
+
         //-----parse the create profile task response-----
         private void parseResponse() {
             if (TextUtils.isEmpty(response)) {

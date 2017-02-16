@@ -110,9 +110,7 @@ public class ContainerActivity extends BaseActivityFull {
         cv.adjustRelativeMargin(groupText, CommonViewUtility.TOP, 14);
         cv.adjustRelativeMargin(boadcastText, CommonViewUtility.TOP, 14);
         cv.adjustRelativeMargin(requestText, CommonViewUtility.TOP, 14);
-
     }
-
 
     public void setUpActionbarChatList() {
 
@@ -171,14 +169,11 @@ public class ContainerActivity extends BaseActivityFull {
         setContentView(R.layout.activity_container_updated);
         ButterKnife.bind(this);
         init(this);
-        //setUpActionbarChatSelection();
-        // setUpActionbarChatListSearch();
         setUpActionbarChatList();
         openNewFragment(new ChatFragment(), "Chat");
         cv.adjustRelativeHeight(bottomTabBar, 133);
         cv.adjustRelativeMargin(fab, CommonViewUtility.BOTTOM, 169);
         cv.adjustRelativeMargin(fab, CommonViewUtility.RIGHT, 39);
-        //cv.adjustRelativeSquare(fab,116);
         createIcons();
         askPermission();
     }

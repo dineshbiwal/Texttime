@@ -1,6 +1,7 @@
 package texttime.android.app.texttime.Registration;
 
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import java.util.HashMap;
@@ -36,7 +38,7 @@ import texttime.android.app.texttime.WebOperations.WebTaskCallback;
  * Created by Dinesh_Text on 2/11/2017.
  */
 
-public class LoginActivity extends BaseActivity implements WebTaskCallback{
+public class LoginActivity extends BaseActivity implements WebTaskCallback {
 
     @BindView(R.id.go_back)
     ImageView goBack;
@@ -54,6 +56,9 @@ public class LoginActivity extends BaseActivity implements WebTaskCallback{
     RelativeLayout loginpass;
 
     boolean isView = false;
+    @BindView(R.id.loginMain)
+    LinearLayout loginMain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,10 +71,14 @@ public class LoginActivity extends BaseActivity implements WebTaskCallback{
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (loginMain != null)
+                loginMain.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
     }
 
     private void adjustUIComponent() {
-       // cv.adjustRelativeMargin(goBack, CommonViewUtility.LEFT, 30);
+        // cv.adjustRelativeMargin(goBack, CommonViewUtility.LEFT, 30);
         cv.adjustRelativeSquare(goBack, 72);
         cv.adjustRelativeMargin(rightAction, CommonViewUtility.RIGHT, 60);
         cv.adjustRelativeMargin(userImage, CommonViewUtility.TOP, 50);
@@ -78,13 +87,13 @@ public class LoginActivity extends BaseActivity implements WebTaskCallback{
         cv.adjustLinearMargin(loginUsername, CommonViewUtility.LEFT, 46);
         cv.adjustLinearMargin(loginUsername, CommonViewUtility.RIGHT, 46);
         cv.adjustLinearMargin(loginpass, CommonViewUtility.TOP, 70);
-        cv.adjustLinearMargin(loginpass, CommonViewUtility.LEFT,46);
+        cv.adjustLinearMargin(loginpass, CommonViewUtility.LEFT, 46);
         cv.adjustLinearMargin(loginpass, CommonViewUtility.RIGHT, 47);
         cv.adjustRelativeMargin(loginViewPassword, CommonViewUtility.LEFT, 47);
         cv.adjustRelative(loginViewPassword, 77, 45);
     }
 
-    private void initEnvironment(){
+    private void initEnvironment() {
         loginUsername.setTypeface(dfunctions.getFontFamily(this), Typeface.NORMAL);
         loginPassword.setTypeface(dfunctions.getFontFamily(this), Typeface.NORMAL);
         userImage.setImageResource(R.mipmap.placeholder);
@@ -94,7 +103,7 @@ public class LoginActivity extends BaseActivity implements WebTaskCallback{
         loginUsername.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(i==0 && !charSequence.toString().equalsIgnoreCase("@")){
+                if (i == 0 && !charSequence.toString().equalsIgnoreCase("@")) {
 
                 }
             }
@@ -103,19 +112,19 @@ public class LoginActivity extends BaseActivity implements WebTaskCallback{
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String str = String.valueOf(charSequence);
 
-                if(!TextUtils.isEmpty(str) && !str.startsWith("@")){
+                if (!TextUtils.isEmpty(str) && !str.startsWith("@")) {
 
-                    if(str.contains("@")){
-                        int index=str.indexOf("@");
-                        str=str.substring(index+1,str.length());
+                    if (str.contains("@")) {
+                        int index = str.indexOf("@");
+                        str = str.substring(index + 1, str.length());
                     }
-                    str="@"+str;
+                    str = "@" + str;
                 }
                 if (str.contains(" ")) {
                     str = str.replace(" ", "_");
                 }
 
-                if(str.length()>=2 && !TextUtils.equals(loginUsername.getText(),str)) {
+                if (str.length() >= 2 && !TextUtils.equals(loginUsername.getText(), str)) {
                     SpannableString styledString
                             = new SpannableString(str);
                     //styledString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.button_blue)), 0, 1, 0);
@@ -124,8 +133,10 @@ public class LoginActivity extends BaseActivity implements WebTaskCallback{
                     loginUsername.setSelection(styledString.length());
                 }
             }
+
             @Override
-            public void afterTextChanged(Editable editable) {}
+            public void afterTextChanged(Editable editable) {
+            }
         });
 
         loginUsername.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
@@ -134,7 +145,8 @@ public class LoginActivity extends BaseActivity implements WebTaskCallback{
                 return false;
             }
 
-            public void onDestroyActionMode(ActionMode mode) {}
+            public void onDestroyActionMode(ActionMode mode) {
+            }
 
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 return false;
@@ -144,10 +156,8 @@ public class LoginActivity extends BaseActivity implements WebTaskCallback{
                 return false;
             }
         });
-        loginUsername.setOnLongClickListener(new View.OnLongClickListener()
-        {
-            public boolean onLongClick(View v)
-            {
+        loginUsername.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View v) {
                 return true;
             }
         });
@@ -157,7 +167,8 @@ public class LoginActivity extends BaseActivity implements WebTaskCallback{
                 return false;
             }
 
-            public void onDestroyActionMode(ActionMode mode) {}
+            public void onDestroyActionMode(ActionMode mode) {
+            }
 
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 return false;
@@ -167,16 +178,14 @@ public class LoginActivity extends BaseActivity implements WebTaskCallback{
                 return false;
             }
         });
-        loginPassword.setOnLongClickListener(new View.OnLongClickListener()
-        {
-            public boolean onLongClick(View v)
-            {
+        loginPassword.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View v) {
                 return true;
             }
         });
     }
 
-    private void setoncliclistener(){
+    private void setoncliclistener() {
 
         rightAction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,15 +204,14 @@ public class LoginActivity extends BaseActivity implements WebTaskCallback{
         loginViewPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isView) {
+                if (isView) {
                     loginPassword.setInputType(InputType.TYPE_CLASS_TEXT |
                             InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     loginPassword.setTypeface(dfunctions.getFontFamily(context), Typeface.NORMAL);
                     loginViewPassword.setImageResource(R.mipmap.ic_eye);
                     loginPassword.setSelection(cd.etData(loginPassword).length());
                     isView = false;
-                }
-                else{
+                } else {
                     loginPassword.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
                     loginPassword.setBackgroundResource(R.drawable.edittext_bottom_line);
                     loginPassword.setTypeface(dfunctions.getFontFamily(context), Typeface.NORMAL);
@@ -216,33 +224,33 @@ public class LoginActivity extends BaseActivity implements WebTaskCallback{
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
         finish();
     }
+
     private void loginApplication() {
-        if(!TextUtils.isEmpty(cd.etData(loginUsername))) {
+        if (!TextUtils.isEmpty(cd.etData(loginUsername))) {
             if (!TextUtils.isEmpty(cd.etData(loginPassword))) {
-                    Map<String, String> map = new HashMap<>();
-                    map.put("token", sd.getToken());
-                    String username=cd.etData(loginUsername).substring(1);
-                    map.put("username", username);
-                    map.put("password", cd.etData(loginPassword));
-                    cpd.show();
-                    WebTask task = new WebTask(context, TaskCode.LOGIN, this, map);
-                    task.performTask();
+                Map<String, String> map = new HashMap<>();
+                map.put("token", sd.getToken());
+                String username = cd.etData(loginUsername).substring(1);
+                map.put("username", username);
+                map.put("password", cd.etData(loginPassword));
+                cpd.show();
+                WebTask task = new WebTask(context, TaskCode.LOGIN, this, map);
+                task.performTask();
             } else
                 cv.showAlert(context, "Please enter password.");
-        }
-       else
+        } else
             cv.showAlert(context, "Please enter profile name.");
     }
 
     @Override
     public void success(Object object, int taskCode) {
         cpd.dismiss();
-        UserSignup user= (UserSignup) object;
-        if(user.getResponseCode().equalsIgnoreCase("2015")){
+        UserSignup user = (UserSignup) object;
+        if (user.getResponseCode().equalsIgnoreCase("2015")) {
             sd.setToken("Bearer " + user.data.getToken());
             sd.setDisplayName(user.data.getDisplayName());
             sd.setAccessToken("Bearer " + user.data.getToken());
@@ -250,25 +258,22 @@ public class LoginActivity extends BaseActivity implements WebTaskCallback{
             sd.setUserPassword(cd.etData(loginPassword));
             startActivityTransition(ContainerActivity.class);
             finish();
-        }
-
-        else
-        {
+        } else {
             cpd.dismiss();
-            cv.showAlert(context,user.getMessage());
+            cv.showAlert(context, user.getMessage());
         }
     }
 
     @Override
     public void fail(int taskCode) {
         cpd.dismiss();
-        cv.showAlert(context,"Error, please try again.");
+        cv.showAlert(context, "Error, please try again.");
     }
 
     @Override
     public void failed(Object object, int taskCode) {
         cpd.dismiss();
-        UserSignup user= (UserSignup) object;
-        cv.showAlert(context,user.getMessage());
+        UserSignup user = (UserSignup) object;
+        cv.showAlert(context, user.getMessage());
     }
 }

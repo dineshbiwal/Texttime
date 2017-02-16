@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/searchIcon"
         android:layout_centerVertical="true"
-        android:background="@mipmap/seach_new"
+        android:background="@mipmap/search"
         android:layout_toRightOf="@id/settingsIcon1"
         />
 

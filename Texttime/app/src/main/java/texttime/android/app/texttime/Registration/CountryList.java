@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -65,6 +63,8 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
     LinearLayout action;
     @BindView(R.id.list_country)
     ListView listCountry;
+    @BindView(R.id.countryMain)
+    LinearLayout countryMain;
 
     private CountryListAdapter adapter;
     private List<Country> cList, selectedCountriesList;
@@ -81,6 +81,10 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
         setonClicklistener();
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (countryMain != null)
+                countryMain.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -96,10 +100,12 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
         countryPickerSearch.setTypeface(font, Typeface.NORMAL);
         countryPickerSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -110,10 +116,12 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
         seekBar.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
                     @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {}
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
 
                     @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {}
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
 
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
