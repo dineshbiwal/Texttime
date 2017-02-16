@@ -286,7 +286,7 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
     //else keep on this screen and continue OTP login process----------------------------
     private void checkIfLoggedIn() {
         if (!TextUtils.equals(sd.getAccessToken(), "")) {
-          //  SAF(ContainerActivity.class);
+            SAF(ContainerActivity.class);
         }
     }
 }
