@@ -1,4 +1,4 @@
-package CustomViews.CameraModule;
+package CustomViews;
 
 import android.content.Context;
 import android.graphics.Typeface;

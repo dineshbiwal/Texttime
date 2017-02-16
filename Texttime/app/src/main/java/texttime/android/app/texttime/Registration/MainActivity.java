@@ -35,6 +35,7 @@ import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
 import texttime.android.app.texttime.CommonClasses.IncomingSms;
 import texttime.android.app.texttime.CommonClasses.PermissionCode;
 import texttime.android.app.texttime.ContainerActivity;
+import texttime.android.app.texttime.ContainerActivityBackup;
 import texttime.android.app.texttime.DataModels.RegisterUser;
 import texttime.android.app.texttime.GeneralClasses.BaseActivity;
 import texttime.android.app.texttime.R;
@@ -79,7 +80,6 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-
     }
 
     @Override

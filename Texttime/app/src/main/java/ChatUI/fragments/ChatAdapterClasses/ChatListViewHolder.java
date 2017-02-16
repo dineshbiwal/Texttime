@@ -7,12 +7,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import CustomViews.CameraModule.CustomReceivedImageView;
-import CustomViews.CameraModule.CustomTextViewMedium;
+import CustomViews.CustomTextViewMedium;
 import CustomViews.CustomImageView;
-import CustomViews.CustomTextView;
 import CustomViews.CustomTextViewBold;
 import CustomViews.CustomTextViewLight;
-import CustomViews.CustomTextViewRegular;
 import texttime.android.app.texttime.R;
 
 
