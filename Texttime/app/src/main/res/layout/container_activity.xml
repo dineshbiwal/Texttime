@@ -13,13 +13,14 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomTabBar"
         android:layout_below="@id/topBar"
         android:id="@+id/placeHolder"
-        android:background="@drawable/container_background">
+        android:background="@drawable/container_background"
+        android:layout_above="@+id/include">
     </FrameLayout>
     <include layout="@layout/bottom_toolbar"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/include" />
 </RelativeLayout>

@@ -31,15 +31,14 @@ public class ChatListViewHolder extends RecyclerView.ViewHolder{
 
     public ChatListViewHolder(View itemView) {
         super(itemView);
-        messageReceivedLayout= (RelativeLayout) itemView.findViewById(R.id.messageReceivedLayout);
-        chatMessageLayout= (LinearLayout) itemView.findViewById(R.id.chatMessageLayout);
-        profileImage= (CustomImageView) itemView.findViewById(R.id.profileImage);
-        userNameLabel= (CustomTextViewMedium) itemView.findViewById(R.id.userNameLabel);
-        postedTimeLabel= (CustomTextViewLight) itemView.findViewById(R.id.postedTimeLabel);
-        unreadMessageLbl= (CustomTextViewBold) itemView.findViewById(R.id.unreadMessageLbl);
-        messageText= (CustomTextViewLight) itemView.findViewById(R.id.messageText);
-        messageStatusImage= (ImageView) itemView.findViewById(R.id.messageStatusImage);
-        receivedImageThumbnail= (CustomReceivedImageView) itemView.findViewById(R.id.receivedImageThumbnail);
-
+        messageReceivedLayout = (RelativeLayout) itemView.findViewById(R.id.messageReceivedLayout);
+        chatMessageLayout = (LinearLayout) itemView.findViewById(R.id.chatMessageLayout);
+        profileImage = (CustomImageView) itemView.findViewById(R.id.profileImage);
+        userNameLabel = (CustomTextViewMedium) itemView.findViewById(R.id.userNameLabel);
+        postedTimeLabel = (CustomTextViewLight) itemView.findViewById(R.id.postedTimeLabel);
+        unreadMessageLbl = (CustomTextViewBold) itemView.findViewById(R.id.unreadMessageLbl);
+        messageText = (CustomTextViewLight) itemView.findViewById(R.id.messageText);
+        messageStatusImage = (ImageView) itemView.findViewById(R.id.messageStatusImage);
+        receivedImageThumbnail = (CustomReceivedImageView) itemView.findViewById(R.id.receivedImageThumbnail);
     }
 }

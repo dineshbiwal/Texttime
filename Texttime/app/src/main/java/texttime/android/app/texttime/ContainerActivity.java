@@ -95,7 +95,7 @@ public class ContainerActivity extends BaseActivityFull {
         setupBottomBarEnvironment();
         setupActionBarEnvironment();
         askPermission();
-        openNewFragment(new BroadcastFragment(), "Broadcast");
+        openNewFragment(new BroadcastFragment(), "BroadcastListAdapter");
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);

@@ -16,7 +16,7 @@
             android:id="@+id/searchIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_search_country"
+            android:src="@mipmap/search_white"
             android:layout_gravity="center_vertical"
             android:layout_centerVertical="true"
             android:background="@android:color/transparent" />
@@ -24,12 +24,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/heading_lable"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
             android:includeFontPadding="false"
             android:layout_centerVertical="true"
             android:textSize="22dp"
             android:text="History"
-            android:alpha="0.5"
             android:layout_toRightOf="@id/searchIcon" />
         <LinearLayout
             android:layout_width="wrap_content"
@@ -42,14 +41,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/icon3"
                 android:visibility="gone"
-                android:src="@mipmap/following_off"
+                android:src="@mipmap/you_follow_white"
                 android:layout_centerVertical="true" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/icon2"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/following_followers_on"
+                android:src="@mipmap/me_follow_disable"
                 android:visibility="gone" />
             <ImageView
                 android:layout_width="wrap_content"
@@ -57,7 +56,7 @@
                 android:id="@+id/icon1"
                 android:visibility="gone"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/world_off" />
+                android:src="@mipmap/world_disable2" />
         </LinearLayout>
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>
