@@ -43,6 +43,8 @@ public class ContainerActivity extends BaseActivityFull {
     ImageView icon2;
     @BindView(R.id.icon3)
     ImageView icon3;
+    @BindView(R.id.icon4)
+    ImageView icon4;
     @BindView(R.id.placeHolder)
     FrameLayout placeHolder;
     @BindView(R.id.chatIcon)
@@ -152,11 +154,11 @@ public class ContainerActivity extends BaseActivityFull {
         cv.adjustLinearMargin(icon1, CommonViewUtility.RIGHT, 60);
         cv.adjustLinearSquare(icon1, 67);
         cv.adjustLinearMargin(icon2, CommonViewUtility.RIGHT, 60);
-        cv.adjustLinearHeight(icon2, 72);
-        cv.adjustLinearWidth(icon2, 85);
+        cv.adjustLinearSquare(icon2, 67);
         cv.adjustLinearMargin(icon3, CommonViewUtility.RIGHT, 60);
-        cv.adjustLinearHeight(icon3, 72);
-        cv.adjustLinearWidth(icon3, 57);
+        cv.adjustLinear(icon3, 85, 72);
+        cv.adjustLinearMargin(icon4, CommonViewUtility.RIGHT, 60);
+        cv.adjustLinear(icon4, 57, 72);
         icon1.setVisibility(View.VISIBLE);
         icon2.setVisibility(View.VISIBLE);
         icon3.setVisibility(View.VISIBLE);

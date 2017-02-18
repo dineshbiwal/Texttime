@@ -10,6 +10,7 @@ import CustomViews.CustomImageView;
 import CustomViews.CustomTextView;
 import CustomViews.CustomTextViewLight;
 import CustomViews.CustomTextViewMedium;
+import CustomViews.CustomTextViewRegular;
 import texttime.android.app.texttime.R;
 
 /**
@@ -33,7 +34,8 @@ public class HistoryViewholder extends RecyclerView.ViewHolder{
     public ImageView shareHistory;
     public CustomTextView shareCount;
     public LinearLayout sharedSection;
-    public CustomTextView textMessage;
+    public CustomTextViewRegular textMessage;
+    public CustomTextView readMore;
     public LinearLayout medialayout;
     public CustomTextView leaveComment;
     public ImageView commentHistory;
@@ -41,6 +43,7 @@ public class HistoryViewholder extends RecyclerView.ViewHolder{
     public ImageView goCommentHistory;
     public LinearLayout features;
     public LinearLayout historyLayout;
+    public LinearLayout mainBroadcast;
 
     public HistoryViewholder(View itemView) {
         super(itemView);
@@ -63,9 +66,10 @@ public class HistoryViewholder extends RecyclerView.ViewHolder{
         sharePersonName = (CustomTextViewMedium) itemView.findViewById(R.id.share_person_name);
 
         shareCount = (CustomTextView) itemView.findViewById(R.id.share_count);
-        textMessage = (CustomTextView) itemView.findViewById(R.id.textMessage);
+        textMessage = (CustomTextViewRegular) itemView.findViewById(R.id.textMessage);
         leaveComment = (CustomTextView) itemView.findViewById(R.id.leave_comment);
         commentCount = (CustomTextView) itemView.findViewById(R.id.comment_count);
+        readMore = (CustomTextView) itemView.findViewById(R.id.read_more);
 
         sharedSection = (LinearLayout) itemView.findViewById(R.id.shared_section);
         medialayout = (LinearLayout) itemView.findViewById(R.id.medialayout);
@@ -73,5 +77,7 @@ public class HistoryViewholder extends RecyclerView.ViewHolder{
         historyLayout = (LinearLayout) itemView.findViewById(R.id.historyLayout);
 
         history = (RelativeLayout) itemView.findViewById(R.id.history);
+
+        mainBroadcast = (LinearLayout) itemView.findViewById(R.id.main_broadcast);
     }
 }

@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
+        android:id="@+id/main_broadcast"
         android:orientation="vertical">
 
         <CustomViews.CustomImageView
@@ -42,7 +43,7 @@
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical">
             <CustomViews.CustomTextViewMedium
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/userName"
                 android:layout_centerVertical="true"
@@ -56,6 +57,15 @@
                 android:layout_alignParentRight="true"
                 android:src="@mipmap/ic_back_down"
                 android:id="@+id/show_history" />
+            <CustomViews.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/postedTime"
+                android:layout_toLeftOf="@id/show_history"
+                android:textSize="16dp"
+                android:textColor="#000000"
+                android:alpha="0.7"/>
+
         </RelativeLayout>
 
         <LinearLayout
@@ -80,24 +90,17 @@
                 android:textColor="#000000"
                 android:alpha="0.3"/>
         </LinearLayout>
-
-        <CustomViews.CustomTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/postedTime"
-            android:textSize="16dp"
-            android:textColor="#000000"
-            android:alpha="0.7"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:visibility="gone"
-            android:layout_gravity="center_vertical"
             android:id="@+id/shared_section">
             <CustomViews.CustomImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
                 android:id="@+id/share_person_img"
                 android:layout_alignParentTop="true"/>
             <LinearLayout
@@ -123,12 +126,11 @@
                 android:id="@+id/share_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/share_post"/>
+                android:src="@mipmap/share_ic"/>
             <CustomViews.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/share_count"
-                android:text="0"
                 android:textSize="16dp"
                 android:textColor="#000000"
                 android:alpha="0.7"
@@ -139,11 +141,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/medialayout">
-            <CustomViews.CustomTextView
+            <CustomViews.CustomTextViewRegular
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textMessage"
-                android:textSize="16dp"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:alpha="0.8"/>
+            <CustomViews.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:gravity="right|bottom"
+                android:id="@+id/read_more"
+                android:visibility="gone"
+                android:text="@string/read_more"
+                android:textSize="20dp"
                 android:textColor="#000000"
                 android:alpha="0.7"/>
         </LinearLayout>
@@ -157,17 +170,24 @@
             <CustomViews.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
                 android:id="@+id/leave_comment"
                 android:text="@string/leave_comment"
                 android:textSize="16dp"
                 android:textColor="#000000"
                 android:alpha="0.7"/>
+
             <ImageView
                 android:id="@+id/comment_history"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/comment_home_page"/>
+                android:src="@mipmap/comment_home_page" />
             <CustomViews.CustomTextView
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/comment_count"
@@ -175,6 +195,8 @@
                 android:textColor="#000000"
                 android:alpha="0.7"/>
             <ImageView
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
                 android:id="@+id/go_comment_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

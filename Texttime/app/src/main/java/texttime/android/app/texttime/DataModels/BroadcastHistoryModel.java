@@ -16,9 +16,9 @@ public class BroadcastHistoryModel {
     String media_location;
     String location_address;
     boolean isLike;
-    int likeCount;
-    int commentCount;
-    int shareCount;
+    long likeCount;
+    long commentCount;
+    long shareCount;
     String share_user_profile_url;
     String share_user_display_name;
     String share_postedtime_ago;
@@ -119,27 +119,27 @@ public class BroadcastHistoryModel {
         isLike = like;
     }
 
-    public int getLikeCount() {
+    public long getLikeCount() {
         return likeCount;
     }
 
-    public void setLikeCount(int likeCount) {
+    public void setLikeCount(long likeCount) {
         this.likeCount = likeCount;
     }
 
-    public int getCommentCount() {
+    public long getCommentCount() {
         return commentCount;
     }
 
-    public void setCommentCount(int commentCount) {
+    public void setCommentCount(long commentCount) {
         this.commentCount = commentCount;
     }
 
-    public int getShareCount() {
+    public long getShareCount() {
         return shareCount;
     }
 
-    public void setShareCount(int shareCount) {
+    public void setShareCount(long shareCount) {
         this.shareCount = shareCount;
     }
 
