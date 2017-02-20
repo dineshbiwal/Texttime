@@ -59,14 +59,32 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
             history.shareCount.setText(CommonMethods.convertIntoKillo(historyList.get(position).getShareCount()));
         }
         history.commentCount.setText(CommonMethods.convertIntoKillo(historyList.get(position).getCommentCount()) + " Comments");
-        String message = historyList.get(position).getMedia_text();
-        if(message.length() > 160)
-        {
-            history.textMessage.setText(message.substring(0, 160));
-            history.readMore.setVisibility(View.VISIBLE);
+        switch (historyList.get(position).getMedia_type()){
+            case DOCUMENT:
+            case PDF:
+            case AUDIO:
+            case CONTACT:
+            case LOCATION:
+            case TEXT: String message = historyList.get(position).getMedia();
+                history.textMessage.setVisibility(View.VISIBLE);
+                if(message.length() > 140)
+                {
+                    history.textMessage.setText(message.substring(0, 140));
+                    history.readMore.setVisibility(View.VISIBLE);
+                }
+                else
+                    history.textMessage.setText(message);
+                break;
+            case IMAGE:
+                history.mediaImage.setVisibility(View.VISIBLE);
+                history.mediaImage.setUrl(historyList.get(position).getMedia());
+                break;
+            case VIDEO:
+                history.mediaPlay.setVisibility(View.VISIBLE);
+                history.mediaImage.setVisibility(View.VISIBLE);
+                history.mediaImage.setUrl(historyList.get(position).getMedia());
+                break;
         }
-        else
-            history.textMessage.setText(message);
         setonClickListener(history, position);
     }
 
@@ -79,7 +97,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         holder.readMore.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                holder.textMessage.setText(historyList.get(position).getMedia_text());
+                holder.textMessage.setText(historyList.get(position).getMedia());
                 holder.readMore.setVisibility(View.GONE);
             }
         });
@@ -110,6 +128,8 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         cv.adjustLinearMargin(holder.shareCount, CommonViewUtility.LEFT, 18);
         cv.adjustLinearMargin(holder.medialayout, CommonViewUtility.TOP, 31);
         cv.adjustLinearMargin(holder.medialayout, CommonViewUtility.RIGHT, 75);
+        cv.adjustRelative(holder.medialayout, 808, 432);
+        cv.adjustRelative(holder.mediaPlay, 51, 61);
         cv.adjustLinearMargin(holder.features, CommonViewUtility.TOP, 46);
         cv.adjustLinearMargin(holder.features, CommonViewUtility.RIGHT, 75);
         cv.adjustLinearMargin(holder.commentHistory, CommonViewUtility.LEFT, 60);

@@ -39,18 +39,18 @@ import java.net.HttpURLConnection;
 
 import texttime.android.app.texttime.R;
 
-
 /**
- * Created by TextTime Android Dev on 7/28/2016.
+ * Created by Dinesh_Text on 2/20/2017.
  */
-public class CustomImageView extends ImageView{
+
+public class CustomMediaImageView extends ImageView {
 
     int width,height;
     Context context;
     DiskCache cache;
     String url;
 
-    public CustomImageView(Context context) {
+    public CustomMediaImageView(Context context) {
         super(context);
         this.context=context;
         cache=new InternalCacheDiskCacheFactory(context).build();
@@ -78,7 +78,7 @@ public class CustomImageView extends ImageView{
                             @Override
                             public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
                                 if(resource!=null)
-                                setDimesions(resource,true);
+                                    setDimesions(resource,true);
                             }
                         });
             } else {
@@ -90,7 +90,7 @@ public class CustomImageView extends ImageView{
     public void setUrl(String url, int placeholder){
         this.url=url;
         this.setImageResource(placeholder);
-        if(!TextUtils.isEmpty(url)) {
+        if(! TextUtils.isEmpty(url)) {
             if (url.contains(".jpg") || url.contains(".png") || url.contains(".jpeg")
                     || url.contains(".JPG") || url.contains(".PNG") || url.contains(".JPEG")
                     ) {
@@ -139,23 +139,23 @@ public class CustomImageView extends ImageView{
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
                         if(resource!=null)
-                        setDimesions(resource,false);
+                            setDimesions(resource,false);
                     }
                 });
     }
 
-    public CustomImageView(Context context, AttributeSet attrs) {
+    public CustomMediaImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context=context;
     }
 
-    public CustomImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomMediaImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context=context;
         cache=new InternalCacheDiskCacheFactory(context).build();
     }
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public CustomImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CustomMediaImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.context=context;
         cache=new InternalCacheDiskCacheFactory(context).build();
@@ -172,34 +172,24 @@ public class CustomImageView extends ImageView{
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void setDimesions(Bitmap bitmap,boolean store){
 
-       // Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+        // Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
         bitmap=Bitmap.createScaledBitmap(bitmap,width,height,false);
         Bitmap mask=createMaskBitmap(width,height);
-        Bitmap mask1=createMaskBitmap(width+20,height+20);
-
         final Bitmap result = Bitmap.createBitmap(mask.getWidth(), mask.getHeight(), Bitmap.Config.ARGB_8888);
-
 
         Canvas mCanvas = new Canvas(result);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
         mCanvas.drawBitmap(bitmap, 0, 0, null);
-       // mCanvas.drawBitmap(m1, 0, 0, null);
         mCanvas.drawBitmap(mask, 0, 0, paint);
         paint.setXfermode(null);
 
         mask.recycle();
         bitmap.recycle();
-        mask=null;
-        bitmap=null;
 
         BitmapDrawable db=new BitmapDrawable(getResources(),result);
         this.setBackground(db);
-       // this.setImageBitmap(result);
-        //Appdelegate.getInstance().getImageList().put(url,result);
         this.setScaleType(ScaleType.CENTER_INSIDE);
-        //this.setBackgroundResource(R.drawable.image_new_mask1);
-        //new TransformImageTask(bitmap).execute();
 
         if(store && !TextUtils.isEmpty(url)) {
             cache=new InternalCacheDiskCacheFactory(context).build();
@@ -233,34 +223,24 @@ public class CustomImageView extends ImageView{
 
     public Bitmap transformImages(Bitmap bitmap){
 
-        // Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
         bitmap=Bitmap.createScaledBitmap(bitmap,width,height,false);
         Bitmap mask=createMaskBitmap(width,height);
-        Bitmap mask1=createMaskBitmap(width+20,height+20);
-
         final Bitmap result = Bitmap.createBitmap(mask.getWidth(), mask.getHeight(), Bitmap.Config.ARGB_8888);
-
 
         Canvas mCanvas = new Canvas(result);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
         mCanvas.drawBitmap(bitmap, 0, 0, null);
-        // mCanvas.drawBitmap(m1, 0, 0, null);
         mCanvas.drawBitmap(mask, 0, 0, paint);
         paint.setXfermode(null);
-
         mask.recycle();
         bitmap.recycle();
-        mask=null;
-        bitmap=null;
-       // Appdelegate.getInstance().getImageList().put(url,result);
         DiskCache cache=new InternalCacheDiskCacheFactory(context).build();
         cache.put(new StringSignature(url), new DiskCache.Writer() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public boolean write(File file) {
                 try (OutputStream out = new FileOutputStream(file)) {
-                    // mimic default behavior you can also use Bitmap.compress
                     BitmapResource resource = BitmapResource.obtain(result, null);
                     new BitmapEncoder().encode(resource, out);
                     return true;
@@ -271,52 +251,13 @@ public class CustomImageView extends ImageView{
             }
         });
         return result;
-
-
-        //this.setBackgroundResource(R.drawable.image_new_mask1);
     }
-
-
-    /*class TransformImageTask extends AsyncTask{
-        Bitmap result;
-        Bitmap input;
-
-        public TransformImageTask(Bitmap input) {
-            this.input = input;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(Object o) {
-            super.onPostExecute(o);
-
-            BitmapDrawable db=new BitmapDrawable(getResources(),result);
-            setBackground(db);
-            //this.setImageBitmap(result);
-            setScaleType(ScaleType.CENTER_INSIDE);
-        }
-
-        @Override
-        protected Object doInBackground(Object[] objects) {
-            result=transformImages(input);
-            return null;
-        }
-    }*/
-
-    private void createBackGround(){
-
-    }
-
 
     @Override
     public void setImageResource(int resId) {
-        Bitmap bm=BitmapFactory.decodeResource(getResources(),resId);
+        Bitmap bm= BitmapFactory.decodeResource(getResources(),resId);
         if(bm!=null)
-        setDimesions(bm,false);
+            setDimesions(bm,false);
     }
 
     public void setDimesions(Drawable d){
@@ -333,8 +274,6 @@ public class CustomImageView extends ImageView{
 
         mask.recycle();
         bitmap.recycle();
-        mask=null;
-        bitmap=null;
 
         this.setImageBitmap(result);
         this.setScaleType(ScaleType.CENTER);
@@ -344,22 +283,16 @@ public class CustomImageView extends ImageView{
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private Bitmap createMaskBitmap(int w, int h){
-        Drawable d=getResources().getDrawable(R.drawable.image_new_mask_transblue,null);
-        //Drawable d=getResources().getDrawable(R.mipmap.mask_photo,null);
+        Drawable d=getResources().getDrawable(R.mipmap.mask_image_post,null);
         Bitmap.Config config = Bitmap.Config.ARGB_8888;
         Bitmap bitmap = Bitmap.createBitmap(w, h, config);
         Canvas c=new Canvas(bitmap);
         d.setBounds(0,0,w,h);
-
         d.draw(c);
-
         return bitmap;
     }
 
-
-
-    private class LoadImageTask extends AsyncTask<Void,Void,Void>{
-
+    private class LoadImageTask extends AsyncTask<Void,Void,Void> {
         String url="";
         Bitmap bm;
         public LoadImageTask(String url) {
@@ -382,7 +315,6 @@ public class CustomImageView extends ImageView{
             }
         }
 
-
         @Override
         protected Void doInBackground(Void... voids) {
             bm=getBitmapFromURL();
@@ -398,7 +330,7 @@ public class CustomImageView extends ImageView{
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if(bm!=null)
-            setDimesions(bm,true);
+                setDimesions(bm,true);
         }
     }
 

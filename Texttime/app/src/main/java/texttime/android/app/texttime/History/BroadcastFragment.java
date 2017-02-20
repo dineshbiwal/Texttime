@@ -59,7 +59,8 @@ public class BroadcastFragment extends BaseFragment {
         model.setPostedTimeAgo("1 Day");
         model.setLike(true);
         model.setLikeCount(5210000);
-        model.setMedia_text("Remember that building a connection with a woman is all about getting her to tell you things she views as personally significant. Her rationale for choosing a job she doesn't like over a job she does is pretty personally significant, and probably not something she talks about all that much with all that many people. The combination of its significance and its rarity as a conversational topic for her make it more impactful in building a stronger connection.");
+        model.setMedia_type("Text");
+        model.setMedia("Remember that building a connection with a woman is all about getting her to tell you things she views as personally significant. Her rationale for choosing a job she doesn't like over a job she does is pretty personally significant, and probably not something she talks about all that much with all that many people. The combination of its significance and its rarity as a conversational topic for her make it more impactful in building a stronger connection.");
         model.setCommentCount(1440);
         model.setProfile_image_url("https://pbs.twimg.com/profile_images/87325629/Sunglass.jpg");
 
@@ -68,11 +69,8 @@ public class BroadcastFragment extends BaseFragment {
         model2.setPostedTimeAgo("3 Days");
         model2.setLike(false);
         model2.setLikeCount(6200);
-        model2.setMedia_text("Yes, that's right. So, since we last talked, I've got a new job and moved into a new apartment. What about you? What have you done since we last talked?\n" +
-                "\n" +
-                "Ah, that's interesting. I've been working hard on a project at work lately. What have you been doing lately?\n" +
-                "\n" +
-                "If I had more free time, I'd play some golf. What about you?");
+        model2.setMedia_type("Text");
+        model2.setMedia("The most important tense for a summary is the simple present.");
         model2.setCommentCount(344);
         model2.setShare_user_profile_url("http://10ad.itocd.net/www/images/girl/1848801-1849000/2a10e542-628c-44b8-809b-0ed204d7a0a6.jpg");
         model2.setShare_user_display_name("Gabriel Paris");
@@ -86,7 +84,8 @@ public class BroadcastFragment extends BaseFragment {
         model3.setPostedTimeAgo("7 Days");
         model3.setLike(true);
         model3.setLikeCount(9630);
-        model3.setMedia_text("I got a new job, and everything changed. What did you do to change things?\n" +
+        model3.setMedia_type("Text");
+        model3.setMedia("I got a new job, and everything changed. What did you do to change things?\n" +
                 "\n" +
                 "Oh well, I'm sure things will be different soon. I know things will change for the better when I get married! Will things change for you soon? If so, how will they change?\n" +
                 "\n" +
@@ -102,7 +101,8 @@ public class BroadcastFragment extends BaseFragment {
         model4.setPostedTimeAgo("10 Days");
         model4.setLike(false);
         model4.setLikeCount(20);
-        model4.setMedia_text("The most important tense for a summary is the simple present.");
+        model4.setMedia_type("Image");
+        model4.setMedia("https://lh6.googleusercontent.com/-eD5AKNbgT4g/AAAAAAAAAAI/AAAAAAAAADw/ksf-xKCNUjg/photo.jpg");
         model4.setCommentCount(14);
         model4.setShare_user_profile_url("http://www.harishzone.com/wp-content/uploads/2014/09/Ankita-Sharma.jpg");
         model4.setShare_user_display_name("Dulce Baldera");
@@ -116,7 +116,8 @@ public class BroadcastFragment extends BaseFragment {
         model5.setPostedTimeAgo("19 Days");
         model5.setLike(false);
         model5.setLikeCount(8000);
-        model5.setMedia_text("When you are first getting to know someone, text messaging can be a great way to break the ice and generate interest in getting to know each other better. To start a text conversation with a girl, send her a short open-ended question to get things going, then shift the conversation toward something timely or significant to her. Keep the conversation lighthearted, and take cues from her to determine whether to keep going or let it end.");
+        model5.setMedia_type("Video");
+        model5.setMedia("https://s-media-cache-ak0.pinimg.com/736x/4c/8f/fe/4c8ffea329bde2a44132c72cea9de93c.jpg");
         model5.setCommentCount(140);
         model5.setProfile_image_url("http://hairstyles.thehairstyler.com/hairstyles/images/14816/icon/Rosemarie-DeWitt.jpg");
 
