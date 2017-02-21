@@ -1,14 +1,17 @@
 package texttime.android.app.texttime;
 
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.graphics.drawable.TransitionDrawable;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -16,9 +19,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import ChatUI.fragments.ChatFragment;
 import CustomViews.CameraModule.CustomCameraView;
-import CustomViews.CustomTextViewMedium;
 import CustomViews.CustomTextViewBold;
+import CustomViews.CustomTextViewMedium;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import texttime.android.app.texttime.CommonClasses.CamUtils;
@@ -88,12 +92,30 @@ public class ContainerActivity extends BaseActivityFull {
     Camera camera;
     CamUtils cUtils;
 
+    @BindView(R.id.chatlabel)
+    CustomTextViewMedium chatlabel;
+    @BindView(R.id.settingsIcon)
+    ImageView settingsIcon;
+    @BindView(R.id.createNewChatIcon)
+    ImageView createNewChatIcon;
+    @BindView(R.id.onlinestatus)
+    ImageView onlinestatus;
+
+    @BindView(R.id.settingsIcon1)
+    ImageView settingsIcon1;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
+
+    View topBar,topBarChat;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.container_activity);
         ButterKnife.bind(this);
         init(this);
+        topBar=findViewById(R.id.topBar);
+        topBarChat=findViewById(R.id.topBarChat);
         setupBottomBarEnvironment();
         setupActionBarEnvironment();
         askPermission();
@@ -101,12 +123,70 @@ public class ContainerActivity extends BaseActivityFull {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        fab.setVisibility(View.GONE);
+        setonclicklistener();
     }
+
+
+    private void setonclicklistener() {
+        chatIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetTransition(chatDrawable);
+                setUpActionbarChatList();
+                openNewFragment(new ChatFragment(), "Chat");
+                cv.adjustRelativeMargin(fab, CommonViewUtility.BOTTOM, 169);
+                cv.adjustRelativeMargin(fab, CommonViewUtility.RIGHT, 39);
+                fab.setVisibility(View.VISIBLE);
+            }
+        });
+
+        broadcastTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetTransition(broadcastDrawable);
+                setupActionBarEnvironment();
+                openNewFragment(new BroadcastFragment(), "BroadcastListAdapter");
+                fab.setVisibility(View.GONE);
+            }
+        });
+    }
+
+
+    private void resetTransition(TransitionDrawable drawable) {
+        chatDrawable.resetTransition();
+        groupDrawable.resetTransition();
+        profileDrawable.resetTransition();
+
+        broadcastDrawable.resetTransition();
+
+        drawable.startTransition(400);
+
+    }
+
+
+    public void setUpActionbarChatList() {
+
+        topBarChat.setVisibility(View.VISIBLE);
+        topBar.setVisibility(View.GONE);
+        cv.adjustRelative(settingsIcon, 30, 30);
+        cv.adjustRelative(settingsIcon1, 30, 30);
+        cv.adjustRelativeSquare(onlinestatus, 12);
+        cv.adjustRelative(searchIcon, 49, 52);
+        cv.adjustRelativeSquare(createNewChatIcon, 54);
+        cv.adjustRelativeMargin(settingsIcon1, CommonViewUtility.LEFT, 30);
+        cv.adjustRelativeMargin(searchIcon, CommonViewUtility.LEFT, 78);
+        cv.adjustRelativeMargin(settingsIcon, CommonViewUtility.RIGHT, 43);
+        cv.adjustRelativeMargin(chatlabel, CommonViewUtility.LEFT, 46);
+        cv.adjustRelativeMargin(onlinestatus, CommonViewUtility.LEFT, 28);
+
+    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (pm.checkPermission(android.Manifest.permission.CAMERA)) {
+        if (pm.checkPermission(Manifest.permission.CAMERA)) {
             if (isCameraEnabled()) {
                 if (camera == null)
                     initCam();
@@ -117,7 +197,7 @@ public class ContainerActivity extends BaseActivityFull {
     @Override
     protected void onPause() {
         super.onPause();
-        if (pm.checkPermission(android.Manifest.permission.CAMERA)) {
+        if (pm.checkPermission(Manifest.permission.CAMERA)) {
             if (isCameraEnabled()) {
                 if (camera != null) {
                     try {
@@ -147,8 +227,12 @@ public class ContainerActivity extends BaseActivityFull {
         ft.commit();
     }
 
-    private void setupActionBarEnvironment(){
-        cv.adjustRelativeMargin(searchIcon, CommonViewUtility.LEFT,120);
+    private void setupActionBarEnvironment() {
+
+        topBarChat.setVisibility(View.GONE);
+        topBar.setVisibility(View.VISIBLE);
+
+        cv.adjustRelativeMargin(searchIcon, CommonViewUtility.LEFT, 120);
         cv.adjustRelativeMargin(searchIcon, CommonViewUtility.RIGHT, 40);
         cv.adjustRelativeMargin(headingLable, CommonViewUtility.RIGHT, 60);
         cv.adjustLinearMargin(icon1, CommonViewUtility.RIGHT, 60);
@@ -165,7 +249,7 @@ public class ContainerActivity extends BaseActivityFull {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void setupBottomBarEnvironment(){
+    private void setupBottomBarEnvironment() {
         cv.adjustRelativeHeight(bottomTabBar, 133);
 
         chatDrawable = createDrawable(R.mipmap.ic_tabbar_chat, R.mipmap.ic_tabbar_chat_choosen);
@@ -191,8 +275,8 @@ public class ContainerActivity extends BaseActivityFull {
     //--------Ask for the camera permission in the marshmallow devices-----------
     private void askPermission() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-            if (!pm.checkPermission(android.Manifest.permission.CAMERA))
-                pm.getPermission(android.Manifest.permission.CAMERA, PermissionCode.PERMISSIONCAMERA);
+            if (!pm.checkPermission(Manifest.permission.CAMERA))
+                pm.getPermission(Manifest.permission.CAMERA, PermissionCode.PERMISSIONCAMERA);
             else
                 initCam();
         } else

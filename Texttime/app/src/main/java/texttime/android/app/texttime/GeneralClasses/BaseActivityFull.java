@@ -102,4 +102,6 @@ public class BaseActivityFull extends AppCompatActivity {
         return drawable;
     }
 
+
+
 }

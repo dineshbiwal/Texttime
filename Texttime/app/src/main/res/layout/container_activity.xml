@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:background="@color/app_blue"
     android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar_updated"
-        android:id="@+id/topBar"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/toplayouts"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="24dp"
+        >
+
+        <include layout="@layout/toolbar_updated"
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+           />
+
+        <include layout="@layout/toolbar_chat_list_updated"
+            android:id="@+id/topBarChat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/topBar"
+        android:layout_below="@id/toplayouts"
         android:id="@+id/placeHolder"
         android:background="@drawable/container_background"
         android:layout_above="@+id/include">
@@ -23,4 +42,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/include" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="30dp"
+        app:backgroundTint="@color/app_blue"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/compose_icon" />
+
 </RelativeLayout>
