@@ -39,24 +39,31 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/icon3"
-                android:visibility="gone"
+                android:id="@+id/icon4"
+                android:visibility="visible"
                 android:src="@mipmap/you_follow_white"
                 android:layout_centerVertical="true" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/icon2"
+                android:id="@+id/icon3"
                 android:layout_centerVertical="true"
                 android:src="@mipmap/me_follow_disable"
-                android:visibility="gone" />
+                android:visibility="visible" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/icon2"
+                android:visibility="visible"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/world_disable2" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/icon1"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/world_disable2" />
+                android:src="@mipmap/notification_ic" />
         </LinearLayout>
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

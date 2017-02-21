@@ -1,5 +1,7 @@
 package texttime.android.app.texttime.DataModels;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by Dinesh_Text on 2/17/2017.
  */
@@ -9,19 +11,16 @@ public class BroadcastHistoryModel {
     String user_display_name;
     String postedTimeAgo;
     String media_type;
-    String media_text;
-    String media_viedo;
-    String media_audio;
-    String media_image;
-    String media_location;
+    String media;
     String location_address;
     boolean isLike;
-    int likeCount;
-    int commentCount;
-    int shareCount;
+    long likeCount;
+    long commentCount;
+    long shareCount;
     String share_user_profile_url;
     String share_user_display_name;
     String share_postedtime_ago;
+    MediaType type;
 
     public String getShare_postedtime_ago() {
         return share_postedtime_ago;
@@ -55,52 +54,29 @@ public class BroadcastHistoryModel {
         this.postedTimeAgo = postedTimeAgo;
     }
 
-    public String getMedia_type() {
-        return media_type;
+    public MediaType getMedia_type() {
+        return this.type;
     }
 
     public void setMedia_type(String media_type) {
-        this.media_type = media_type;
+        switch (media_type){
+            case "Text"  : this.type = MediaType.TEXT; break;
+            case "Image" : this.type = MediaType.IMAGE; break;
+            case "Video" : this.type = MediaType.VIDEO; break;
+            case "PDF"   : this.type = MediaType.PDF; break;
+            case "Location" : this.type = MediaType.LOCATION; break;
+            case "Conatct" : this.type = MediaType.CONTACT; break;
+            case "Document" : this.type = MediaType.DOCUMENT; break;
+        }
+       // this.media_type = media_type;
     }
 
-    public String getMedia_text() {
-        return media_text;
+    public String getMedia() {
+        return media;
     }
 
-    public void setMedia_text(String media_text) {
-        this.media_text = media_text;
-    }
-
-    public String getMedia_viedo() {
-        return media_viedo;
-    }
-
-    public void setMedia_viedo(String media_viedo) {
-        this.media_viedo = media_viedo;
-    }
-
-    public String getMedia_audio() {
-        return media_audio;
-    }
-
-    public void setMedia_audio(String media_audio) {
-        this.media_audio = media_audio;
-    }
-
-    public String getMedia_image() {
-        return media_image;
-    }
-
-    public void setMedia_image(String media_image) {
-        this.media_image = media_image;
-    }
-
-    public String getMedia_location() {
-        return media_location;
-    }
-
-    public void setMedia_location(String media_location) {
-        this.media_location = media_location;
+    public void setMedia(String media) {
+        this.media = media;
     }
 
     public String getLocation_address() {
@@ -119,27 +95,27 @@ public class BroadcastHistoryModel {
         isLike = like;
     }
 
-    public int getLikeCount() {
+    public long getLikeCount() {
         return likeCount;
     }
 
-    public void setLikeCount(int likeCount) {
+    public void setLikeCount(long likeCount) {
         this.likeCount = likeCount;
     }
 
-    public int getCommentCount() {
+    public long getCommentCount() {
         return commentCount;
     }
 
-    public void setCommentCount(int commentCount) {
+    public void setCommentCount(long commentCount) {
         this.commentCount = commentCount;
     }
 
-    public int getShareCount() {
+    public long getShareCount() {
         return shareCount;
     }
 
-    public void setShareCount(int shareCount) {
+    public void setShareCount(long shareCount) {
         this.shareCount = shareCount;
     }
 
@@ -157,5 +133,16 @@ public class BroadcastHistoryModel {
 
     public void setShare_user_display_name(String share_user_display_name) {
         this.share_user_display_name = share_user_display_name;
+    }
+
+    public enum MediaType {
+        IMAGE,
+        VIDEO,
+        AUDIO,
+        PDF,
+        TEXT,
+        DOCUMENT,
+        LOCATION,
+        CONTACT
     }
 }

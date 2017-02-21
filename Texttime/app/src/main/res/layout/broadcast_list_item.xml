@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
+        android:id="@+id/main_broadcast"
         android:orientation="vertical">
 
         <CustomViews.CustomImageView
@@ -42,7 +43,7 @@
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical">
             <CustomViews.CustomTextViewMedium
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/userName"
                 android:layout_centerVertical="true"
@@ -56,6 +57,14 @@
                 android:layout_alignParentRight="true"
                 android:src="@mipmap/ic_back_down"
                 android:id="@+id/show_history" />
+            <CustomViews.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/postedTime"
+                android:layout_toLeftOf="@id/show_history"
+                android:textSize="16dp"
+                android:textColor="#000000"
+                android:alpha="0.7"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -80,105 +89,140 @@
                 android:textColor="#000000"
                 android:alpha="0.3"/>
         </LinearLayout>
-
-        <CustomViews.CustomTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/postedTime"
-            android:textSize="16dp"
-            android:textColor="#000000"
-            android:alpha="0.7"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/shared_section">
-            <CustomViews.CustomImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/share_person_img"
-                android:layout_alignParentTop="true"/>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <CustomViews.CustomTextViewMedium
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/share_person_name"
-                    android:textSize="18dp"
-                    android:textColor="#000000"
-                    android:alpha="0.7"/>
-                <CustomViews.CustomTextViewLight
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/sharePostedTime"
-                    android:textSize="16dp"
-                    android:textColor="#000000"
-                    android:alpha="0.7"/>
-            </LinearLayout>
-            <ImageView
-                android:id="@+id/share_history"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/share_post"/>
-            <CustomViews.CustomTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/share_count"
-                android:text="0"
-                android:textSize="16dp"
-                android:textColor="#000000"
-                android:alpha="0.7"
-                android:layout_centerVertical="true"/>
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/medialayout">
-            <CustomViews.CustomTextView
-                android:layout_width="wrap_content"
+            android:id="@+id/post_view">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textMessage"
-                android:textSize="16dp"
-                android:textColor="#000000"
-                android:alpha="0.7"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:id="@+id/features">
-            <CustomViews.CustomTextView
-                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:id="@+id/shared_section">
+                <CustomViews.CustomImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:id="@+id/share_person_img"
+                    android:layout_alignParentTop="true"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <CustomViews.CustomTextViewMedium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/share_person_name"
+                        android:textSize="18dp"
+                        android:textColor="#000000"
+                        android:alpha="0.7"/>
+                    <CustomViews.CustomTextViewLight
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sharePostedTime"
+                        android:textSize="16dp"
+                        android:textColor="#000000"
+                        android:alpha="0.7"/>
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/share_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/share_ic"/>
+                <CustomViews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/share_count"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:alpha="0.7"
+                    android:layout_centerVertical="true"/>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/leave_comment"
-                android:text="@string/leave_comment"
-                android:textSize="16dp"
-                android:textColor="#000000"
-                android:alpha="0.7"/>
-            <ImageView
-                android:id="@+id/comment_history"
-                android:layout_width="wrap_content"
+                android:id="@+id/medialayout">
+                <CustomViews.CustomTextViewRegular
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textMessage"
+                    android:textSize="20dp"
+                    android:visibility="gone"
+                    android:textColor="#000000"
+                    android:alpha="0.7"/>
+
+                <CustomViews.CustomMediaImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/media_image"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_play_white"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:visibility="gone"
+                    android:id="@+id/mediaPlay"/>
+
+                <CustomViews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/read_more"
+                    android:visibility="gone"
+                    android:text="@string/read_more"
+                    android:textSize="20dp"
+                    android:textColor="#000000"
+                    android:alpha="0.7"
+                    android:layout_below="@id/textMessage"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/comment_home_page"/>
-            <CustomViews.CustomTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/comment_count"
-                android:textSize="16dp"
-                android:textColor="#000000"
-                android:alpha="0.7"/>
-            <ImageView
-                android:id="@+id/go_comment_history"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_forword"/>
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:id="@+id/features">
+                <CustomViews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:id="@+id/leave_comment"
+                    android:text="@string/leave_comment"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:alpha="0.7"/>
+
+                <ImageView
+                    android:id="@+id/comment_history"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/comment_home_page" />
+                <CustomViews.CustomTextView
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/comment_count"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:alpha="0.7"/>
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:id="@+id/go_comment_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_forword"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
