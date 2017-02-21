@@ -37,6 +37,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
+import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
 import texttime.android.app.texttime.R;
 
 /**
@@ -60,12 +61,12 @@ public class CustomMediaImageView extends ImageView {
     public void setUrl(String url){
         this.url=url;
         cache=new InternalCacheDiskCacheFactory(context).build();
-        if(cache.get(new StringSignature(url))!=null){
+        /*if(cache.get(new StringSignature(url))!=null){
             Glide.with(context).load(cache.get(new StringSignature(url))).into(this);
         }
-        else
+        else*/
         {
-            this.setImageResource(R.mipmap.logo_placeholder);
+            //this.setImageResource(R.mipmap.logo_placeholder);
             if (url.contains(".jpg") || url.contains(".png") || url.contains(".jpeg")
                     || url.contains(".JPG") || url.contains(".PNG") || url.contains(".JPEG")
                     ) {
@@ -171,10 +172,9 @@ public class CustomMediaImageView extends ImageView {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void setDimesions(Bitmap bitmap,boolean store){
-
-        // Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
-        bitmap=Bitmap.createScaledBitmap(bitmap,width,height,false);
-        Bitmap mask=createMaskBitmap(width,height);
+       
+        bitmap=Bitmap.createScaledBitmap(bitmap, width, height, false);
+        Bitmap mask=createMaskBitmap(width, height);
         final Bitmap result = Bitmap.createBitmap(mask.getWidth(), mask.getHeight(), Bitmap.Config.ARGB_8888);
 
         Canvas mCanvas = new Canvas(result);

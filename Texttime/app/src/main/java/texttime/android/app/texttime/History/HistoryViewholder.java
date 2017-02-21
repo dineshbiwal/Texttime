@@ -48,6 +48,7 @@ public class HistoryViewholder extends RecyclerView.ViewHolder{
     public LinearLayout mainBroadcast;
     public CustomMediaImageView mediaImage;
     public ImageView mediaPlay;
+    public LinearLayout postView;
 
     public HistoryViewholder(View itemView) {
         super(itemView);
@@ -83,5 +84,6 @@ public class HistoryViewholder extends RecyclerView.ViewHolder{
         history = (RelativeLayout) itemView.findViewById(R.id.history);
         mediaImage = (CustomMediaImageView) itemView.findViewById(R.id.media_image);
         mainBroadcast = (LinearLayout) itemView.findViewById(R.id.main_broadcast);
+        postView = (LinearLayout) itemView.findViewById(R.id.post_view);
     }
 }

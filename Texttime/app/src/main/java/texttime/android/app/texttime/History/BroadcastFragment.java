@@ -69,8 +69,8 @@ public class BroadcastFragment extends BaseFragment {
         model2.setPostedTimeAgo("3 Days");
         model2.setLike(false);
         model2.setLikeCount(6200);
-        model2.setMedia_type("Text");
-        model2.setMedia("The most important tense for a summary is the simple present.");
+        model2.setMedia_type("Image");
+        model2.setMedia("http://xndev.com/wp-content/uploads/2012/03/writing_600_300.jpg");
         model2.setCommentCount(344);
         model2.setShare_user_profile_url("http://10ad.itocd.net/www/images/girl/1848801-1849000/2a10e542-628c-44b8-809b-0ed204d7a0a6.jpg");
         model2.setShare_user_display_name("Gabriel Paris");
@@ -102,7 +102,7 @@ public class BroadcastFragment extends BaseFragment {
         model4.setLike(false);
         model4.setLikeCount(20);
         model4.setMedia_type("Image");
-        model4.setMedia("https://lh6.googleusercontent.com/-eD5AKNbgT4g/AAAAAAAAAAI/AAAAAAAAADw/ksf-xKCNUjg/photo.jpg");
+        model4.setMedia("https://s3-us-west-1.amazonaws.com/powr/defaults/image-slider2.jpg");
         model4.setCommentCount(14);
         model4.setShare_user_profile_url("http://www.harishzone.com/wp-content/uploads/2014/09/Ankita-Sharma.jpg");
         model4.setShare_user_display_name("Dulce Baldera");
@@ -117,7 +117,7 @@ public class BroadcastFragment extends BaseFragment {
         model5.setLike(false);
         model5.setLikeCount(8000);
         model5.setMedia_type("Video");
-        model5.setMedia("https://s-media-cache-ak0.pinimg.com/736x/4c/8f/fe/4c8ffea329bde2a44132c72cea9de93c.jpg");
+        model5.setMedia("http://www.zastavki.com/pictures/originals/2013/Photoshop_Image_of_the_horse_053857_.jpg");
         model5.setCommentCount(140);
         model5.setProfile_image_url("http://hairstyles.thehairstyler.com/hairstyles/images/14816/icon/Rosemarie-DeWitt.jpg");
 

@@ -90,7 +90,7 @@
                 android:alpha="0.3"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/post_view">
@@ -152,17 +152,7 @@
                     android:visibility="gone"
                     android:textColor="#000000"
                     android:alpha="0.7"/>
-                <CustomViews.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|bottom"
-                    android:gravity="right|bottom"
-                    android:id="@+id/read_more"
-                    android:visibility="gone"
-                    android:text="@string/read_more"
-                    android:textSize="20dp"
-                    android:textColor="#000000"
-                    android:alpha="0.7"/>
+
                 <CustomViews.CustomMediaImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -171,11 +161,25 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_play"
-                    android:layout_gravity="center"
-                    android:foregroundGravity="center"
+                    android:src="@mipmap/ic_play_white"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
                     android:visibility="gone"
                     android:id="@+id/mediaPlay"/>
+
+                <CustomViews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/read_more"
+                    android:visibility="gone"
+                    android:text="@string/read_more"
+                    android:textSize="20dp"
+                    android:textColor="#000000"
+                    android:alpha="0.7"
+                    android:layout_below="@id/textMessage"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"

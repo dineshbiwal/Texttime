@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import java.util.List;
 
+import CustomViews.CustomTextView;
 import texttime.android.app.texttime.CommonClasses.CommonMethods;
 import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
 import texttime.android.app.texttime.DataModels.BroadcastHistoryModel;
@@ -25,6 +26,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
 
     List<BroadcastHistoryModel> historyList;
     Context context;
+    boolean hidePost = true;
 
     public BroadcastListAdapter(Context context, List<BroadcastHistoryModel> model) {
         this.context = context;
@@ -101,6 +103,22 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
                 holder.readMore.setVisibility(View.GONE);
             }
         });
+        holder.showHistory.setOnClickListener(new View.OnClickListener() {
+            // true => Hide the post
+            // false => Show the post
+            @Override
+            public void onClick(View v) {
+                if(hidePost) {
+                    holder.postView.setVisibility(View.GONE);
+                    holder.showHistory.setImageResource(R.mipmap.ic_up_post);
+                    hidePost = false;
+                }else{
+                    holder.showHistory.setImageResource(R.mipmap.ic_back_down);
+                    holder.postView.setVisibility(View.VISIBLE);
+                    hidePost = true;
+                }
+            }
+        });
     }
     private void setUIComponent(HistoryViewholder holder){
         CommonViewUtility cv=CommonViewUtility.getInstance();
@@ -128,7 +146,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         cv.adjustLinearMargin(holder.shareCount, CommonViewUtility.LEFT, 18);
         cv.adjustLinearMargin(holder.medialayout, CommonViewUtility.TOP, 31);
         cv.adjustLinearMargin(holder.medialayout, CommonViewUtility.RIGHT, 75);
-        cv.adjustRelative(holder.medialayout, 808, 432);
+        cv.adjustRelative(holder.mediaImage, 808, 432);
         cv.adjustRelative(holder.mediaPlay, 51, 61);
         cv.adjustLinearMargin(holder.features, CommonViewUtility.TOP, 46);
         cv.adjustLinearMargin(holder.features, CommonViewUtility.RIGHT, 75);
@@ -138,5 +156,6 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         cv.adjustLinearMargin(holder.goCommentHistory, CommonViewUtility.LEFT, 6);
         cv.adjustLinear(holder.goCommentHistory, 18, 24);
         cv.adjustLinearMargin(holder.historyLayout, CommonViewUtility.BOTTOM, 40);
+        //cv.adjustRelativeMargin(holder.readMore, CommonViewUtility.TOP, 20);
     }
 }
