@@ -99,11 +99,10 @@ public class CustomCameraView extends FrameLayout implements TextureView.Surface
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         imageViewTrans.setScaleType(ImageView.ScaleType.FIT_XY);
 
-
         CommonViewUtility.getInstance().adjustFrameSquare(imageView,width);
         CommonViewUtility.getInstance().adjustFrameSquare(imageViewTrans,width);
 
-        imageView.setImageResource(R.mipmap.profile_capture);
+        imageView.setImageResource(R.mipmap.profile_capture4);
         imageViewTrans.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.trans_patch1));
     }
 
@@ -121,19 +120,15 @@ public class CustomCameraView extends FrameLayout implements TextureView.Surface
         imageView=new ImageView(context);
         imageViewTrans=new ImageView(context);
 
-
-
-
         this.addView(imageViewTrans,lp);
         this.addView(imageView,lp);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-
 
       //  CommonViewUtility.getInstance().adjustFrameSquare(textureView,width);
         CommonViewUtility.getInstance().adjustFrameSquare(imageView,width);
         CommonViewUtility.getInstance().adjustFrameSquare(imageViewTrans,width);
 
-        imageView.setImageResource(R.mipmap.profile_capture);
+        imageView.setImageResource(R.mipmap.profile_capture4);
         imageViewTrans.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.trans_patch1));
         CommonViewUtility.getInstance().adjustRelativeSquare(this,width);
         textureView.setSurfaceTextureListener(this);
@@ -145,7 +140,6 @@ public class CustomCameraView extends FrameLayout implements TextureView.Surface
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 try {
                     camera.setPreviewTexture(surfaceTexture);
                     camera.startPreview();

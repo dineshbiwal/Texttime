@@ -1,99 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/main"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/main_bg_gradient">
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:background="#000000"
-        android:alpha="0.38"
-        ></View>
-    <CustomViews.CustomTextView
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="22dp"
-        android:textColor="@color/textColor"
-        android:background="@android:color/transparent"
-        android:text="@string/app"
-        android:id="@+id/toolText"
         android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        android:gravity="center"/>
+        ></include>
+
     <LinearLayout
-         android:id="@+id/choose_country"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:orientation="horizontal"
-         android:gravity="center_vertical"
-         android:background="@android:color/transparent">
-
-        <ImageButton
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_location"
-            android:background="@android:color/transparent"/>
-
-        <CustomViews.CustomTextView
-             android:id="@+id/your_country"
-             android:textSize="18dp"
-             android:layout_width="wrap_content"
+             android:id="@+id/choose_country"
+             android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:textColor="@color/textColor1"
-             android:text="@string/choose_country"
-             android:background="@android:color/transparent"/>
+             android:orientation="horizontal"
+             android:gravity="center_vertical"
+             android:background="@android:color/transparent">
 
-        <CustomViews.CustomTextView
-            android:id="@+id/country_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:visibility="gone"
-            android:background="@android:color/transparent"
-            android:textColor="@android:color/black"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/numberinput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@android:color/transparent">
-        <EditText
-            android:id="@+id/insert_number"
-            android:hint="@string/enter_number"
-            android:textColorHint="@color/textColor1"
+            <ImageButton
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_location"
+                android:background="@android:color/transparent"/>
+
+            <CustomViews.CustomTextView
+                 android:id="@+id/your_country"
+                 android:textSize="18dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textColor="@color/textColor1"
+                 android:text="@string/choose_country"
+                 android:background="@android:color/transparent"/>
+
+            <CustomViews.CustomTextView
+                android:id="@+id/country_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:visibility="gone"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/numberinput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/textColor1"
-            android:background="@drawable/edittext_bottom_line"
-            android:textSize="28dp"
-            android:focusableInTouchMode="true"
-            android:inputType="phone"/>
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:background="@android:color/transparent">
+            <EditText
+                android:id="@+id/insert_number"
+                android:hint="@string/enter_number"
+                android:textColorHint="@color/textColor1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor1"
+                android:background="@drawable/edittext_bottom_line"
+                android:textSize="28dp"
+                android:longClickable="false"
+                android:singleLine="true"
+                android:focusableInTouchMode="true"
+                android:inputType="phone"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/sendVerifyCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="right|center_vertical"
-        android:gravity="right|center_vertical"
-        android:background="@android:color/transparent">
-        <CustomViews.CustomTextView
+        <LinearLayout
+            android:id="@+id/sendVerifyCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:textColor="@color/textColor1"
-            android:background="@android:color/transparent"
-            android:text="@string/send_sms" />
-        <ImageView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/sendSms"
-            android:background="@android:color/transparent"
-            android:src="@mipmap/send"/>
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:layout_gravity="right|center_vertical"
+            android:gravity="right|center_vertical"
+            android:background="@android:color/transparent">
+            <CustomViews.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textColor="@color/textColor1"
+                android:background="@android:color/transparent"
+                android:text="@string/send_sms" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/sendSms"
+                android:background="@android:color/transparent"
+                android:src="@mipmap/send"/>
+        </LinearLayout>
 </LinearLayout>
 

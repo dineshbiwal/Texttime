@@ -4,8 +4,6 @@
     android:background="@color/app_blue"
     android:layout_height="match_parent">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:id="@+id/bottomTabBar"
@@ -13,7 +11,6 @@
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -26,9 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/chatIcon"
-                android:layout_centerInParent="true"
-
-                />
+                android:layout_centerInParent="true" />
 
             <CustomViews.CustomTextViewBold
                 android:layout_width="wrap_content"
@@ -39,9 +34,7 @@
                 android:text="111"
                 android:textSize="10dp"
                 android:singleLine="true"
-                android:paddingRight="2dp"
-                />
-
+                android:paddingRight="2dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -55,9 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/groupIcon"
-                android:layout_centerInParent="true"
-
-                />
+                android:layout_centerInParent="true" />
 
             <CustomViews.CustomTextViewBold
                 android:layout_width="wrap_content"
@@ -68,9 +59,7 @@
                 android:text="111"
                 android:textSize="10dp"
                 android:singleLine="true"
-                android:paddingRight="2dp"
-                />
-
+                android:paddingRight="2dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -80,24 +69,19 @@
             android:layout_gravity="center_vertical"
             android:layout_height="match_parent">
 
-
            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/cameraPreview"
-                android:layout_centerInParent="true"
-                >
+                android:layout_centerInParent="true">
 
                 <CustomViews.CameraModule.CustomCameraView
                     android:id="@+id/customCameraView"
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     ></CustomViews.CameraModule.CustomCameraView>
-
             </RelativeLayout>
-
 
         </RelativeLayout>
 

@@ -73,7 +73,7 @@ public class CustomKeyboardLayout implements CurrentFocusInterface{
                 lCount = lCount + ((int) (pos / 3));
             }
         }
-        // System.out.println("Position is >>>"+pos+" lcount is >>>"+lCount);
+        System.out.println("Position is >>>"+pos+" lcount is >>>"+lCount);
 
         LinearLayout addLayout= (LinearLayout) customKeyboardLayout.getChildAt(lCount);
 
@@ -116,7 +116,7 @@ public class CustomKeyboardLayout implements CurrentFocusInterface{
         LinearLayout.LayoutParams lp1=new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT,1.0f);
         LinearLayout.LayoutParams lp2=new LinearLayout.LayoutParams(1, LinearLayout.LayoutParams.MATCH_PARENT);
 
-        if(resource>0){
+        if(resource > 0){
             ImageView iv=new ImageView(context);
             iv.setScaleType(ImageView.ScaleType.CENTER);
             iv.setImageResource(resource);
@@ -139,9 +139,10 @@ public class CustomKeyboardLayout implements CurrentFocusInterface{
                                 e.setSelection(e.getText().length());
                             }
                         }
-
                         else {
-                            ((EditText) v).setText("");
+                            ((EditText) v).setText(key.substring(0, key.length()-1));
+                            key = key.substring(0, key.length()-1);
+                            ((EditText) v).setSelection(((EditText) v).getText().length());
                         }
                     }
                 }
@@ -165,7 +166,8 @@ public class CustomKeyboardLayout implements CurrentFocusInterface{
                         //  int p = (int) view.getTag();
                         View v = currentFocus;
                         if (v instanceof EditText) {
-                            ((EditText) v).setText("" + 0);
+                            ((EditText) v).setText(key+0);
+                            key = key+0;
                             ((EditText) v).setSelection(((EditText) v).getText().length());
                         }
                     }
@@ -196,7 +198,6 @@ public class CustomKeyboardLayout implements CurrentFocusInterface{
 
         customKeyboardLayout.addView(r1);
         customKeyboardLayout.addView(lineSep2);
-
     }
 
     @Override

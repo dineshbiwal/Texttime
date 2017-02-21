@@ -2,6 +2,7 @@ package texttime.android.app.texttime.Registration;
 
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -29,8 +30,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import CustomViews.CustomTextViewBold;
-import CustomViews.CustomTextViewRegular;
 import CustomViews.VerticalSeekBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,10 +47,6 @@ import texttime.android.app.texttime.R;
 public class CountryList extends BaseActivity implements Comparator<Country>, View.OnTouchListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
     @BindView(R.id.country_picker_search)
     EditText countryPickerSearch;
-    @BindView(R.id.alphabate)
-    CustomTextViewRegular alphabate;
-    @BindView(R.id.list_country)
-    ListView listCountry;
     @BindView(R.id.seekBar1)
     VerticalSeekBar seekBar;
     @BindView(R.id.alphabaticLayout)
@@ -66,8 +61,10 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
     LinearLayout countryLst;
     @BindView(R.id.action)
     LinearLayout action;
-    @BindView(R.id.s_text)
-    LinearLayout sText;
+    @BindView(R.id.list_country)
+    ListView listCountry;
+    @BindView(R.id.countryMain)
+    LinearLayout countryMain;
 
     private CountryListAdapter adapter;
     private List<Country> cList, selectedCountriesList;
@@ -82,6 +79,12 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
         init(this);
         adjustUIcontant();
         setonClicklistener();
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (countryMain != null)
+                countryMain.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -93,18 +96,15 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
     public void init() {
         listCountry.setOnItemClickListener(this);
         listCountry.setOnScrollListener(this);
-
         Typeface font = dfunctions.getFontFamily(this);
         countryPickerSearch.setTypeface(font, Typeface.NORMAL);
         countryPickerSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before,
-                                      int count) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
@@ -124,20 +124,18 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
                     }
 
                     @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress,
-                                                  boolean fromUser) {
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                         int diff = 25 - progress;
                         if (diff < 0)
                             diff = diff * -1;
                         TextView tv = (TextView) alphabaticLayout.getChildAt(diff);
                         listCountry.setSelection(mapIndex.get(tv.getText().toString()));
-                        alphabate.setText(tv.getText().toString());
                     }
                 });
     }
 
     private void adjustUIcontant() {
-        cv.adjustLinearMargin(action, CommonViewUtility.TOP, 80);
+        cv.adjustLinearMargin(action, CommonViewUtility.TOP, 58);
         cv.adjustLinearMargin(action, CommonViewUtility.LEFT, 36);
         cv.adjustLinearSquare(cancel, 68);
         cv.adjustLinearMargin(searchIcon, CommonViewUtility.LEFT, 56);
@@ -145,9 +143,7 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
         cv.adjustRelativeHeight(seekBar, 1300);
         cv.adjustRelativeWidth(seekBar, 100);
         cv.adjustRelativeHeight(alphabaticLayout, 1300);
-        cv.adjustLinearMargin(sText, CommonViewUtility.LEFT, 26);
-        cv.adjustLinear(sText, 100, 100);
-        cv.adjustLinearMargin(countryLst, CommonViewUtility.TOP, 56);
+        cv.adjustLinearMargin(countryLst, CommonViewUtility.TOP, 62);
     }
 
     private void setonClicklistener() {
@@ -173,13 +169,6 @@ public class CountryList extends BaseActivity implements Comparator<Country>, Vi
 
     @Override
     public void onScrollStateChanged(AbsListView view, int i) {
-        int ic = listCountry.getFirstVisiblePosition();
-        TextView txt = (TextView) view.findViewById(R.id.country_name);
-        String indx = txt.getText().toString().substring(0, 1);
-        if (ic > 7)
-            alphabate.setText(indx);
-        else
-            alphabate.setText("#");
     }
 
     @Override

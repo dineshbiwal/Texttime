@@ -29,7 +29,7 @@ import texttime.android.app.texttime.R;
 /**
  * Created by TextTime Android Dev on 8/24/2016.
  */
-public class ChatFragment extends BaseFragment {
+public class ChatFragment extends BaseFragment implements  SelectionInterface{
 
 
     @BindView(R.id.typeofchat)
@@ -60,7 +60,7 @@ public class ChatFragment extends BaseFragment {
 
         fillData();
         chatList.setLayoutManager(new LinearLayoutManager(context));
-        chatList.addItemDecoration(new VerticalItemDecoration(cv.getHeight(56), false));
+       // chatList.addItemDecoration(new VerticalItemDecoration(cv.getHeight(56), false));
         ChatHistoryAdapter adapter = new ChatHistoryAdapter(list, context);
         chatList.setAdapter(adapter);
         adjustUIComponent();
@@ -119,5 +119,15 @@ public class ChatFragment extends BaseFragment {
         bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
         return byteArray;
+    }
+
+    @Override
+    public void activateSelectionMode() {
+
+    }
+
+    @Override
+    public void deactivateSelectionMode() {
+
     }
 }

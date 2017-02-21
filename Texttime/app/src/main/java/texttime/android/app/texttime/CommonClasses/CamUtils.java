@@ -156,7 +156,6 @@ public class CamUtils {
                 }
             }
         }
-
         return optimalSize;
     }
 
@@ -168,13 +167,8 @@ public class CamUtils {
         }
 
         else {
-           /* if(desiredPreviewWidth > CommonViewUtility.getInstance().getWidth(450))
                 previewSize=getOptimalPreviewSize(parameters.getSupportedPreviewSizes(),desiredPreviewWidth,desiredPreviewHeight);
-            else*/
-                previewSize=getOptimalPreviewSize(parameters.getSupportedPreviewSizes(),desiredPreviewWidth,desiredPreviewHeight);
-
-            setPictureSizeImage();
-
+                setPictureSizeImage();
         }
 
         parameters.setPreviewSize(previewSize.width,previewSize.height);

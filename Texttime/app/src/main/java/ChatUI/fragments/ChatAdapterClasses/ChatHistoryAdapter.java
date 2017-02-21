@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ChatUI.fragments.ChatDataModels.ChattingUserList;
+import ChatUI.fragments.SelectionInterface;
+import texttime.android.app.texttime.CommonClasses.AppDelegate;
 import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
 import texttime.android.app.texttime.R;
 
@@ -23,15 +25,20 @@ import texttime.android.app.texttime.R;
  * Created by DELL on 11/28/2016.
  */
 
-public class ChatHistoryAdapter extends RecyclerView.Adapter{
+public class ChatHistoryAdapter extends RecyclerView.Adapter implements SelectionInterface{
 
     ArrayList<ChattingUserList> chatHistoryList;
     Context context;
+
+    SelectionInterface selectionInterface;
+    boolean isSelection=false;
 
 
     public ChatHistoryAdapter(ArrayList<ChattingUserList> chatHistoryList, Context context) {
         this.chatHistoryList = chatHistoryList;
         this.context = context;
+        this.selectionInterface=this;
+        AppDelegate.getInstance().setUserSelectionCallback(this);
 
     }
 
@@ -45,8 +52,6 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final ChattingUserList model=chatHistoryList.get(position);
         final ChatListViewHolder viewHolder= (ChatListViewHolder) holder;
-
-
         CommonViewUtility cv=CommonViewUtility.getInstance();
         cv.adjustRelativeSquare(viewHolder.profileImage,180);
         cv.adjustRelativeSquare(viewHolder.unreadMessageLbl,55);
@@ -59,19 +64,12 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter{
         cv.adjustRelativeMargin(viewHolder.postedTimeLabel,CommonViewUtility.LEFT,28);
         cv.adjustLinearMargin(viewHolder.messageReceivedLayout,CommonViewUtility.TOP,20);
         cv.adjustRelativeSquare(viewHolder.receivedImageThumbnail,116);
+        viewHolder.userNameLabel.setTextColor(Color.parseColor("#505f67"));
 
-      //  viewHolder.userNameLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX,30.43f);
-      //  viewHolder.messageText.setTextSize(TypedValue.COMPLEX_UNIT_PX,23.33f);
-      //  viewHolder.postedTimeLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX,20.29f);
-          viewHolder.userNameLabel.setTextColor(Color.parseColor("#505f67"));
-
-        if(model.getUserStatus()){
+        if(model.getUserStatus())
             viewHolder.messageStatusImage.setImageResource(R.drawable.circle_blue_solid);
-        }
-
         else
             viewHolder.messageStatusImage.setImageResource(R.drawable.circle_blue_holo);
-
 
         viewHolder.messageText.setText(model.getLastMessage());
         viewHolder.profileImage.setUrl(model.getUserAvatar());
@@ -82,7 +80,6 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter{
             viewHolder.messageText.setVisibility(View.GONE);
             viewHolder.receivedImageThumbnail.setVisibility(View.VISIBLE);
             viewHolder.receivedImageThumbnail.setUrl(model.getBaseImage());
-
         }
 
         else {
@@ -90,52 +87,61 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter{
             viewHolder.receivedImageThumbnail.setVisibility(View.GONE);
         }
 
-        /*if(model.getLastMessageTime() != null)
-            viewHolder.postedTimeLabel.setText(CommonMethods.calculateTimeDiffernce(Long.parseLong(model.getLastMessageTime())));
-        if(model.getNewMessageCount()>0){
-            viewHolder.unreadMessageLbl.setText("" + model.getNewMessageCount());
-        }
-        else {
-            viewHolder.unreadMessageLbl.setVisibility(View.INVISIBLE);
-        }*/
-
-        /*if(!TextUtils.isEmpty(model.getMessageStatus())) {
-            switch (model.getMessageStatus()) {
-                case "not_send":
-                    viewHolder.messageStatusImage.setImageResource(R.mipmap.unsend);
-                    break;
-                case "send":
-                    viewHolder.messageStatusImage.setImageResource(R.mipmap.send);
-                    break;
-                case "deliver":
-                    viewHolder.messageStatusImage.setImageResource(R.mipmap.send_unread);
-                    break;
-                case "read":
-                    viewHolder.messageStatusImage.setImageResource(R.mipmap.send_read);
-                    break;
+        viewHolder.chatContainerRowLayout.setTag(model);
+        viewHolder.chatContainerRowLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if(!isSelection) {
+                    selectionInterface.activateSelectionMode();
+                    ChattingUserList modelClicked= (ChattingUserList) view.getTag();
+                    AppDelegate.getInstance().getSelectedUserList().add(modelClicked);
+                    view.setBackgroundColor(Color.parseColor("#1A000000"));
+                    return true;
+                }
+                return false;
             }
-        }*/
-/*        itemView.setOnClickListener(new View.OnClickListener() {
+        });
+
+        viewHolder.chatContainerRowLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyXMPP.getInstance(context).sendChatReqeuest(model.getDisplayName());
-                Bundle b=new Bundle();
-                b.putString("userName",model.getDisplayName());
-                b.putString("displayName",model.getDisplayName());
-                b.putString("jid", model.getJabberID());
-                b.putString("state", "chat");
-                Intent i=new Intent(context, ChatMainActivity.class);
-                i.putExtras(b);
-                context.startActivity(i);
+                if(isSelection){
+                    ChattingUserList modelClicked= (ChattingUserList) view.getTag();
+                    if(AppDelegate.getInstance().getSelectedUserList().contains(modelClicked)){
+                        AppDelegate.getInstance().getSelectedUserList().remove(modelClicked);
+                        view.setBackgroundColor(Color.parseColor("#ffffff"));
+                        view.setAlpha(1);
+                    }
+
+                    else {
+                        AppDelegate.getInstance().getSelectedUserList().add(modelClicked);
+                        view.setBackgroundColor(Color.parseColor("#1A000000"));
+                        //view.setAlpha(0.1f);
+                    }
+                }
             }
-        });*/
+        });
 
-
+        viewHolder.chatContainerRowLayout.setPadding(cv.getWidth(15),cv.getHeight(28),cv.getWidth(15),cv.getHeight(28));
 
     }
 
     @Override
     public int getItemCount() {
         return chatHistoryList.size();
+    }
+
+    @Override
+    public void activateSelectionMode() {
+        isSelection=true;
+        AppDelegate.getInstance().setChatSelection(true);
+        AppDelegate.getInstance().setSelectedUserList(new ArrayList<ChattingUserList>());
+    }
+
+    @Override
+    public void deactivateSelectionMode() {
+        AppDelegate.getInstance().setSelectedUserList(new ArrayList<ChattingUserList>());
+        isSelection=false;
+        notifyDataSetChanged();
     }
 }

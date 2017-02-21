@@ -1,43 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/chatContainerRowLayout"
 
     android:layout_height="wrap_content">
-
-
     <CustomViews.CustomImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/profileImage"
-        android:layout_centerVertical="true"
-        />
-
-
+        android:layout_centerVertical="true"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/chatMessageLayout"
         android:layout_toRightOf="@id/profileImage"
         android:orientation="vertical"
-        android:layout_centerVertical="true"
-
-        >
-
-
+        android:layout_centerVertical="true">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <CustomViews.CameraModule.CustomTextViewMedium
+            <CustomViews.CustomTextViewMedium
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/userNameLabel"
                 android:textSize="18dp"
                 android:textColor="#000000"
-
-                android:layout_centerVertical="true"
-
-                />
+                android:layout_centerVertical="true"/>
 
             <CustomViews.CustomTextViewLight
                 android:layout_width="wrap_content"
@@ -47,15 +35,12 @@
                 android:textColor="#000000"
                 android:alpha="0.25"
                 android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                />
+                android:layout_alignParentRight="true" />
         </RelativeLayout>
-
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-
             android:id="@+id/messageReceivedLayout"
             android:layout_height="wrap_content">
 
@@ -68,23 +53,19 @@
                 android:background="@drawable/unread_msg_back"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:textSize="11dp"
-                />
-
+                android:textSize="11dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/messageLayout"
-                android:layout_toLeftOf="@id/unreadMessageLbl"
-                >
+                android:layout_toLeftOf="@id/unreadMessageLbl">
 
             <ImageView
                 android:layout_width="16dp"
                 android:id="@+id/messageStatusImage"
                 android:layout_margin="5dp"
                 android:layout_height="16dp" />
-
 
             <CustomViews.CustomTextViewLight
                 android:layout_toRightOf="@id/messageStatusImage"
@@ -96,8 +77,7 @@
                 android:textSize="14dp"
                 android:textColor="#000000"
                 android:alpha="0.50"
-                android:layout_marginRight="5dp"
-                />
+                android:layout_marginRight="5dp" />
 
                 <CustomViews.CameraModule.CustomReceivedImageView
                     android:layout_width="wrap_content"
@@ -106,8 +86,6 @@
                     android:layout_height="wrap_content" />
 
             </RelativeLayout>
-
-
 
         </RelativeLayout>
 

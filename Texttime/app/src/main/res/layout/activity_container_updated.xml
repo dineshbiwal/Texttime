@@ -5,12 +5,12 @@
     android:background="@color/app_blue"
     android:layout_height="match_parent">
 
-    <View
+   <!-- <View
         android:layout_width="match_parent"
         android:layout_height="24dp"
         android:background="#000000"
         android:alpha="0.38"
-        ></View>
+        ></View>-->
 
     <include layout="@layout/toolbar_chat_list_updated"
         android:id="@+id/topBar"

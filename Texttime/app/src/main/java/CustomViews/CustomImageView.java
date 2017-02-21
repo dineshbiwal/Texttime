@@ -95,7 +95,7 @@ public class CustomImageView extends ImageView{
     public void setUrl(String url, int placeholder){
         this.url=url;
         this.setImageResource(placeholder);
-        if(! TextUtils.isEmpty(url)) {
+        if(!TextUtils.isEmpty(url)) {
             if (url.contains(".jpg") || url.contains(".png") || url.contains(".jpeg")
                     || url.contains(".JPG") || url.contains(".PNG") || url.contains(".JPEG")
                     ) {

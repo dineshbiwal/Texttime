@@ -1,57 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fitsSystemWindows="true"
+    android:id="@+id/verify_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg_gradient">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:orientation="vertical">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:background="#000000"
-            android:alpha="0.38"
-            ></View>
-        <!--<include layout="@layout/toolbar"
+        <include layout="@layout/toolbar"
             android:id="@+id/topBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="24dp"
-            ></include>-->
-        <RelativeLayout
-            android:id="@+id/verify_tool"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:src="@mipmap/ic_cancel"
-                android:background="@android:color/transparent"
-                android:id="@+id/tool_cancel" />
-            <CustomViews.CustomTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22dp"
-                android:textColor="@color/textColor"
-                android:background="@android:color/transparent"
-                android:text="@string/app"
-                android:id="@+id/toolBarText"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
-            <CustomViews.CustomTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:textColor="@color/textColor1"
-                android:text="Next"
-                android:background="@android:color/transparent"
-                android:id="@+id/rightAction"
-                android:layout_alignParentRight="true"/>
-        </RelativeLayout>
+            android:layout_alignParentTop="true"></include>
         <LinearLayout
             android:id="@+id/veriCode"
             android:layout_width="match_parent"
@@ -92,13 +55,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@android:color/transparent">
-            <EditText
+            <CustomViews.CustomEditText
                 android:id="@+id/insert_code"
                 android:hint="@string/digit_code"
                 android:textColorHint="@color/textColor1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textColor1"
+                android:maxLength="4"
+                android:longClickable="false"
                 android:background="@drawable/edittext_bottom_line"
                 android:textSize="28dp"
                 android:focusableInTouchMode="true"
@@ -126,20 +91,63 @@
                 android:src="@mipmap/send"/>
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-        <ProgressBar
-            android:id="@+id/verify_progress"
-            style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:indeterminate="false"
-            android:max="60"
-            android:progress="60"
-            android:progressDrawable="@drawable/progressbar"></ProgressBar>
+            android:layout_height="wrap_content">
+            <ProgressBar
+                android:id="@+id/verify_progress"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:indeterminate="false"
+                android:max="60"
+                android:progress="60"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_weight="1"
+                    android:background="#ffff00"
+                    android:visibility="invisible"
+                    android:id="@+id/firstLine"
+                    ></View>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_weight="1"
+                    android:background="#0000ff"
+                    android:visibility="invisible"
+                    android:id="@+id/secondLine"
+                    ></View>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_weight="1"
+                    android:background="#ff0000"
+                    android:visibility="invisible"
+                    android:id="@+id/thirdLine"
+                    ></View>
+            </LinearLayout>
+        </RelativeLayout>
+
         <!--<LinearLayout
             android:id="@+id/custom"
             android:layout_width="match_parent"

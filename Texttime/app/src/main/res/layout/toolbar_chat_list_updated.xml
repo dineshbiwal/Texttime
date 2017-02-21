@@ -8,76 +8,57 @@
     android:background="@color/app_blue"
     app:layout_scrollFlags="scroll|enterAlways"
     app:layout_collapseMode="pin">
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/settingsIcon1"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/settings_icon_new"
+            android:visibility="gone" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchIcon"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/ic_search_country"
+            android:layout_toRightOf="@id/settingsIcon1"/>
 
-
-<RelativeLayout
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-
-<ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/settingsIcon1"
-    android:layout_centerVertical="true"
-    android:background="@mipmap/settings_icon_new"
-    android:visibility="invisible"
-    />
-
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/searchIcon"
-        android:layout_centerVertical="true"
-        android:background="@mipmap/seach_new"
-        android:layout_toRightOf="@id/settingsIcon1"
-        />
-
-
-
-    <CustomViews.CameraModule.CustomTextViewMedium
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/chatlabel"
-        android:textColor="#000000"
-        android:includeFontPadding="false"
-        android:layout_centerVertical="true"
-        android:textSize="22dp"
-        android:text="Chat"
-        android:alpha="0.5"
-        android:layout_toRightOf="@id/searchIcon"
-        />
-
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/settingsIcon"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:background="@mipmap/settings_icon_new"
-
-        />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/createNewChatIcon"
-        android:layout_centerVertical="true"
-        android:background="@mipmap/compose_icon"
-       android:layout_alignParentRight="true"
-        android:visibility="gone"
-        />
-
-    <ImageView
-        android:layout_width="8dp"
-        android:layout_height="8dp"
-        android:id="@+id/onlinestatus"
-        android:background="@drawable/circle_green"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/chatlabel"
-        />
-
-</RelativeLayout>
-    </android.support.v7.widget.Toolbar>
+        <CustomViews.CustomTextViewMedium
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chatlabel"
+            android:textColor="#000000"
+            android:includeFontPadding="false"
+            android:layout_centerVertical="true"
+            android:textSize="22dp"
+            android:text="Chat"
+            android:alpha="0.5"
+            android:layout_toRightOf="@id/searchIcon" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/settingsIcon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/settings_icon_new" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/createNewChatIcon"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/compose_icon"
+            android:layout_alignParentRight="true"
+            android:visibility="gone" />
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:id="@+id/onlinestatus"
+            android:background="@drawable/circle_green"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/chatlabel" />
+    </RelativeLayout>
+</android.support.v7.widget.Toolbar>

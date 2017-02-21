@@ -11,6 +11,9 @@ import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -32,6 +35,7 @@ import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
 import texttime.android.app.texttime.CommonClasses.IncomingSms;
 import texttime.android.app.texttime.CommonClasses.PermissionCode;
 import texttime.android.app.texttime.ContainerActivity;
+import texttime.android.app.texttime.ContainerActivityBackup;
 import texttime.android.app.texttime.DataModels.RegisterUser;
 import texttime.android.app.texttime.GeneralClasses.BaseActivity;
 import texttime.android.app.texttime.R;
@@ -62,8 +66,8 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
     String phoneNumber = "";
     @BindView(R.id.numberinput)
     LinearLayout numberinput;
-    @BindView(R.id.toolText)
-    CustomTextView toolText;
+    @BindView(R.id.main)
+    LinearLayout main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,16 +75,22 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
         setContentView(R.layout.enter_number);
         ButterKnife.bind(this);
         init(this);
-        // setUpActionbar(getResources().getString(R.string.app), 0, null);
         checkIfLoggedIn();
         getCountryCode();
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         adjustUIcontent();
-        chooseCountry.setOnClickListener(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (main != null) {
+                main.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            }
+        }    chooseCountry.setOnClickListener(this);
         insertNumber.addTextChangedListener(this);
         sendVerifyCode.setOnClickListener(this);
         checkPermissions();
@@ -92,6 +102,28 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
             countryCode.setVisibility(View.VISIBLE);
             countryCode.setText(sd.getDialCode());
         }
+        insertNumber.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            public void onDestroyActionMode(ActionMode mode) {
+            }
+
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                return false;
+            }
+        });
+        insertNumber.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View v) {
+                return true;
+            }
+        });
     }
 
     //----Get country code from the telephony manager class--------------------------------
@@ -105,18 +137,18 @@ public class MainActivity extends BaseActivity implements WebTaskCallback, View.
     private void adjustUIcontent() {
         cv.adjustLinearHeight(location, 62);
         cv.adjustLinearWidth(location, 44);
-        cv.adjustLinearSquare(sendSms, 72);
-        cv.adjustLinearMargin(toolText, CommonViewUtility.TOP, 62);
-        cv.adjustLinearMargin(chooseCountry, CommonViewUtility.TOP, 380);
+        cv.adjustLinearSquare(sendSms, 67);
+        // cv.adjustLinearMargin(toolText, CommonViewUtility.TOP, 58);
+        cv.adjustLinearMargin(chooseCountry, CommonViewUtility.TOP, 370);
         cv.adjustLinearMargin(chooseCountry, CommonViewUtility.LEFT, 62);
-        cv.adjustLinearMargin(yourCountry, CommonViewUtility.LEFT, 21);
-        cv.adjustLinearMargin(numberinput, CommonViewUtility.TOP, 68);
-        cv.adjustLinearMargin(numberinput, CommonViewUtility.LEFT, 38);
-        cv.adjustLinearMargin(numberinput, CommonViewUtility.RIGHT, 34);
+        cv.adjustLinearMargin(yourCountry, CommonViewUtility.LEFT, 30);
+        cv.adjustLinearMargin(numberinput, CommonViewUtility.TOP, 74);
+        cv.adjustLinearMargin(numberinput, CommonViewUtility.LEFT, 46);
+        cv.adjustLinearMargin(numberinput, CommonViewUtility.RIGHT, 46);
         cv.adjustLinearMargin(countryCode, CommonViewUtility.RIGHT, 62);
-        cv.adjustLinearMargin(sendVerifyCode, CommonViewUtility.RIGHT, 44);
+        cv.adjustLinearMargin(sendVerifyCode, CommonViewUtility.RIGHT, 60);
         cv.adjustLinearMargin(sendSms, CommonViewUtility.LEFT, 14);
-        cv.adjustLinearMargin(sendVerifyCode, CommonViewUtility.TOP, 130);
+        cv.adjustLinearMargin(sendVerifyCode, CommonViewUtility.TOP, 148);
     }
 
     private void failShowMessage() {

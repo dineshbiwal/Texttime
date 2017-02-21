@@ -91,66 +91,15 @@ public class BaseActivityFull extends AppCompatActivity {
         }
     }
 
-    /*public void clearSavedData(){
-        Appdelegate.getInstance().setClickedImage(null);
-        Appdelegate.getInstance().setCroppedImage(null);
-    }
-
-
-    public  void setTopLoadingBar(SwipeRefreshLayout.OnRefreshListener listener) {
-        swipeContainer.setOnRefreshListener(listener);
-        swipeContainer.setEnabled(false);
-        swipeContainer.setColorSchemeResources(R.color.yellow, R.color.blue, R.color.red, R.color.button_blue);
-    }
-
-    public void setTopAnimation() {
-        swipeContainer.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeContainer.setRefreshing(true);
-            }
-        });
-    }
-
-    public void stopTopAnimation() {
-        swipeContainer.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeContainer.setRefreshing(false);
-            }
-        });
-    }*/
-
-    /*public void setUpActionbar(String title, int iconResource, View.OnClickListener listener) {
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setCustomView(R.layout.toolbar);
-        View view = getSupportActionBar().getCustomView();
-        CustomTextViewBold titleText = (CustomTextViewBold) view.findViewById(R.id.toolBarText);
-        ImageView toolbarIcon = (ImageView) view.findViewById(R.id.tool_barIcon);
-        titleText.setText(title);
-        if (iconResource == 0) {
-            toolbarIcon.setVisibility(View.GONE);
-        }
-
-        if (iconResource != 0)
-            toolbarIcon.setImageResource(iconResource);
-
-      //  toolbarIcon.setImageResource(iconResource);
-        toolbarIcon.setOnClickListener(listener);
-    }*/
-
-
     public TransitionDrawable createDrawable(int res1,int res2){
        TransitionDrawable drawable;
         Drawable cd[] = new Drawable[2];
         Resources res = getResources();
         cd[0] = res.getDrawable(res1);
         cd[1] = res.getDrawable(res2);
-
         drawable=new TransitionDrawable(cd);
         drawable.setCrossFadeEnabled(true);
-
         return drawable;
     }
+
 }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:id="@+id/userMain"
+    android:background="@drawable/main_bg_gradient">
+    <include layout="@layout/toolbar"
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        ></include>
+
+    <RelativeLayout
+        android:id="@+id/imageContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CustomViews.CameraModule.CustomCameraView
+            android:id="@+id/customCameraView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"/>
+
+        <CustomViews.CustomImageView
+            android:id="@+id/selectedImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+    <EditText
+        android:id="@+id/insert_username"
+        android:hint="@string/create_user"
+        android:textColorHint="@color/textColor1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor1"
+        android:singleLine="true"
+        android:longClickable="false"
+        android:background="@drawable/edittext_bottom_line"
+        android:textSize="28dp"
+        android:focusableInTouchMode="true" />
+    <CustomViews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:background="@drawable/edittext_bottom_line"
+        android:onClick="alreadyProfile"
+        android:id="@+id/alreadyProfile"
+        android:text="@string/already_profile"
+        android:textSize="18dp"
+        android:textColor="@color/textColor1" />
+</LinearLayout>
