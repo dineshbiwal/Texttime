@@ -232,6 +232,7 @@ public class ContainerActivity extends BaseActivityFull {
 
         cv.adjustRelativeMargin(searchIcon, CommonViewUtility.LEFT, 120);
         cv.adjustRelativeMargin(searchIcon, CommonViewUtility.RIGHT, 40);
+        cv.adjustRelative(searchIcon, 51, 54);
         cv.adjustRelativeMargin(headingLable, CommonViewUtility.RIGHT, 60);
         cv.adjustLinearMargin(icon1, CommonViewUtility.RIGHT, 60);
       //  cv.adjustLinearSquare(icon1, 67);
