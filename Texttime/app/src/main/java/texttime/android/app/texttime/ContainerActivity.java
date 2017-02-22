@@ -125,6 +125,7 @@ public class ContainerActivity extends BaseActivityFull {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         fab.setVisibility(View.GONE);
         setonclicklistener();
+        resetTransition(broadcastDrawable);
     }
 
 
@@ -157,11 +158,8 @@ public class ContainerActivity extends BaseActivityFull {
         chatDrawable.resetTransition();
         groupDrawable.resetTransition();
         profileDrawable.resetTransition();
-
         broadcastDrawable.resetTransition();
-
         drawable.startTransition(400);
-
     }
 
 
@@ -236,13 +234,13 @@ public class ContainerActivity extends BaseActivityFull {
         cv.adjustRelativeMargin(searchIcon, CommonViewUtility.RIGHT, 40);
         cv.adjustRelativeMargin(headingLable, CommonViewUtility.RIGHT, 60);
         cv.adjustLinearMargin(icon1, CommonViewUtility.RIGHT, 60);
-        cv.adjustLinearSquare(icon1, 67);
+      //  cv.adjustLinearSquare(icon1, 67);
         cv.adjustLinearMargin(icon2, CommonViewUtility.RIGHT, 60);
-        cv.adjustLinearSquare(icon2, 67);
+      //  cv.adjustLinearSquare(icon2, 67);
         cv.adjustLinearMargin(icon3, CommonViewUtility.RIGHT, 60);
-        cv.adjustLinear(icon3, 85, 72);
+      //  cv.adjustLinear(icon3, 85, 72);
         cv.adjustLinearMargin(icon4, CommonViewUtility.RIGHT, 60);
-        cv.adjustLinear(icon4, 57, 72);
+      //  cv.adjustLinear(icon4, 57, 72);
         icon1.setVisibility(View.VISIBLE);
         icon2.setVisibility(View.VISIBLE);
         icon3.setVisibility(View.VISIBLE);

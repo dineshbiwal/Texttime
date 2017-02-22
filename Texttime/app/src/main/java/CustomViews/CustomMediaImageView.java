@@ -61,10 +61,10 @@ public class CustomMediaImageView extends ImageView {
     public void setUrl(String url){
         this.url=url;
         cache=new InternalCacheDiskCacheFactory(context).build();
-        /*if(cache.get(new StringSignature(url))!=null){
+        if(cache.get(new StringSignature(url))!=null){
             Glide.with(context).load(cache.get(new StringSignature(url))).into(this);
         }
-        else*/
+        else
         {
             //this.setImageResource(R.mipmap.logo_placeholder);
             if (url.contains(".jpg") || url.contains(".png") || url.contains(".jpeg")
@@ -172,7 +172,7 @@ public class CustomMediaImageView extends ImageView {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void setDimesions(Bitmap bitmap,boolean store){
-       
+
         bitmap=Bitmap.createScaledBitmap(bitmap, width, height, false);
         Bitmap mask=createMaskBitmap(width, height);
         final Bitmap result = Bitmap.createBitmap(mask.getWidth(), mask.getHeight(), Bitmap.Config.ARGB_8888);

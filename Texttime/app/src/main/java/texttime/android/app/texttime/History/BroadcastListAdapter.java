@@ -1,6 +1,7 @@
 package texttime.android.app.texttime.History;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -47,6 +48,8 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         history.userName.setText(historyList.get(position).getUser_display_name());
         history.postedTime.setText(historyList.get(position).getPostedTimeAgo());
         history.likeCount.setText(CommonMethods.convertIntoKillo(historyList.get(position).getLikeCount()));
+        history.userName.setTextColor(Color.parseColor("#505f67"));
+        history.sharePersonName.setTextColor(Color.parseColor("#506068"));
         if(historyList.get(position).isLike())
             history.likeHistory.setImageResource(R.mipmap.liked_home_page);
         if(!TextUtils.isEmpty(historyList.get(position).getLocation_address())){
@@ -132,7 +135,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         cv.adjustLinearMargin(holder.history, CommonViewUtility.TOP, 35);
         cv.adjustLinearMargin(holder.historyLayout, CommonViewUtility.LEFT, 10);
         cv.adjustRelativeMargin(holder.showHistory, CommonViewUtility.RIGHT, 46);
-        cv.adjustRelative(holder.showHistory, 52, 33);
+        cv.adjustRelative(holder.showHistory, 35, 22);
         cv.adjustRelativeMargin(holder.postedTime, CommonViewUtility.RIGHT, 20);
         cv.adjustRelativeMargin(holder.postedTime, CommonViewUtility.LEFT, 40);
         cv.adjustLinear(holder.locationIcon, 30, 43);
@@ -142,7 +145,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         cv.adjustLinearMargin(holder.sharePersonName, CommonViewUtility.LEFT, 21);
         cv.adjustLinearMargin(holder.sharePostedTime, CommonViewUtility.LEFT, 21);
         cv.adjustLinearMargin(holder.shareHistory, CommonViewUtility.LEFT, 21);
-        cv.adjustLinear(holder.shareHistory, 52, 62);
+       // cv.adjustLinear(holder.shareHistory, 52, 62);
         cv.adjustLinearMargin(holder.shareCount, CommonViewUtility.LEFT, 18);
         cv.adjustLinearMargin(holder.medialayout, CommonViewUtility.TOP, 31);
         cv.adjustLinearMargin(holder.medialayout, CommonViewUtility.RIGHT, 75);
@@ -150,7 +153,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         cv.adjustRelative(holder.mediaPlay, 51, 61);
         cv.adjustLinearMargin(holder.features, CommonViewUtility.TOP, 46);
         cv.adjustLinearMargin(holder.features, CommonViewUtility.RIGHT, 75);
-        cv.adjustLinearMargin(holder.commentHistory, CommonViewUtility.LEFT, 60);
+        cv.adjustLinearMargin(holder.commentHistory, CommonViewUtility.LEFT, 90);
         cv.adjustLinear(holder.commentHistory, 56, 50);
         cv.adjustLinearMargin(holder.commentCount, CommonViewUtility.LEFT, 18);
         cv.adjustLinearMargin(holder.goCommentHistory, CommonViewUtility.LEFT, 6);
