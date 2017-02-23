@@ -69,8 +69,8 @@ public class BroadcastFragment extends BaseFragment {
         model2.setPostedTimeAgo("3 Days");
         model2.setLike(false);
         model2.setLikeCount(6200);
-        model2.setMedia_type("Image");
-        model2.setMedia("http://xndev.com/wp-content/uploads/2012/03/writing_600_300.jpg");
+        model2.setMedia_type("Text");
+        model2.setMedia("I got a new job, and everything changed.  What did you do to change things?\n"+"Oh well, I'm sure things will be different soon.");
         model2.setCommentCount(344);
         model2.setShare_user_profile_url("http://10ad.itocd.net/www/images/girl/1848801-1849000/2a10e542-628c-44b8-809b-0ed204d7a0a6.jpg");
         model2.setShare_user_display_name("Gabriel Paris");
@@ -85,11 +85,9 @@ public class BroadcastFragment extends BaseFragment {
         model3.setLike(true);
         model3.setLikeCount(9630);
         model3.setMedia_type("Text");
-        model3.setMedia("I got a new job, and everything changed. What did you do to change things?\n" +
-                "\n" +
-                "Oh well, I'm sure things will be different soon. I know things will change for the better when I get married! Will things change for you soon? If so, how will they change?\n" +
-                "\n" +
-                "Oh, look at the time!");
+        model3.setMedia("I got a new job, and everything changed. What did you do to change things?"+
+                " Oh well, I'm sure things will be different soon. I know things will change for the better when I get married! Will things change for you soon? If so, how will they change?"+
+                " Oh, look at the time!");
         model3.setCommentCount(4220);
         model3.setShare_user_display_name("Arun Sharma");
         model3.setShare_postedtime_ago("5 Days");

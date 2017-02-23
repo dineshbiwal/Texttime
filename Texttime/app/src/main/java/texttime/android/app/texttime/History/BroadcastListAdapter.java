@@ -1,6 +1,7 @@
 package texttime.android.app.texttime.History;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -12,11 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import java.util.List;
+import java.util.Objects;
 
 import CustomViews.CustomTextView;
+import texttime.android.app.texttime.CommonClasses.AppDelegate;
 import texttime.android.app.texttime.CommonClasses.CommonMethods;
 import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
 import texttime.android.app.texttime.DataModels.BroadcastHistoryModel;
+import texttime.android.app.texttime.LikeComment.CommentList;
 import texttime.android.app.texttime.R;
 
 /**
@@ -72,9 +76,10 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
             case LOCATION:
             case TEXT: String message = historyList.get(position).getMedia();
                 history.textMessage.setVisibility(View.VISIBLE);
-                if(message.length() > 140)
+                history.textMessage.setMaxLines(3);
+                if(message.length() > 120)
                 {
-                    history.textMessage.setText(message.substring(0, 140));
+                    history.textMessage.setText(message);
                     history.readMore.setVisibility(View.VISIBLE);
                 }
                 else
@@ -102,6 +107,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         holder.readMore.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                holder.textMessage.setMaxLines(1000);
                 holder.textMessage.setText(historyList.get(position).getMedia());
                 holder.readMore.setVisibility(View.GONE);
             }
@@ -120,6 +126,15 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
                     holder.postView.setVisibility(View.VISIBLE);
                     hidePost = true;
                 }
+            }
+        });
+
+        holder.leaveComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppDelegate.getInstance().setBroadcastModel(historyList.get(position));
+                Intent intent = new Intent(context, CommentList.class);
+                context.startActivity(intent);
             }
         });
     }
