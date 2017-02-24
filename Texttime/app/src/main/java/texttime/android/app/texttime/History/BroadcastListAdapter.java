@@ -2,6 +2,7 @@ package texttime.android.app.texttime.History;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.text.Html;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import CustomViews.CustomTextView;
 import texttime.android.app.texttime.CommonClasses.AppDelegate;
 import texttime.android.app.texttime.CommonClasses.CommonMethods;
 import texttime.android.app.texttime.CommonClasses.CommonViewUtility;
+import texttime.android.app.texttime.CommonClasses.DataFunctions;
 import texttime.android.app.texttime.DataModels.BroadcastHistoryModel;
 import texttime.android.app.texttime.LikeComment.CommentList;
 import texttime.android.app.texttime.R;
@@ -52,7 +55,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         history.userName.setText(historyList.get(position).getUser_display_name());
         history.postedTime.setText(historyList.get(position).getPostedTimeAgo());
         history.likeCount.setText(CommonMethods.convertIntoKillo(historyList.get(position).getLikeCount()));
-        history.userName.setTextColor(Color.parseColor("#505f67"));
+        history.userName.setTextColor(Color.parseColor("#505f66"));
         history.sharePersonName.setTextColor(Color.parseColor("#506068"));
         if(historyList.get(position).isLike())
             history.likeHistory.setImageResource(R.mipmap.liked_home_page);
@@ -77,6 +80,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
             case TEXT: String message = historyList.get(position).getMedia();
                 history.textMessage.setVisibility(View.VISIBLE);
                 history.textMessage.setMaxLines(3);
+                history.medialayout.setBackgroundResource(R.drawable.rounded_rectangle);
                 if(message.length() > 120)
                 {
                     history.textMessage.setText(message);
@@ -153,6 +157,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         cv.adjustRelative(holder.showHistory, 35, 22);
         cv.adjustRelativeMargin(holder.postedTime, CommonViewUtility.RIGHT, 20);
         cv.adjustRelativeMargin(holder.postedTime, CommonViewUtility.LEFT, 40);
+        cv.adjustLinearMargin(holder.locationInfo, CommonViewUtility.TOP, 15);
         cv.adjustLinear(holder.locationIcon, 30, 43);
         cv.adjustLinearMargin(holder.locationAddress, CommonViewUtility.LEFT, 22);
         cv.adjustLinearMargin(holder.sharedSection, CommonViewUtility.TOP, 31);
@@ -175,5 +180,19 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         cv.adjustLinear(holder.goCommentHistory, 18, 24);
         cv.adjustLinearMargin(holder.historyLayout, CommonViewUtility.BOTTOM, 40);
         //cv.adjustRelativeMargin(holder.readMore, CommonViewUtility.TOP, 20);
+    }
+
+    private void setFontSize(HistoryViewholder holder){
+        holder.userName.setTextSize(DataFunctions.convertPixelsToDp(50));
+        holder.postedTime.setTextSize(DataFunctions.convertPixelsToDp(18));
+        holder.locationAddress.setTextSize(DataFunctions.convertPixelsToDp(18));
+        holder.sharePersonName.setTextSize(DataFunctions.convertPixelsToDp(40));
+        holder.sharePostedTime.setTextSize(DataFunctions.convertPixelsToDp(18));
+        holder.shareCount.setTextSize(DataFunctions.convertPixelsToDp(20));
+        holder.likeCount.setTextSize(DataFunctions.convertPixelsToDp(20));
+        holder.readMore.setTextSize(DataFunctions.convertPixelsToDp(25));
+        holder.leaveComment.setTextSize(DataFunctions.convertPixelsToDp(20));
+        holder.commentCount.setTextSize(DataFunctions.convertPixelsToDp(20));
+        holder.textMessage.setTextSize(DataFunctions.convertPixelsToDp(25));
     }
 }

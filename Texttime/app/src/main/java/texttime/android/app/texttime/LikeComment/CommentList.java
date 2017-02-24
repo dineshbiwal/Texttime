@@ -110,7 +110,7 @@ public class CommentList extends BaseActivity {
         cv.adjustLinearMargin(commentUserProfile, CommonViewUtility.RIGHT, 27);
         cv.adjustLinearMargin(commentText, CommonViewUtility.LEFT, 12);
         cv.adjustLinearMargin(commentText, CommonViewUtility.TOP, 16);
-        cv.adjustRelativeMargin(commentList, CommonViewUtility.TOP, 96);
+        cv.adjustLinearMargin(commentList, CommonViewUtility.TOP, 96);
         cv.adjustFrameHeight(commentArea, 130);
         cv.adjustLinearSquare(commentDone, 72);
         cv.adjustLinearMargin(sendComment, CommonViewUtility.LEFT, 81);

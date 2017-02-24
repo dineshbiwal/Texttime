@@ -29,19 +29,19 @@ public class HistoryViewholder extends RecyclerView.ViewHolder{
     public ImageView locationIcon;
     public CustomTextViewLight locationAddress;
     public LinearLayout locationInfo;
-    public CustomTextView postedTime;
+    public CustomTextViewLight postedTime;
     public CustomImageView sharePersonImg;
     public CustomTextViewLight sharePostedTime;
     public CustomTextViewMedium sharePersonName;
     public ImageView shareHistory;
-    public CustomTextView shareCount;
+    public CustomTextViewLight shareCount;
     public LinearLayout sharedSection;
     public CustomTextViewRegular textMessage;
     public CustomTextView readMore;
     public RelativeLayout medialayout;
     public CustomTextView leaveComment;
     public ImageView commentHistory;
-    public CustomTextView commentCount;
+    public CustomTextViewLight commentCount;
     public ImageView goCommentHistory;
     public LinearLayout features;
     public LinearLayout historyLayout;
@@ -56,7 +56,7 @@ public class HistoryViewholder extends RecyclerView.ViewHolder{
         locationInfo = (LinearLayout) itemView.findViewById(R.id.locationInfo);
         sharePersonImg = (CustomImageView) itemView.findViewById(R.id.share_person_img);
         likeCount = (CustomTextView) itemView.findViewById(R.id.like_count);
-        postedTime = (CustomTextView) itemView.findViewById(R.id.postedTime);
+        postedTime = (CustomTextViewLight) itemView.findViewById(R.id.postedTime);
         sharePostedTime = (CustomTextViewLight) itemView.findViewById(R.id.sharePostedTime);
         userName = (CustomTextViewMedium) itemView.findViewById(R.id.userName);
         likeHistory = (ImageView) itemView.findViewById(R.id.like_history);
@@ -70,10 +70,10 @@ public class HistoryViewholder extends RecyclerView.ViewHolder{
         locationAddress = (CustomTextViewLight) itemView.findViewById(R.id.location_address);
         sharePersonName = (CustomTextViewMedium) itemView.findViewById(R.id.share_person_name);
 
-        shareCount = (CustomTextView) itemView.findViewById(R.id.share_count);
+        shareCount = (CustomTextViewLight) itemView.findViewById(R.id.share_count);
         textMessage = (CustomTextViewRegular) itemView.findViewById(R.id.textMessage);
         leaveComment = (CustomTextView) itemView.findViewById(R.id.leave_comment);
-        commentCount = (CustomTextView) itemView.findViewById(R.id.comment_count);
+        commentCount = (CustomTextViewLight) itemView.findViewById(R.id.comment_count);
         readMore = (CustomTextView) itemView.findViewById(R.id.read_more);
 
         sharedSection = (LinearLayout) itemView.findViewById(R.id.shared_section);

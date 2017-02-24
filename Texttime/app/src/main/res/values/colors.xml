@@ -13,4 +13,7 @@
     <color name="app_blue">#00BBD3</color>
     <color name="red">#ff0000</color>
     <color name="text_color">#0FBFD6</color>
+    <color name="heading_color">#505f66</color>
+    <color name="heading_second">#506068</color>
+    <color name="back_color">#F0F4F7</color>
 </resources>
