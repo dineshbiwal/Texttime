@@ -26,6 +26,15 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             />
+
+
+        <include layout="@layout/toolbar_chat_options"
+            android:id="@+id/topBarChatOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+
     </RelativeLayout>
 
 
@@ -52,5 +61,24 @@
         app:backgroundTint="@color/app_blue"
         android:layout_alignParentRight="true"
         android:src="@mipmap/compose_icon" />
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toplayouts"
+        android:background="@drawable/trans_white"
+        android:id="@+id/blockBackClickImage"
+        android:visibility="gone"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/app_blue"
+        android:id="@+id/slidinganimationMenu"
+        android:layout_alignParentBottom="true"
+        >
+
+    </RelativeLayout>
 
 </RelativeLayout>

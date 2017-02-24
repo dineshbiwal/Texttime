@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 
 import ChatUI.fragments.ChatDataModels.ChattingUserList;
+import ChatUI.fragments.ChatOptionsInterface;
 import ChatUI.fragments.SelectionInterface;
 import texttime.android.app.texttime.WebOperations.ApiClient;
 import texttime.android.app.texttime.callbacks.OTPRecievedCallback;
@@ -27,6 +28,15 @@ public class AppDelegate {
     boolean isChatSelection=false;
     ArrayList<ChattingUserList> selectedUserList = new ArrayList<>();
     SelectionInterface userSelectionCallback;
+    ChatOptionsInterface chatOptionsInterface;
+
+    public ChatOptionsInterface getChatOptionsInterface() {
+        return chatOptionsInterface;
+    }
+
+    public void setChatOptionsInterface(ChatOptionsInterface chatOptionsInterface) {
+        this.chatOptionsInterface = chatOptionsInterface;
+    }
 
     public SelectionInterface getUserSelectionCallback() {
         return userSelectionCallback;

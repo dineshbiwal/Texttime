@@ -16,6 +16,15 @@ public class ChattingUserList {
     byte[] baseImage;
     int newMessageCount; //number Of New Message of user
     String lastMessageTime;
+    boolean isSelected;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 
     public byte[] getBaseImage() {
         return baseImage;
