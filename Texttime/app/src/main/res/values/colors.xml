@@ -15,5 +15,8 @@
     <color name="text_color">#0FBFD6</color>
     <color name="heading_color">#505f66</color>
     <color name="heading_second">#506068</color>
-    <color name="back_color">#F0F4F7</color>
+    <color name="back_color">#ebf0f4f7</color>
+    <color name="bg_color">#ebf9f9f9</color>
+    <color name="audio_progress_bg">#00BBD3</color>
+    <color name="audio_progress_front">#506068</color>
 </resources>

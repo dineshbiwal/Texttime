@@ -61,6 +61,7 @@ public class BroadcastHistoryModel {
     public void setMedia_type(String media_type) {
         switch (media_type){
             case "Text"  : this.type = MediaType.TEXT; break;
+            case "Audio" : this.type = MediaType.AUDIO; break;
             case "Image" : this.type = MediaType.IMAGE; break;
             case "Video" : this.type = MediaType.VIDEO; break;
             case "PDF"   : this.type = MediaType.PDF; break;

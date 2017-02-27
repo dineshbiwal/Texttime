@@ -16,7 +16,7 @@
             android:id="@+id/searchIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/search_white"
+            android:src="@mipmap/search_ic"
             android:layout_gravity="center_vertical"
             android:layout_centerVertical="true"
             android:background="@android:color/transparent" />
@@ -27,7 +27,7 @@
             android:textColor="#FFFFFF"
             android:includeFontPadding="false"
             android:layout_centerVertical="true"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:text="History"
             android:layout_toRightOf="@id/searchIcon" />
         <LinearLayout
@@ -41,14 +41,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/icon4"
                 android:visibility="visible"
-                android:src="@mipmap/you_follow_white"
+                android:src="@mipmap/follow_u_history"
                 android:layout_centerVertical="true" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/icon3"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/me_follow_disable"
+                android:src="@mipmap/follow_me_history"
                 android:visibility="visible" />
             <ImageView
                 android:layout_width="wrap_content"
@@ -56,14 +56,14 @@
                 android:id="@+id/icon2"
                 android:visibility="visible"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/world_disable2" />
+                android:src="@mipmap/glob_history" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/icon1"
                 android:visibility="visible"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/notification_ic" />
+                android:src="@mipmap/notify_history" />
         </LinearLayout>
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

@@ -1,0 +1,70 @@
+[
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_play.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\btn_play.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\list_selector.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\list_selector.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_playlist.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\btn_playlist.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\adele.jpg",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\adele.jpg"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_next.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\btn_next.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\gradient_bg.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\gradient_bg.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_pause.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\btn_pause.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_backward.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\btn_backward.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_repeat.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\btn_repeat.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_forward.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\btn_forward.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_shuffle.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\btn_shuffle.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\seekbar_progress_bg.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\seekbar_progress_bg.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\gradient_bg_hover.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\gradient_bg_hover.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_repeat_focused.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\btn_repeat_focused.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_previous.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\btn_previous.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_shuffle_focused.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\btn_shuffle_focused.xml"
+    },
+    {
+        "merged": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\seekbar_progress.xml",
+        "source": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\drawable-hdpi\\seekbar_progress.xml"
+    }
+]

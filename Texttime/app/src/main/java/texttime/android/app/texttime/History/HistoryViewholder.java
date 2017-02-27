@@ -1,11 +1,11 @@
 package texttime.android.app.texttime.History;
 
-import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 
 import CustomViews.CustomImageView;
 import CustomViews.CustomMediaImageView;
@@ -22,26 +22,26 @@ import texttime.android.app.texttime.R;
 public class HistoryViewholder extends RecyclerView.ViewHolder{
     public CustomImageView profileImage;
     public ImageView likeHistory;
-    public CustomTextView likeCount;
+    public CustomTextViewLight likeCount;
     public CustomTextViewMedium userName;
     public ImageView showHistory;
     public RelativeLayout history;
     public ImageView locationIcon;
-    public CustomTextViewLight locationAddress;
+    public CustomTextViewRegular locationAddress;
     public LinearLayout locationInfo;
-    public CustomTextViewLight postedTime;
+    public CustomTextViewRegular postedTime;
     public CustomImageView sharePersonImg;
-    public CustomTextViewLight sharePostedTime;
+    public CustomTextViewRegular sharePostedTime;
     public CustomTextViewMedium sharePersonName;
     public ImageView shareHistory;
-    public CustomTextViewLight shareCount;
+    public CustomTextViewRegular shareCount;
     public LinearLayout sharedSection;
     public CustomTextViewRegular textMessage;
     public CustomTextView readMore;
     public RelativeLayout medialayout;
-    public CustomTextView leaveComment;
+    public CustomTextViewLight leaveComment;
     public ImageView commentHistory;
-    public CustomTextViewLight commentCount;
+    public CustomTextViewRegular commentCount;
     public ImageView goCommentHistory;
     public LinearLayout features;
     public LinearLayout historyLayout;
@@ -49,15 +49,20 @@ public class HistoryViewholder extends RecyclerView.ViewHolder{
     public CustomMediaImageView mediaImage;
     public ImageView mediaPlay;
     public LinearLayout postView;
+    public LinearLayout commentSection;
+    public RelativeLayout audioLayout;
+    public ImageView audioPlay;
+    public SeekBar songProgressBar;
+    public CustomTextViewMedium audioTimer;
 
     public HistoryViewholder(View itemView) {
         super(itemView);
         profileImage = (CustomImageView) itemView.findViewById(R.id.profileImage);
         locationInfo = (LinearLayout) itemView.findViewById(R.id.locationInfo);
         sharePersonImg = (CustomImageView) itemView.findViewById(R.id.share_person_img);
-        likeCount = (CustomTextView) itemView.findViewById(R.id.like_count);
-        postedTime = (CustomTextViewLight) itemView.findViewById(R.id.postedTime);
-        sharePostedTime = (CustomTextViewLight) itemView.findViewById(R.id.sharePostedTime);
+        likeCount = (CustomTextViewLight) itemView.findViewById(R.id.like_count);
+        postedTime = (CustomTextViewRegular) itemView.findViewById(R.id.postedTime);
+        sharePostedTime = (CustomTextViewRegular) itemView.findViewById(R.id.sharePostedTime);
         userName = (CustomTextViewMedium) itemView.findViewById(R.id.userName);
         likeHistory = (ImageView) itemView.findViewById(R.id.like_history);
         showHistory = (ImageView) itemView.findViewById(R.id.show_history);
@@ -67,13 +72,13 @@ public class HistoryViewholder extends RecyclerView.ViewHolder{
         goCommentHistory = (ImageView) itemView.findViewById(R.id.go_comment_history);
         showHistory = (ImageView) itemView.findViewById(R.id.show_history);
 
-        locationAddress = (CustomTextViewLight) itemView.findViewById(R.id.location_address);
+        locationAddress = (CustomTextViewRegular) itemView.findViewById(R.id.location_address);
         sharePersonName = (CustomTextViewMedium) itemView.findViewById(R.id.share_person_name);
 
-        shareCount = (CustomTextViewLight) itemView.findViewById(R.id.share_count);
+        shareCount = (CustomTextViewRegular) itemView.findViewById(R.id.share_count);
         textMessage = (CustomTextViewRegular) itemView.findViewById(R.id.textMessage);
-        leaveComment = (CustomTextView) itemView.findViewById(R.id.leave_comment);
-        commentCount = (CustomTextViewLight) itemView.findViewById(R.id.comment_count);
+        leaveComment = (CustomTextViewLight) itemView.findViewById(R.id.leave_comment);
+        commentCount = (CustomTextViewRegular) itemView.findViewById(R.id.comment_count);
         readMore = (CustomTextView) itemView.findViewById(R.id.read_more);
 
         sharedSection = (LinearLayout) itemView.findViewById(R.id.shared_section);
@@ -85,5 +90,11 @@ public class HistoryViewholder extends RecyclerView.ViewHolder{
         mediaImage = (CustomMediaImageView) itemView.findViewById(R.id.media_image);
         mainBroadcast = (LinearLayout) itemView.findViewById(R.id.main_broadcast);
         postView = (LinearLayout) itemView.findViewById(R.id.post_view);
+        commentSection = (LinearLayout) itemView.findViewById(R.id.comment_section);
+
+        audioLayout = (RelativeLayout) itemView.findViewById(R.id.audio_layout);
+        audioPlay = (ImageView) itemView.findViewById(R.id.audio_play);
+        songProgressBar = (SeekBar) itemView.findViewById(R.id.songProgressBar);
+        audioTimer = (CustomTextViewMedium) itemView.findViewById(R.id.audio_timer);
     }
 }

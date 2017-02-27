@@ -18,11 +18,16 @@ import java.util.regex.Pattern;
 
 public class DataFunctions {
 
-	public static float convertPixelsToDp(int px){
+	public static float convertPixelsToDp(Context ctx, int px){
 		/*DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
 		float dp = px / (metrics.densityDpi / 160f);
 		return Math.round(dp);*/
-		return Math.round(px/(Resources.getSystem().getDisplayMetrics().xdpi/DisplayMetrics.DENSITY_DEFAULT));
+		//float d = (float) (px * 1.3);
+		Resources r = ctx.getResources();
+		int  dps = Math.round(px/(r.getDisplayMetrics().densityDpi/240f));
+		return dps;
+
+		//return Math.round(d/(Resources.getSystem().getDisplayMetrics().ydpi/DisplayMetrics.DENSITY_DEFAULT));
 	}
 
 	 public boolean isEmailValid(String email) {

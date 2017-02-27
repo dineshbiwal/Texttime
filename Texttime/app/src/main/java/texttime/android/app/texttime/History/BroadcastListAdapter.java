@@ -35,6 +35,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
     List<BroadcastHistoryModel> historyList;
     Context context;
     boolean hidePost = true;
+    CommonViewUtility cv=CommonViewUtility.getInstance();
 
     public BroadcastListAdapter(Context context, List<BroadcastHistoryModel> model) {
         this.context = context;
@@ -51,6 +52,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         HistoryViewholder history = (HistoryViewholder) holder;
         setUIComponent(history);
+        setFontSize(history);
         history.profileImage.setUrl(historyList.get(position).getProfile_image_url(), R.mipmap.placeholder);
         history.userName.setText(historyList.get(position).getUser_display_name());
         history.postedTime.setText(historyList.get(position).getPostedTimeAgo());
@@ -74,13 +76,11 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         switch (historyList.get(position).getMedia_type()){
             case DOCUMENT:
             case PDF:
-            case AUDIO:
             case CONTACT:
-            case LOCATION:
             case TEXT: String message = historyList.get(position).getMedia();
                 history.textMessage.setVisibility(View.VISIBLE);
                 history.textMessage.setMaxLines(3);
-                history.medialayout.setBackgroundResource(R.drawable.rounded_rectangle);
+                history.textMessage.setBackgroundResource(R.drawable.rounded_rectangle);
                 if(message.length() > 120)
                 {
                     history.textMessage.setText(message);
@@ -88,6 +88,15 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
                 }
                 else
                     history.textMessage.setText(message);
+                break;
+            case LOCATION:
+                cv.adjustRelative(history.mediaImage, 492, 432);
+                history.mediaImage.setVisibility(View.VISIBLE);
+                history.mediaImage.setUrl(historyList.get(position).getMedia());
+                break;
+            case AUDIO:
+                history.audioLayout.setBackgroundResource(R.drawable.rounded_rectangle);
+                history.audioLayout.setVisibility(View.VISIBLE);
                 break;
             case IMAGE:
                 history.mediaImage.setVisibility(View.VISIBLE);
@@ -143,7 +152,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         });
     }
     private void setUIComponent(HistoryViewholder holder){
-        CommonViewUtility cv=CommonViewUtility.getInstance();
+
         cv.adjustLinearSquare(holder.profileImage, 144);
         cv.adjustLinearMargin(holder.profileImage, CommonViewUtility.TOP, 35);
         cv.adjustLinearMargin(holder.profileImage, CommonViewUtility.LEFT, 19);
@@ -154,18 +163,19 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         cv.adjustLinearMargin(holder.history, CommonViewUtility.TOP, 35);
         cv.adjustLinearMargin(holder.historyLayout, CommonViewUtility.LEFT, 10);
         cv.adjustRelativeMargin(holder.showHistory, CommonViewUtility.RIGHT, 46);
+        //cv.adjustRelativeMargin(holder.showHistory, CommonViewUtility.TOP, 15);
         cv.adjustRelative(holder.showHistory, 35, 22);
-        cv.adjustRelativeMargin(holder.postedTime, CommonViewUtility.RIGHT, 20);
+        cv.adjustRelativeMargin(holder.postedTime, CommonViewUtility.RIGHT, 40);
         cv.adjustRelativeMargin(holder.postedTime, CommonViewUtility.LEFT, 40);
         cv.adjustLinearMargin(holder.locationInfo, CommonViewUtility.TOP, 15);
-        cv.adjustLinear(holder.locationIcon, 30, 43);
-        cv.adjustLinearMargin(holder.locationAddress, CommonViewUtility.LEFT, 22);
+        cv.adjustLinear(holder.locationIcon, 21, 29);
+        cv.adjustLinearMargin(holder.locationAddress, CommonViewUtility.LEFT, 26);
         cv.adjustLinearMargin(holder.sharedSection, CommonViewUtility.TOP, 31);
         cv.adjustLinearSquare(holder.sharePersonImg, 87);
         cv.adjustLinearMargin(holder.sharePersonName, CommonViewUtility.LEFT, 21);
         cv.adjustLinearMargin(holder.sharePostedTime, CommonViewUtility.LEFT, 21);
         cv.adjustLinearMargin(holder.shareHistory, CommonViewUtility.LEFT, 21);
-       // cv.adjustLinear(holder.shareHistory, 52, 62);
+        cv.adjustLinear(holder.shareHistory, 35, 41);
         cv.adjustLinearMargin(holder.shareCount, CommonViewUtility.LEFT, 18);
         cv.adjustLinearMargin(holder.medialayout, CommonViewUtility.TOP, 31);
         cv.adjustLinearMargin(holder.medialayout, CommonViewUtility.RIGHT, 75);
@@ -173,26 +183,33 @@ public class BroadcastListAdapter extends RecyclerView.Adapter {
         cv.adjustRelative(holder.mediaPlay, 51, 61);
         cv.adjustLinearMargin(holder.features, CommonViewUtility.TOP, 46);
         cv.adjustLinearMargin(holder.features, CommonViewUtility.RIGHT, 75);
-        cv.adjustLinearMargin(holder.commentHistory, CommonViewUtility.LEFT, 90);
-        cv.adjustLinear(holder.commentHistory, 56, 50);
+        cv.adjustLinearMargin(holder.commentSection, CommonViewUtility.LEFT, 118);
+        cv.adjustLinearWidth(holder.leaveComment, 307);
+        cv.adjustLinear(holder.commentHistory, 41, 36);
         cv.adjustLinearMargin(holder.commentCount, CommonViewUtility.LEFT, 18);
         cv.adjustLinearMargin(holder.goCommentHistory, CommonViewUtility.LEFT, 6);
         cv.adjustLinear(holder.goCommentHistory, 18, 24);
-        cv.adjustLinearMargin(holder.historyLayout, CommonViewUtility.BOTTOM, 40);
+        cv.adjustLinearMargin(holder.historyLayout, CommonViewUtility.BOTTOM, 20);
         //cv.adjustRelativeMargin(holder.readMore, CommonViewUtility.TOP, 20);
+        cv.adjustRelativeHeight(holder.audioLayout, 104);
+        cv.adjustRelative(holder.audioPlay, 39, 47);
+        cv.adjustRelativeWidth(holder.songProgressBar, 445);
+        cv.adjustRelativeMargin(holder.songProgressBar, CommonViewUtility.LEFT, 12);
+        cv.adjustRelativeMargin(holder.songProgressBar, CommonViewUtility.RIGHT, 12);
     }
 
     private void setFontSize(HistoryViewholder holder){
-        holder.userName.setTextSize(DataFunctions.convertPixelsToDp(50));
-        holder.postedTime.setTextSize(DataFunctions.convertPixelsToDp(18));
-        holder.locationAddress.setTextSize(DataFunctions.convertPixelsToDp(18));
-        holder.sharePersonName.setTextSize(DataFunctions.convertPixelsToDp(40));
-        holder.sharePostedTime.setTextSize(DataFunctions.convertPixelsToDp(18));
-        holder.shareCount.setTextSize(DataFunctions.convertPixelsToDp(20));
-        holder.likeCount.setTextSize(DataFunctions.convertPixelsToDp(20));
-        holder.readMore.setTextSize(DataFunctions.convertPixelsToDp(25));
-        holder.leaveComment.setTextSize(DataFunctions.convertPixelsToDp(20));
-        holder.commentCount.setTextSize(DataFunctions.convertPixelsToDp(20));
-        holder.textMessage.setTextSize(DataFunctions.convertPixelsToDp(25));
+        holder.userName.setTextSize(DataFunctions.convertPixelsToDp(context,30));
+        holder.postedTime.setTextSize(DataFunctions.convertPixelsToDp(context,18));
+        holder.locationAddress.setTextSize(DataFunctions.convertPixelsToDp(context,18));
+        holder.sharePersonName.setTextSize(DataFunctions.convertPixelsToDp(context,20));
+        holder.sharePostedTime.setTextSize(DataFunctions.convertPixelsToDp(context,18));
+        holder.shareCount.setTextSize(DataFunctions.convertPixelsToDp(context,20));
+        holder.likeCount.setTextSize(DataFunctions.convertPixelsToDp(context,20));
+        holder.readMore.setTextSize(DataFunctions.convertPixelsToDp(context,30));
+        holder.leaveComment.setTextSize(DataFunctions.convertPixelsToDp(context,20));
+        holder.commentCount.setTextSize(DataFunctions.convertPixelsToDp(context,20));
+        holder.textMessage.setTextSize(DataFunctions.convertPixelsToDp(context,30));
+        holder.audioTimer.setTextSize(DataFunctions.convertPixelsToDp(context,20));
     }
 }
