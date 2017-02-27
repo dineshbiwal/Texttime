@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import ChatUI.fragments.ChatDeleteMenu;
 import ChatUI.fragments.ChatFragment;
 import ChatUI.fragments.ChatOptionsInterface;
 import CustomViews.CameraModule.CustomCameraView;
@@ -263,6 +264,9 @@ public class ContainerActivity extends BaseActivityFull implements ChatOptionsIn
             @Override
             public void onClick(View view) {
                 openLayout(MENU_DELETE_CHAT);
+                slidinganimationMenu.removeAllViews();
+                slidinganimationMenu.addView(new ChatDeleteMenu(AppDelegate.getInstance().getSelectedUserList(),context).createDeleteMenu());
+
             }
         });
         slidinganimationMenu.setOnClickListener(new View.OnClickListener() {
