@@ -171,12 +171,10 @@ public class CustomMediaImageView extends ImageView {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void setDimesions(Bitmap bitmap,boolean store){
-
+    public void setDimesions(Bitmap bitmap, boolean store){
         bitmap=Bitmap.createScaledBitmap(bitmap, width, height, false);
         Bitmap mask=createMaskBitmap(width, height);
         final Bitmap result = Bitmap.createBitmap(mask.getWidth(), mask.getHeight(), Bitmap.Config.ARGB_8888);
-
         Canvas mCanvas = new Canvas(result);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));

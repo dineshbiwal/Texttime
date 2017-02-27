@@ -7,10 +7,12 @@
     <string name="leave_comment">Leave a comment</string>
     <string name="read_more"><u>Read More...</u></string>
     <string name="your_pass">Create your password</string>
+    <string name="write_comment">Write your comment!</string>
     <string name="create_user">Create your @username</string>
     <string name="resend_code">Resend validation code</string>
     <string name="choose_country"> Choose your country</string>
     <string name="enter_number">Enter your phone number</string>
+    <string name="about_comment">You\'re about to comment!</string>
     <string name="send_sms">Send SMS with verification code</string>
     <string name="number_correct">Is your number above correct?</string>
     <string name="signup_error">Getting error with signup process</string>

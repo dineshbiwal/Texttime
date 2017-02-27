@@ -10,20 +10,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/toplayouts"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="24dp"
-        >
+        android:layout_marginTop="24dp">
 
         <include layout="@layout/toolbar_updated"
             android:id="@+id/topBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-           />
+            android:layout_height="wrap_content" />
 
         <include layout="@layout/toolbar_chat_list_updated"
             android:id="@+id/topBarChat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
+            android:visibility="gone" />
+=======
             android:visibility="gone"
             />
 
@@ -35,6 +35,7 @@
             android:visibility="gone"
             />
 
+>>>>>>> f06416d2f34dbd07095fecc809e387b9469267f7
     </RelativeLayout>
 
 

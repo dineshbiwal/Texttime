@@ -1,0 +1,45 @@
+[
+    {
+        "outputFile": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 63,
+                    "endOffset": 114
+                },
+                "from": {
+                    "file": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 143,
+                        "endColumn": 63,
+                        "endOffset": 202
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 119,
+                    "endColumn": 82,
+                    "endOffset": 197
+                },
+                "from": {
+                    "file": "H:\\TexttimeUI\\AndroidBuildingMusicPlayer\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 59,
+                        "endColumn": 82,
+                        "endOffset": 137
+                    }
+                }
+            }
+        ]
+    }
+]

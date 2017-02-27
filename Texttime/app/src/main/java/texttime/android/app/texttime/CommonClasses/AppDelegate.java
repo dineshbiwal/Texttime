@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import ChatUI.fragments.ChatDataModels.ChattingUserList;
 import ChatUI.fragments.ChatOptionsInterface;
 import ChatUI.fragments.SelectionInterface;
+import texttime.android.app.texttime.DataModels.BroadcastHistoryModel;
 import texttime.android.app.texttime.WebOperations.ApiClient;
 import texttime.android.app.texttime.callbacks.OTPRecievedCallback;
 
@@ -138,5 +139,13 @@ public class AppDelegate {
     }
     public static String getServerImageUrl(String media, String imageType, String username, String imageName){
         return ApiClient.BASE_URL + media+"/images/"+imageType+"/"+username+"/"+imageName;
+    }
+
+    static BroadcastHistoryModel model;
+    public void setBroadcastModel(BroadcastHistoryModel m){
+        model = m;
+    }
+    public BroadcastHistoryModel getBroadcastModel(){
+        return model;
     }
 }

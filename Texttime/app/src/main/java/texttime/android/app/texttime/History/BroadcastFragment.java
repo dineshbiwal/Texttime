@@ -59,8 +59,11 @@ public class BroadcastFragment extends BaseFragment {
         model.setPostedTimeAgo("1 Day");
         model.setLike(true);
         model.setLikeCount(5210000);
-        model.setMedia_type("Text");
-        model.setMedia("Remember that building a connection with a woman is all about getting her to tell you things she views as personally significant. Her rationale for choosing a job she doesn't like over a job she does is pretty personally significant, and probably not something she talks about all that much with all that many people. The combination of its significance and its rarity as a conversational topic for her make it more impactful in building a stronger connection.");
+        model.setMedia_type("Audio");
+        /*model3.setMedia("I got a new job, and everything changed. What did you do to change things?"+
+                " Oh well, I'm sure things will be different soon. I know things will change for the better when I get married! Will things change for you soon? If so, how will they change?"+
+                " Oh, look at the time!");*/
+        model.setMedia("");
         model.setCommentCount(1440);
         model.setProfile_image_url("https://pbs.twimg.com/profile_images/87325629/Sunglass.jpg");
 
@@ -69,8 +72,8 @@ public class BroadcastFragment extends BaseFragment {
         model2.setPostedTimeAgo("3 Days");
         model2.setLike(false);
         model2.setLikeCount(6200);
-        model2.setMedia_type("Image");
-        model2.setMedia("http://xndev.com/wp-content/uploads/2012/03/writing_600_300.jpg");
+        model2.setMedia_type("Text");
+        model2.setMedia("How's the day Today ?");
         model2.setCommentCount(344);
         model2.setShare_user_profile_url("http://10ad.itocd.net/www/images/girl/1848801-1849000/2a10e542-628c-44b8-809b-0ed204d7a0a6.jpg");
         model2.setShare_user_display_name("Gabriel Paris");
@@ -84,12 +87,8 @@ public class BroadcastFragment extends BaseFragment {
         model3.setPostedTimeAgo("7 Days");
         model3.setLike(true);
         model3.setLikeCount(9630);
-        model3.setMedia_type("Text");
-        model3.setMedia("I got a new job, and everything changed. What did you do to change things?\n" +
-                "\n" +
-                "Oh well, I'm sure things will be different soon. I know things will change for the better when I get married! Will things change for you soon? If so, how will they change?\n" +
-                "\n" +
-                "Oh, look at the time!");
+        model3.setMedia_type("Image");
+        model3.setMedia("https://s3-us-west-1.amazonaws.com/powr/defaults/image-slider2.jpg");
         model3.setCommentCount(4220);
         model3.setShare_user_display_name("Arun Sharma");
         model3.setShare_postedtime_ago("5 Days");
@@ -101,8 +100,9 @@ public class BroadcastFragment extends BaseFragment {
         model4.setPostedTimeAgo("10 Days");
         model4.setLike(false);
         model4.setLikeCount(20);
-        model4.setMedia_type("Image");
-        model4.setMedia("https://s3-us-west-1.amazonaws.com/powr/defaults/image-slider2.jpg");
+        model4.setMedia_type("Location");
+        // model.setMedia("Remember that building a connection with a woman is all about getting her to tell you things she views as personally significant. Her rationale for choosing a job she doesn't like over a job she does is pretty personally significant, and probably not something she talks about all that much with all that many people. The combination of its significance and its rarity as a conversational topic for her make it more impactful in building a stronger connection.");
+        model4.setMedia("https://maps.googleapis.com/maps/api/staticmap?markers=26.2656884,72.9923257&zoom=15&size=492x432&key=AIzaSyA82N1-k-AGKJrboXsXcddIEV9UBGsginU");
         model4.setCommentCount(14);
         model4.setShare_user_profile_url("http://www.harishzone.com/wp-content/uploads/2014/09/Ankita-Sharma.jpg");
         model4.setShare_user_display_name("Dulce Baldera");

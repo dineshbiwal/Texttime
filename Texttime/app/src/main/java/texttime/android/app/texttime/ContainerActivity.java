@@ -476,13 +476,14 @@ public class ContainerActivity extends BaseActivityFull implements ChatOptionsIn
         cv.adjustRelative(searchIcon, 51, 54);
         cv.adjustRelativeMargin(headingLable, CommonViewUtility.RIGHT, 60);
         cv.adjustLinearMargin(icon1, CommonViewUtility.RIGHT, 60);
-      //  cv.adjustLinearSquare(icon1, 67);
+        cv.adjustLinearMargin(icon1, CommonViewUtility.TOP, 6);
+        cv.adjustLinearSquare(icon1, 67);
         cv.adjustLinearMargin(icon2, CommonViewUtility.RIGHT, 60);
-      //  cv.adjustLinearSquare(icon2, 67);
+        cv.adjustLinearSquare(icon2, 67);
         cv.adjustLinearMargin(icon3, CommonViewUtility.RIGHT, 60);
-      //  cv.adjustLinear(icon3, 85, 72);
+        cv.adjustLinear(icon3, 84, 76);
         cv.adjustLinearMargin(icon4, CommonViewUtility.RIGHT, 60);
-      //  cv.adjustLinear(icon4, 57, 72);
+        cv.adjustLinear(icon4, 57, 73);
         icon1.setVisibility(View.VISIBLE);
         icon2.setVisibility(View.VISIBLE);
         icon3.setVisibility(View.VISIBLE);

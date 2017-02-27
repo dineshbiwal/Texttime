@@ -2,8 +2,10 @@ package texttime.android.app.texttime.CommonClasses;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.google.i18n.phonenumbers.NumberParseException;
@@ -15,6 +17,18 @@ import java.util.regex.Pattern;
 
 
 public class DataFunctions {
+
+	public static float convertPixelsToDp(Context ctx, int px){
+		/*DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+		float dp = px / (metrics.densityDpi / 160f);
+		return Math.round(dp);*/
+		//float d = (float) (px * 1.3);
+		Resources r = ctx.getResources();
+		int  dps = Math.round(px/(r.getDisplayMetrics().densityDpi/240f));
+		return dps;
+
+		//return Math.round(d/(Resources.getSystem().getDisplayMetrics().ydpi/DisplayMetrics.DENSITY_DEFAULT));
+	}
 
 	 public boolean isEmailValid(String email) {
 	        boolean isValid = false;

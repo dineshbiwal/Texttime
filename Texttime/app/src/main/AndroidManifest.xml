@@ -105,6 +105,11 @@
             android:theme="@style/AppTheme.Transparent">
         </activity>
 
+        <activity android:name=".LikeComment.CommentList"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent">
+        </activity>
+
     </application>
 
 </manifest>

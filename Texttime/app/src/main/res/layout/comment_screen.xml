@@ -1,51 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:background="@color/app_blue">
+
+    <include layout="@layout/toolbar_single_item"
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@id/toolBar"
+            android:background="@drawable/container_background"
+            android:weightSum="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/options_selection"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/left_button_blue_unselected"
+                    android:id="@+id/click_like">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/like_ic"/>
+                    <CustomViews.CustomTextViewMedium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="14dp"
+                        android:textColor="@color/app_blue"
+                        android:id="@+id/likes" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/click_comment"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/right_button_blue_selected"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/comment"/>
+                    <CustomViews.CustomTextViewMedium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="14dp"
+                        android:textColor="@android:color/white"
+                        android:id="@+id/comments" />
+                </LinearLayout>
+            </LinearLayout>
+            <CustomViews.CustomTextViewLight
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/about_comment"
+                android:text="@string/about_comment"
+                android:textSize="18dp"
+                android:textColor="@color/text_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_comment"
+                android:orientation="horizontal">
+                <CustomViews.CustomImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/comment_user_profile"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <CustomViews.CustomTextViewRegular
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="16dp"
+                        android:id="@+id/comment_user_name"/>
+                    <CustomViews.CustomTextViewRegular
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:id="@+id/comment_text"
+                        android:textColor="@android:color/black"
+                        android:alpha="0.7"/>
+                </LinearLayout>
+            </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:id="@+id/commentList"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.93">
+                </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/options_selection"
-        android:orientation="horizontal">
+        android:layout_weight="1"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/container_background">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:background="@drawable/left_button_blue_unselected"
-            android:id="@+id/click_like">
+            android:id="@+id/comment_area"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:background="#E7F1F5"
+            android:layout_alignParentBottom="true"
+            android:weightSum="1">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/send_comment"
+                android:hint="@string/write_comment"
+                android:textSize="17dp"
+                android:background="@drawable/edittext_bottom_line"
+                android:textColorHint="@color/textColor1"
+                android:layout_weight="0.90" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/like_ic"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/app_blue"
-                android:id="@+id/likes"
-                android:text="495"/>
+                android:id="@+id/comment_done"
+                android:src="@mipmap/untype_to_send_comment"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/click_comment"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:background="@drawable/right_button_blue_selected"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/comment"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:id="@+id/comments"
-                android:text="127" />
-        </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+    </FrameLayout>
+</RelativeLayout>

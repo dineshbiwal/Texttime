@@ -35,6 +35,7 @@ public class CommonViewUtility {
     public static int TOP=2;
     public static int BOTTOM=3;
     public static int RIGHT=4;
+    public static int ALL=5;
 
 
     //-----Singleton Method for initializing the class object-----
