@@ -76,6 +76,16 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter implements Selectio
         viewHolder.userNameLabel.setText(model.getDisplayName());
         viewHolder.unreadMessageLbl.setText("" + model.getNewMessageCount());
         viewHolder.postedTimeLabel.setText("Today 11:17 AM");
+
+        if(model.isSelected()){
+            viewHolder.chatContainerRowLayout.setBackgroundColor(Color.parseColor("#1A000000"));
+        }
+
+        else {
+            viewHolder.chatContainerRowLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+        }
+
+
         if(model.getLastMessage().contains("Image")){
             viewHolder.messageText.setVisibility(View.GONE);
             viewHolder.receivedImageThumbnail.setVisibility(View.VISIBLE);
@@ -94,7 +104,13 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter implements Selectio
                 if(!isSelection) {
                     selectionInterface.activateSelectionMode();
                     ChattingUserList modelClicked= (ChattingUserList) view.getTag();
+
                     AppDelegate.getInstance().getSelectedUserList().add(modelClicked);
+                    int pos=chatHistoryList.indexOf(modelClicked);
+                    modelClicked.setSelected(true);
+                    chatHistoryList.set(pos,modelClicked);
+
+                    AppDelegate.getInstance().getChatOptionsInterface().selectionsMade();
                     view.setBackgroundColor(Color.parseColor("#1A000000"));
                     return true;
                 }
@@ -109,6 +125,12 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter implements Selectio
                     ChattingUserList modelClicked= (ChattingUserList) view.getTag();
                     if(AppDelegate.getInstance().getSelectedUserList().contains(modelClicked)){
                         AppDelegate.getInstance().getSelectedUserList().remove(modelClicked);
+                        AppDelegate.getInstance().getChatOptionsInterface().selectionsMade();
+
+                        int pos=chatHistoryList.indexOf(modelClicked);
+                        modelClicked.setSelected(false);
+                        chatHistoryList.set(pos,modelClicked);
+
                         view.setBackgroundColor(Color.parseColor("#ffffff"));
                         view.setAlpha(1);
                     }
@@ -116,6 +138,12 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter implements Selectio
                     else {
                         AppDelegate.getInstance().getSelectedUserList().add(modelClicked);
                         view.setBackgroundColor(Color.parseColor("#1A000000"));
+                        AppDelegate.getInstance().getChatOptionsInterface().selectionsMade();
+
+                        int pos=chatHistoryList.indexOf(modelClicked);
+                        modelClicked.setSelected(true);
+                        chatHistoryList.set(pos,modelClicked);
+
                         //view.setAlpha(0.1f);
                     }
                 }
@@ -142,6 +170,14 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter implements Selectio
     public void deactivateSelectionMode() {
         AppDelegate.getInstance().setSelectedUserList(new ArrayList<ChattingUserList>());
         isSelection=false;
+
+        for(int i=0;i<chatHistoryList.size();i++){
+            ChattingUserList model=chatHistoryList.get(i);
+            model.setSelected(false);
+            chatHistoryList.set(i,model);
+        }
+
+
         notifyDataSetChanged();
     }
 }

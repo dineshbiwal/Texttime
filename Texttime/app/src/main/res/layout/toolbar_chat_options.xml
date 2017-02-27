@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbarChatOptions"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/app_blue"
+    app:layout_scrollFlags="scroll|enterAlways"
+    app:layout_collapseMode="pin">
+
+<RelativeLayout
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -8,7 +18,7 @@
     android:layout_height="wrap_content"
     android:layout_centerVertical="true"
     android:layout_marginLeft="10dp"
-    android:background="@mipmap/back_button"
+    android:background="@mipmap/back_button_chat"
     android:id="@+id/backButton"
     />
 
@@ -17,8 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:background="@mipmap/mute"
+
+        android:background="@mipmap/mute_button"
         android:id="@+id/muteButton"
         />
 
@@ -28,8 +38,8 @@
         android:layout_centerVertical="true"
         android:id="@+id/archiveButton"
         android:layout_toLeftOf="@id/muteButton"
-        android:layout_marginRight="15dp"
-        android:background="@mipmap/archive"
+
+        android:background="@mipmap/archive_button"
         />
 
     <ImageView
@@ -38,14 +48,14 @@
         android:layout_centerVertical="true"
         android:id="@+id/deleteButton"
         android:layout_toLeftOf="@id/archiveButton"
-        android:layout_marginRight="15dp"
-        android:background="@mipmap/delete"
+
+        android:background="@mipmap/delete_button"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/textback"
+        android:background="@mipmap/top_number"
         android:textColor="@android:color/white"
         android:id="@+id/numberofSelection"
         android:gravity="center"
@@ -56,3 +66,4 @@
         />
 
 </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
