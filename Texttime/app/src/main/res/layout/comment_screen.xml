@@ -83,26 +83,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <CustomViews.CustomTextViewRegular
+                    <CustomViews.CustomTextViewMedium
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/black"
-                        android:textSize="16dp"
+                        android:textSize="14dp"
                         android:id="@+id/comment_user_name"/>
-                    <CustomViews.CustomTextViewRegular
+                    <CustomViews.CustomTextViewLight
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
+                        android:textSize="15dp"
                         android:id="@+id/comment_text"
                         android:textColor="@android:color/black"
-                        android:alpha="0.7"/>
+                        android:alpha="0.5"/>
                 </LinearLayout>
             </LinearLayout>
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:id="@+id/commentList"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.93">
+                    android:layout_height="wrap_content">
                 </android.support.v7.widget.RecyclerView>
         </LinearLayout>
     <FrameLayout
@@ -126,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/send_comment"
                 android:hint="@string/write_comment"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:background="@drawable/edittext_bottom_line"
                 android:textColorHint="@color/textColor1"
                 android:layout_weight="0.90" />

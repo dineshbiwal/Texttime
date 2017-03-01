@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -54,9 +55,9 @@ public class CommentList extends BaseActivity {
     @BindView(R.id.comment_done)
     ImageView commentDone;
     @BindView(R.id.comment_user_name)
-    CustomTextViewRegular commentUserName;
+    CustomTextViewMedium commentUserName;
     @BindView(R.id.comment_text)
-    CustomTextViewRegular commentText;
+    CustomTextViewLight commentText;
     @BindView(R.id.user_comment)
     LinearLayout userComment;
     @BindView(R.id.send_comment)
@@ -78,10 +79,15 @@ public class CommentList extends BaseActivity {
         adjustUIContent();
         gettingData();
         getCommentList();
-        CommentListAdapter adapter = new CommentListAdapter(context, list);
-        commentList.setAdapter(adapter);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        commentList.setLayoutManager(new LinearLayoutManager(this));
+        CommentListAdapter adapter = new CommentListAdapter(this, list);
+        commentList.setAdapter(adapter);
+    }
     private void gettingData() {
         BroadcastHistoryModel model = AppDelegate.getInstance().getBroadcastModel();
         likes.setText(CommonMethods.convertIntoKillo(model.getLikeCount()));
@@ -110,14 +116,14 @@ public class CommentList extends BaseActivity {
         cv.adjustLinearMargin(commentUserProfile, CommonViewUtility.RIGHT, 27);
         cv.adjustLinearMargin(commentText, CommonViewUtility.LEFT, 12);
         cv.adjustLinearMargin(commentText, CommonViewUtility.TOP, 16);
-        cv.adjustLinearMargin(commentList, CommonViewUtility.TOP, 96);
+        cv.adjustLinearMargin(commentList, CommonViewUtility.TOP, 53);
         cv.adjustFrameHeight(commentArea, 130);
         cv.adjustLinearSquare(commentDone, 72);
         cv.adjustLinearMargin(sendComment, CommonViewUtility.LEFT, 81);
         cv.adjustLinearMargin(sendComment, CommonViewUtility.RIGHT, 33);
         cv.adjustLinearMargin(goBack, CommonViewUtility.LEFT, 32);
         cv.adjustLinear(goBack, 36, 64);
-        cv.adjustLinearMargin(toolTitle, CommonViewUtility.LEFT, 142);
+        cv.adjustLinearMargin(toolTitle, CommonViewUtility.LEFT, 99);
         commentUserName.setTextColor(Color.parseColor("#505f67"));
         sendComment.setTypeface(dfunctions.getFontFamily(context), Typeface.NORMAL);
     }
@@ -126,7 +132,7 @@ public class CommentList extends BaseActivity {
         CommentListModel model = new CommentListModel();
         model.setProfile_image_url("http://www.kpopmusic.com/wp-content/uploads/2015/01/LeeJoonProfile.png");
         model.setComment("Good idea ,I can set tag line about first aid in my Blog. Thanks for sharing");
-        model.setPostedTime("Today");
+        model.setPostedTime("Today 11:27 AM");
         model.setProfile_display_name("Denial");
 
         CommentListModel model2 = new CommentListModel();
@@ -136,7 +142,7 @@ public class CommentList extends BaseActivity {
         model2.setProfile_display_name("Aashish");
 
         CommentListModel model3 = new CommentListModel();
-        model3.setProfile_image_url("http://2.bp.blogspot.com/--AdLfRmz0dc/T74vm9oeO9I/AAAAAAAAARo/wAgMN7eymcU/s1600/Gemma+Ward.jpg");
+        model3.setProfile_image_url("http://img01.ibnlive.in/ibnlive/uploads/2016/04/12931171_1079163228794337_8732305975871635522_n.jpg");
         model3.setComment("Once you have read this article, you might have a blog or probably planning to have one. I advise that you must appreciate your readers because they are your fuel in order to go farther in blogging.");
         model3.setPostedTime("20/02/2017");
         model3.setProfile_display_name("Martina Zulunga");

@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background"
-        android:height="2px"
+        android:height="2dp"
+        android:gravity="center_vertical"
+        android:drawable="@mipmap/voice_note_bar_play"
+        android:dither="true">
+    </item>
+    <item android:id="@android:id/background"
+        android:height="2dp"
+        android:left="@dimen/cast_intro_overlay_title_margin_top"
         android:gravity="center_vertical"
         android:drawable="@mipmap/voice_note_bar_bg"
         android:dither="true">
     </item>
-    <item android:id="@android:id/secondaryProgress">
-        <clip>
-            <shape>
-                <gradient
-                    android:startColor="@color/audio_progress_front"
-                    android:centerColor="@color/audio_progress_front"
-                    android:endColor="@color/audio_progress_front"
-                    android:angle="270" />
-            </shape>
-        </clip>
+    <item android:id="@android:id/background"
+        android:width="2dp"
+        android:left="@dimen/cast_intro_overlay_title_margin_top"
+        android:drawable="@drawable/thumb_image_progress"
+        android:dither="true">
     </item>
+
     <item
         android:id="@android:id/progress"
         android:drawable="@drawable/seekbar_progress_bg" />

@@ -39,7 +39,7 @@ public class CommentListAdapter extends RecyclerView.Adapter {
         viewHolder.commentedUserName.setTextColor(Color.parseColor("#505f67"));
         viewHolder.commentedUserName.setText(model.get(position).getProfile_display_name());
         viewHolder.commentedTime.setText(model.get(position).getPostedTime());
-        viewHolder.commentedUserProfile.setUrl(model.get(position).getProfile_image_url(),R.mipmap.placeholder);
+        viewHolder.commentedUserProfile.setUrl(model.get(position).getProfile_image_url(), R.mipmap.placeholder);
         viewHolder.commentedText.setText(model.get(position).getComment());
     }
 
@@ -49,14 +49,15 @@ public class CommentListAdapter extends RecyclerView.Adapter {
     }
 
     private void setUIComponent(CommentViewHolder holder){
-        CommonViewUtility cv = new CommonViewUtility();
+        CommonViewUtility cv = CommonViewUtility.getInstance();
         cv.adjustLinearSquare(holder.commentedUserProfile, 173);
         cv.adjustLinearMargin(holder.commentedUserProfile, CommonViewUtility.LEFT, 14);
         cv.adjustLinearMargin(holder.commentedUserProfile, CommonViewUtility.RIGHT, 14);
-        cv.adjustLinearMargin(holder.commentedUserName, CommonViewUtility.LEFT, 18);
-        cv.adjustLinearMargin(holder.commentedUserName, CommonViewUtility.RIGHT, 35);
-        cv.adjustLinearMargin(holder.commentedTime, CommonViewUtility.RIGHT, 35);
+        cv.adjustRelativeMargin(holder.commentedUserName, CommonViewUtility.LEFT, 18);
+        cv.adjustRelativeMargin(holder.commentedUserName, CommonViewUtility.RIGHT, 35);
+        cv.adjustRelativeMargin(holder.commentedTime, CommonViewUtility.RIGHT, 35);
         cv.adjustLinearMargin(holder.commentedText, CommonViewUtility.LEFT, 35);
         cv.adjustLinearMargin(holder.commentedText, CommonViewUtility.RIGHT, 35);
+        cv.adjustLinearMargin(holder.commentPart, CommonViewUtility.TOP, 43);
     }
 }

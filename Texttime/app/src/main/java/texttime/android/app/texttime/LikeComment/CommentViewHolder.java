@@ -2,6 +2,7 @@ package texttime.android.app.texttime.LikeComment;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import CustomViews.CustomImageView;
 import CustomViews.CustomTextView;
@@ -19,6 +20,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder{
     CustomTextViewMedium commentedUserName;
     CustomTextViewLight commentedTime;
     CustomTextViewLight commentedText;
+    LinearLayout commentPart;
 
     public CommentViewHolder(View itemView) {
         super(itemView);
@@ -26,5 +28,6 @@ public class CommentViewHolder extends RecyclerView.ViewHolder{
         commentedUserName = (CustomTextViewMedium) itemView.findViewById(R.id.commented_user_name);
         commentedTime = (CustomTextViewLight) itemView.findViewById(R.id.commented_time);
         commentedText = (CustomTextViewLight) itemView.findViewById(R.id.commented_text);
+        commentPart = (LinearLayout) itemView.findViewById(R.id.comment_part);
     }
 }

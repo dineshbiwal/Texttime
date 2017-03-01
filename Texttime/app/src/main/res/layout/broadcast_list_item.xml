@@ -24,7 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/like_count"
-            android:textColor="@color/heading_color"/>
+            android:textSize="12dp"
+            android:textColor="@android:color/black"
+            android:alpha="0.25"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/userName"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:layout_centerVertical="true"
                 android:textColor="@color/heading_color" />
             <ImageView
@@ -54,12 +56,14 @@
                 android:src="@mipmap/ic_back_down"
                 android:id="@+id/show_history" />
 
-            <CustomViews.CustomTextViewRegular
+            <CustomViews.CustomTextViewLight
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/postedTime"
-                android:textColor="#A5A5A5"
-                android:layout_marginTop="4dp"
+                android:textColor="#000000"
+                android:alpha="0.25"
+                android:textSize="12dp"
+                android:layout_marginTop="3dp"
                 android:includeFontPadding="false"
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/show_history"
@@ -78,13 +82,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/location_icon" />
-            <CustomViews.CustomTextViewRegular
+                android:src="@mipmap/location_ic" />
+            <CustomViews.CustomTextViewLight
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/location_address"
                 android:layout_centerVertical="true"
-                android:textColor="#A3A3A3"/>
+                android:textColor="#000000"
+                android:textSize="12dp"
+                android:alpha="0.2"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -112,31 +118,36 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/share_person_name"
-                        android:textSize="16dp"
+                        android:textSize="14dp"
                         android:textColor="@color/heading_second" />
-                    <CustomViews.CustomTextViewRegular
+                    <CustomViews.CustomTextViewLight
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/sharePostedTime"
-                        android:textColor="@color/heading_second" />
+                        android:textSize="12dp"
+                        android:alpha="0.25"
+                        android:textColor="@android:color/black" />
                 </LinearLayout>
                 <ImageView
                     android:id="@+id/share_history"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/share_ic"/>
-                <CustomViews.CustomTextViewRegular
+                    android:layout_marginTop="2dp"
+                    android:src="@mipmap/share_post"/>
+                <CustomViews.CustomTextViewLight
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/share_count"
-                    android:textColor="#A2A2A2"
+                    android:textSize="12dp"
+                    android:alpha="0.25"
+                    android:textColor="@android:color/black"
                     android:layout_centerVertical="true"/>
             </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/medialayout" >
-                <CustomViews.CustomTextViewRegular
+                <CustomViews.CustomTextViewLight
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textMessage"
@@ -144,23 +155,26 @@
                     android:visibility="gone"
                     android:text="I am working on top bar interactions screen today, it's fairly time consuming task so I won't be able to provide build today as well will send build close to lunch time tomorrow with chat screen with top bar interactions completed."
                     android:textColor="#000000"
-                    android:alpha="0.7"/>
-
-                <CustomViews.CustomMediaImageView
+                    android:alpha="0.5"/>
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:id="@+id/media_image"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_play_white"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:visibility="gone"
-                    android:id="@+id/mediaPlay"/>
-
-                <CustomViews.CustomTextView
+                    android:gravity="center_vertical">
+                    <CustomViews.CustomMediaImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/media_image"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/play_video_ic"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:visibility="gone"
+                        android:id="@+id/mediaPlay"/>
+                </RelativeLayout>
+                <CustomViews.CustomTextViewLight
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/read_more"
@@ -180,7 +194,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_play_on"
+                        android:src="@mipmap/ic_play_disable"
                         android:layout_centerVertical="true"
                         android:id="@+id/audio_play"/>
                     <SeekBar
@@ -188,14 +202,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/audio_play"
-                        android:thumb="@mipmap/progress_bar_on"
+                        android:thumb="@null"
+
                         android:layout_centerVertical="true"
                         android:progressDrawable="@drawable/seekbar_progress" />
+                    <!--@drawable/thumb_image_progress-->
                     <CustomViews.CustomTextViewMedium
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/audio_progress_bg"
-                        android:text="01:59"
+                        android:text="1:59"
+                        android:textSize="12dp"
                         android:layout_centerVertical="true"
                         android:id="@+id/audio_timer"
                         android:layout_toRightOf="@id/songProgressBar"/>
@@ -209,15 +226,32 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:id="@+id/features">
-                <CustomViews.CustomTextViewLight
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
-                    android:background="@drawable/rectangle_border"
-                    android:id="@+id/leave_comment"
-                    android:text="@string/leave_comment"
-                    android:textColor="@color/heading_second" />
+                    android:id="@+id/shared">
+                    <ImageView
+                        android:id="@+id/sharings_history"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/share_post" />
+                    <CustomViews.CustomTextViewLight
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:id="@+id/sharing_total"
+                        android:includeFontPadding="false"
+                        android:text="0 Shares"
+                        android:textSize="12dp"
+                        android:textColor="@android:color/black"
+                        android:alpha="0.25"/>
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -232,21 +266,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@mipmap/comment_home_page" />
-                    <CustomViews.CustomTextViewRegular
+                    <CustomViews.CustomTextViewLight
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/comment_count"
                         android:includeFontPadding="false"
-                        android:textColor="#A5A5A5"/>
-                    <ImageView
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
-                        android:id="@+id/go_comment_history"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/ic_forword"/>
+                        android:text="0 Comments"
+                        android:textSize="12dp"
+                        android:textColor="@android:color/black"
+                        android:alpha="0.25"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

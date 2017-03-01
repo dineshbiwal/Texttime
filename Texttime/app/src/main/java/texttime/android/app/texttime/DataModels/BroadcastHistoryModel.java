@@ -17,6 +17,7 @@ public class BroadcastHistoryModel {
     long likeCount;
     long commentCount;
     long shareCount;
+    long total_shared;
     String share_user_profile_url;
     String share_user_display_name;
     String share_postedtime_ago;
@@ -134,6 +135,14 @@ public class BroadcastHistoryModel {
 
     public void setShare_user_display_name(String share_user_display_name) {
         this.share_user_display_name = share_user_display_name;
+    }
+
+    public long getTotal_shared() {
+        return total_shared;
+    }
+
+    public void setTotal_shared(long total_shared) {
+        this.total_shared = total_shared;
     }
 
     public enum MediaType {

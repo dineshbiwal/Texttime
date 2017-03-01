@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/userNameLabel"
                 android:textSize="18dp"
+                android:text="Kenny"
                 android:textColor="#000000"
                 android:layout_centerVertical="true"/>
 
@@ -34,6 +35,7 @@
                 android:textSize="12dp"
                 android:textColor="#000000"
                 android:alpha="0.25"
+                android:text="1 Days"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true" />
         </RelativeLayout>
@@ -50,6 +52,7 @@
                 android:textColor="#ffffff"
                 android:id="@+id/unreadMessageLbl"
                 android:gravity="center"
+                android:text="3"
                 android:background="@drawable/unread_msg_back"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
@@ -75,6 +78,7 @@
                 android:id="@+id/messageText"
                 android:ellipsize="end"
                 android:textSize="14dp"
+                android:text="Hello"
                 android:textColor="#000000"
                 android:alpha="0.50"
                 android:layout_marginRight="5dp" />

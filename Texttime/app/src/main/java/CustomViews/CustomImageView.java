@@ -65,7 +65,7 @@ public class CustomImageView extends ImageView{
         }
         else
         {
-            this.setImageResource(R.mipmap.logo_placeholder);
+            this.setImageResource(R.mipmap.placeholder);
             if (url.contains(".jpg") || url.contains(".png") || url.contains(".jpeg")
                     || url.contains(".JPG") || url.contains(".PNG") || url.contains(".JPEG")
                     ) {
@@ -89,8 +89,8 @@ public class CustomImageView extends ImageView{
 
     public void setUrl(String url, int placeholder){
         this.url=url;
-        this.setImageResource(placeholder);
-        if(!TextUtils.isEmpty(url)) {
+        if(!TextUtils.isEmpty(url))
+        {
             if (url.contains(".jpg") || url.contains(".png") || url.contains(".jpeg")
                     || url.contains(".JPG") || url.contains(".PNG") || url.contains(".JPEG")
                     ) {
@@ -107,6 +107,8 @@ public class CustomImageView extends ImageView{
             } else {
                 new LoadImageTask(url).execute();
             }
+        }else{
+            this.setImageResource(placeholder);
         }
     }
 
@@ -173,9 +175,9 @@ public class CustomImageView extends ImageView{
     public void setDimesions(Bitmap bitmap,boolean store){
 
        // Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
-        bitmap=Bitmap.createScaledBitmap(bitmap,width,height,false);
+        bitmap=Bitmap.createScaledBitmap(bitmap, width, height,false);
         Bitmap mask=createMaskBitmap(width,height);
-        Bitmap mask1=createMaskBitmap(width+20,height+20);
+        //Bitmap mask1=createMaskBitmap(width+20,height+20);
 
         final Bitmap result = Bitmap.createBitmap(mask.getWidth(), mask.getHeight(), Bitmap.Config.ARGB_8888);
 
@@ -344,7 +346,7 @@ public class CustomImageView extends ImageView{
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private Bitmap createMaskBitmap(int w, int h){
-        Drawable d=getResources().getDrawable(R.drawable.image_new_mask_transblue,null);
+        Drawable d=getResources().getDrawable(R.mipmap.mask_photo,null);
         //Drawable d=getResources().getDrawable(R.mipmap.mask_photo,null);
         Bitmap.Config config = Bitmap.Config.ARGB_8888;
         Bitmap bitmap = Bitmap.createBitmap(w, h, config);
